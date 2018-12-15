@@ -197,6 +197,9 @@ namespace CSMPC
             TabPageCurve_Cbx_SerialStopBit.DropDownStyle = ComboBoxStyle.DropDownList;
             TabPageCurve_Cbx_SerialCheckBit.DropDownStyle = ComboBoxStyle.DropDownList;
 
+            // 曲线初始化
+            SerialPortCurve_ZedGraphInit();
+
             // 辅助功能设置
             TabPageCurve_Cbx_Curve1.Enabled = true;
             TabPageCurve_Cbx_Curve2.Enabled = true;
@@ -229,9 +232,6 @@ namespace CSMPC
             TabPageCurve_Nud_CurveNum.Maximum = 8;
             TabPageCurve_Nud_CurveNum.Value = 4;
             TabPageCurve_Nud_CurveNum.Increment = 1;
-
-            // 曲线初始化
-            SerialPortCurve_ZedGraphInit();
 
             // 信息区设置
             TabPageCurve_Tbx_SerialInfo.ReadOnly = true;
@@ -1281,7 +1281,12 @@ namespace CSMPC
                     }
                     catch (Exception)
                     {
+                        // 串口提示信息
+                        TabPageCurve_Tbx_SerialInfo.Text = "串口无效或已被占用!";
 
+                        // 打开串口失败
+                        MessageBox.Show("串口无效或已被占用!", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        return;
                     }
 
                 }
@@ -1289,6 +1294,691 @@ namespace CSMPC
             }
 
         }
+
+        #endregion
+
+        #region 串口数据接收
+        private void SerialPortCurve_DataReceived(object sender, SerialDataReceivedEventArgs e) // 串口数据接收
+        {
+            // 当前串口状态获取,串口打开:1,串口关闭:0.
+            if (this.SerialPortCurve.IsOpen)//如果串口打开
+            {
+                // 如果正在关闭,忽略操作
+                if (m_bSerialCurveCloseFlag)
+                {
+                    Thread.Sleep(100);  // 线程睡眠
+                    m_bSerialCurveSleep = false;
+                    return;
+                }
+
+                // 关闭串口
+                try
+                {
+                    m_bSerialCurveListenFlag = true;   // 设置标志
+
+                    // 串口线程睡眠等待
+                    if (m_bSerialCurveSleep == true)    // 串口线程睡眠等待UI刷新
+                    {
+                        Thread.Sleep(100);  // 线程睡眠
+                        m_bSerialCurveSleep = false;
+                    }
+
+                    int i, j, k;
+                    Byte[] ReceiveDataArray = new Byte[this.SerialPortCurve.BytesToRead];       // ReceiveDataArray数组表示COM口接受的数据量
+                    this.SerialPortCurve.Read(ReceiveDataArray, 0, ReceiveDataArray.Length);    // 读取数据到ReceiveDataArray数组
+                    this.SerialPortCurve.DiscardInBuffer(); // 清空SerialPort数据缓冲Buff
+
+                    // 对串口数据进行拆分
+                    for (i = 0; i < ReceiveDataArray.Length - (Int16)TabPageCurve_Nud_CurveNum.Value * 2 - 3; i++)  // 搜索数据格式
+                    {
+                        // 数据格式(0xFF,0x00,...,0xAA,0x55)
+                        if (ReceiveDataArray[i] == (byte)(0xFF) && ReceiveDataArray[i + 1] == (byte)(0x00) && ReceiveDataArray[i + (Int16)TabPageCurve_Nud_CurveNum.Value * 2 + 2] == (byte)(0xAA) && ReceiveDataArray[i + (Int16)TabPageCurve_Nud_CurveNum.Value * 2 + 3] == (byte)(0x55))
+                        {
+                            for (j = 0, k = i; j < (Int16)TabPageCurve_Nud_CurveNum.Value; j++, k += 2)
+                            {
+                                m_nSerialCurveData[j] = BitConverter.ToInt16(ReceiveDataArray, k + 2);  // 数据拆分
+                            }
+                            i += (Int16)TabPageCurve_Nud_CurveNum.Value * 2 + 3;
+                            m_bSerialCurveDataCheckFinish = true;   // 数据拆分完成
+                        }
+                    }
+                    
+                }
+                // 异常处理
+                catch (Exception)
+                {
+                    // 串口信息提示
+                    TabPageCurve_Tbx_SerialInfo.Text = "串口传输出现异常!";
+                    MessageBox.Show("串口传输出现异常!", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                // 串口接收结束
+                finally
+                {
+                    m_bSerialCurveListenFlag = false;
+                    m_bSerialCurveSleep = false;
+                }
+            }
+            else // 如果串口关闭
+            {
+                // 串口信息提示
+                TabPageCurve_Tbx_SerialInfo.Text = "串口未打开!";
+                MessageBox.Show("串口未打开!", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+        }
+
+        #endregion
+
+        #region 定时刷新曲线
+        private void CurveRefresh_Tick(object sender, EventArgs e)
+        {
+            if (m_bSerialCurveDataCheckFinish)  // 数据拆分完成
+            {
+                // 刷新UI界面
+                this.Invoke((EventHandler)(delegate
+                {
+                    this.TabPageCurve_Lab_Curve1.Text = "数值:" + m_nSerialCurveData[0].ToString();   // 曲线1数值显示
+                    this.TabPageCurve_Lab_Curve2.Text = "数值:" + m_nSerialCurveData[1].ToString();   // 曲线2数值显示
+                    this.TabPageCurve_Lab_Curve3.Text = "数值:" + m_nSerialCurveData[2].ToString();   // 曲线3数值显示
+                    this.TabPageCurve_Lab_Curve4.Text = "数值:" + m_nSerialCurveData[3].ToString();   // 曲线4数值显示
+                    this.TabPageCurve_Lab_Curve5.Text = "数值:" + m_nSerialCurveData[4].ToString();   // 曲线5数值显示
+                    this.TabPageCurve_Lab_Curve6.Text = "数值:" + m_nSerialCurveData[5].ToString();   // 曲线6数值显示
+                    this.TabPageCurve_Lab_Curve7.Text = "数值:" + m_nSerialCurveData[6].ToString();   // 曲线7数值显示
+                    this.TabPageCurve_Lab_Curve8.Text = "数值:" + m_nSerialCurveData[7].ToString();   // 曲线8数值显示
+
+                    // 坐标点数多余300后保持坐标中存在300点
+                    if (ZedGraph_List_1.Count >= 300)
+                    {
+                        ZedGraph_List_1.RemoveAt(0);
+                    }
+                    if (ZedGraph_List_2.Count >= 300)
+                    {
+                        ZedGraph_List_2.RemoveAt(0);
+                    }
+                    if (ZedGraph_List_3.Count >= 300)
+                    {
+                        ZedGraph_List_3.RemoveAt(0);
+                    }
+                    if (ZedGraph_List_4.Count >= 300)
+                    {
+                        ZedGraph_List_4.RemoveAt(0);
+                    }
+                    if (ZedGraph_List_5.Count >= 300)
+                    {
+                        ZedGraph_List_5.RemoveAt(0);
+                    }
+                    if (ZedGraph_List_6.Count >= 300)
+                    {
+                        ZedGraph_List_6.RemoveAt(0);
+                    }
+                    if (ZedGraph_List_7.Count >= 300)
+                    {
+                        ZedGraph_List_7.RemoveAt(0);
+                    }
+                    if (ZedGraph_List_8.Count >= 300)
+                    {
+                        ZedGraph_List_8.RemoveAt(0);
+                    }
+
+                    ZedGraph_List_1.Add(0, m_nSerialCurveData[0]);  // ZedGraph_List_1添加数据
+                    ZedGraph_List_2.Add(0, m_nSerialCurveData[1]);  // ZedGraph_List_2添加数据
+                    ZedGraph_List_3.Add(0, m_nSerialCurveData[2]);  // ZedGraph_List_3添加数据
+                    ZedGraph_List_4.Add(0, m_nSerialCurveData[3]);  // ZedGraph_List_4添加数据
+                    ZedGraph_List_5.Add(0, m_nSerialCurveData[4]);  // ZedGraph_List_5添加数据
+                    ZedGraph_List_6.Add(0, m_nSerialCurveData[5]);  // ZedGraph_List_6添加数据
+                    ZedGraph_List_7.Add(0, m_nSerialCurveData[6]);  // ZedGraph_List_7添加数据
+                    ZedGraph_List_8.Add(0, m_nSerialCurveData[7]);  // ZedGraph_List_8添加数据
+
+                    this.TabPageCurve_Zed_Graph.AxisChange();       // 坐标轴自动适应
+                    this.TabPageCurve_Zed_Graph.Invalidate();       // 重绘控件
+
+                    // 接收曲线限幅
+                    m_lSerialCurveRecvCount += 1;                   // 接收曲线数加一
+                    if (m_lSerialCurveRecvCount > 32767)
+                    {
+                        m_lSerialCurveRecvCount = 32767;
+                    }
+                    this.TabPageCurve_Lab_SerialInfoRecv.Text = "已接收数据:" + m_lSerialCurveRecvCount.ToString();
+                }
+                    ));
+                m_bSerialCurveDataCheckFinish = false;  // 等待拆分数据
+            }
+        }
+
+        #endregion
+
+        #region 清除曲线
+        private void TabPageCurve_Btn_CurveClear_Click(object sender, EventArgs e)
+        {
+            // 清除绘图曲线
+            ZedGraph_List_1.RemoveRange(0, ZedGraph_List_1.Count);  // 清除曲线1数据
+            ZedGraph_List_2.RemoveRange(0, ZedGraph_List_2.Count);  // 清除曲线2数据
+            ZedGraph_List_3.RemoveRange(0, ZedGraph_List_3.Count);  // 清除曲线3数据
+            ZedGraph_List_4.RemoveRange(0, ZedGraph_List_4.Count);  // 清除曲线4数据
+            ZedGraph_List_5.RemoveRange(0, ZedGraph_List_5.Count);  // 清除曲线5数据
+            ZedGraph_List_6.RemoveRange(0, ZedGraph_List_6.Count);  // 清除曲线6数据
+            ZedGraph_List_7.RemoveRange(0, ZedGraph_List_7.Count);  // 清除曲线7数据
+            ZedGraph_List_8.RemoveRange(0, ZedGraph_List_8.Count);  // 清除曲线8数据
+
+            ZedGraph_Curve_1.Clear();   // 清除曲线1数据
+            ZedGraph_Curve_2.Clear();   // 清除曲线2数据
+            ZedGraph_Curve_3.Clear();   // 清除曲线3数据
+            ZedGraph_Curve_4.Clear();   // 清除曲线4数据
+            ZedGraph_Curve_5.Clear();   // 清除曲线5数据
+            ZedGraph_Curve_6.Clear();   // 清除曲线6数据
+            ZedGraph_Curve_7.Clear();   // 清除曲线7数据
+            ZedGraph_Curve_8.Clear();   // 清除曲线8数据
+
+            this.TabPageCurve_Zed_Graph.Refresh();  // ZedGraph刷新
+
+            // 清除接收曲线数据
+            m_lSerialCurveRecvCount = 0;
+            this.TabPageCurve_Lab_SerialInfoRecv.Text = "已接收数据:0";
+        }
+        #endregion
+
+        #region 曲线导出
+        private void TabPageCurve_Btn_ExportData_Click(object sender, EventArgs e)
+        {
+
+        }
+        #endregion
+
+        #region 曲线数量变化
+        private void TabPageCurve_Nud_CurveNum_ValueChanged(object sender, EventArgs e)
+        {
+            // 当前曲线数量
+            switch ((int)this.TabPageCurve_Nud_CurveNum.Value)
+            {
+                case 1:// 当前选中1条曲线
+                    this.TabPageCurve_Cbx_Curve1.Enabled = true;//曲线1可用
+                    this.TabPageCurve_Cbx_Curve2.Enabled = false;//曲线2不可用
+                    this.TabPageCurve_Cbx_Curve3.Enabled = false;//曲线3不可用
+                    this.TabPageCurve_Cbx_Curve4.Enabled = false;//曲线4不可用
+                    this.TabPageCurve_Cbx_Curve5.Enabled = false;//曲线5不可用
+                    this.TabPageCurve_Cbx_Curve6.Enabled = false;//曲线6不可用
+                    this.TabPageCurve_Cbx_Curve7.Enabled = false;//曲线7不可用
+                    this.TabPageCurve_Cbx_Curve8.Enabled = false;//曲线8不可用
+
+                    this.TabPageCurve_Cbx_Curve1.Checked = true;//曲线1选中
+                    this.TabPageCurve_Cbx_Curve2.Checked = false;//曲线2不选中
+                    this.TabPageCurve_Cbx_Curve3.Checked = false;//曲线3不选中
+                    this.TabPageCurve_Cbx_Curve4.Checked = false;//曲线4不选中
+                    this.TabPageCurve_Cbx_Curve5.Checked = false;//曲线5不选中
+                    this.TabPageCurve_Cbx_Curve6.Checked = false;//曲线6不选中
+                    this.TabPageCurve_Cbx_Curve7.Checked = false;//曲线7不选中
+                    this.TabPageCurve_Cbx_Curve8.Checked = false;//曲线8不选中
+
+                    this.TabPageCurve_Lab_Curve1.Enabled = true;//曲线1数值可用
+                    this.TabPageCurve_Lab_Curve2.Enabled = false;//曲线2数值不可用
+                    this.TabPageCurve_Lab_Curve3.Enabled = false;//曲线3数值不可用
+                    this.TabPageCurve_Lab_Curve4.Enabled = false;//曲线4数值不可用
+                    this.TabPageCurve_Lab_Curve5.Enabled = false;//曲线5数值不可用
+                    this.TabPageCurve_Lab_Curve6.Enabled = false;//曲线6数值不可用
+                    this.TabPageCurve_Lab_Curve7.Enabled = false;//曲线7数值不可用
+                    this.TabPageCurve_Lab_Curve8.Enabled = false;//曲线8数值不可用
+                    break;
+                case 2://当前选中2条曲线
+                    this.TabPageCurve_Cbx_Curve1.Enabled = true;//曲线1可用
+                    this.TabPageCurve_Cbx_Curve2.Enabled = true;//曲线2可用
+                    this.TabPageCurve_Cbx_Curve3.Enabled = false;//曲线3不可用
+                    this.TabPageCurve_Cbx_Curve4.Enabled = false;//曲线4不可用
+                    this.TabPageCurve_Cbx_Curve5.Enabled = false;//曲线5不可用
+                    this.TabPageCurve_Cbx_Curve6.Enabled = false;//曲线6不可用
+                    this.TabPageCurve_Cbx_Curve7.Enabled = false;//曲线7不可用
+                    this.TabPageCurve_Cbx_Curve8.Enabled = false;//曲线8不可用
+
+                    this.TabPageCurve_Cbx_Curve1.Checked = true;//曲线1选中
+                    this.TabPageCurve_Cbx_Curve2.Checked = true;//曲线2选中
+                    this.TabPageCurve_Cbx_Curve3.Checked = false;//曲线3不选中
+                    this.TabPageCurve_Cbx_Curve4.Checked = false;//曲线4不选中
+                    this.TabPageCurve_Cbx_Curve5.Checked = false;//曲线5不选中
+                    this.TabPageCurve_Cbx_Curve6.Checked = false;//曲线6不选中
+                    this.TabPageCurve_Cbx_Curve7.Checked = false;//曲线7不选中
+                    this.TabPageCurve_Cbx_Curve8.Checked = false;//曲线8不选中
+
+                    this.TabPageCurve_Lab_Curve1.Enabled = true;//曲线1数值可用
+                    this.TabPageCurve_Lab_Curve2.Enabled = true;//曲线2数值可用
+                    this.TabPageCurve_Lab_Curve3.Enabled = false;//曲线3数值不可用
+                    this.TabPageCurve_Lab_Curve4.Enabled = false;//曲线4数值不可用
+                    this.TabPageCurve_Lab_Curve5.Enabled = false;//曲线5数值不可用
+                    this.TabPageCurve_Lab_Curve6.Enabled = false;//曲线6数值不可用
+                    this.TabPageCurve_Lab_Curve7.Enabled = false;//曲线7数值不可用
+                    this.TabPageCurve_Lab_Curve8.Enabled = false;//曲线8数值不可用
+                    break;
+                case 3://当前选中3条曲线
+                    this.TabPageCurve_Cbx_Curve1.Enabled = true;//曲线1可用
+                    this.TabPageCurve_Cbx_Curve2.Enabled = true;//曲线2可用
+                    this.TabPageCurve_Cbx_Curve3.Enabled = true;//曲线3可用
+                    this.TabPageCurve_Cbx_Curve4.Enabled = false;//曲线4不可用
+                    this.TabPageCurve_Cbx_Curve5.Enabled = false;//曲线5不可用
+                    this.TabPageCurve_Cbx_Curve6.Enabled = false;//曲线6不可用
+                    this.TabPageCurve_Cbx_Curve7.Enabled = false;//曲线7不可用
+                    this.TabPageCurve_Cbx_Curve8.Enabled = false;//曲线8不可用
+
+                    this.TabPageCurve_Cbx_Curve1.Checked = true;//曲线1选中
+                    this.TabPageCurve_Cbx_Curve2.Checked = true;//曲线2选中
+                    this.TabPageCurve_Cbx_Curve3.Checked = true;//曲线3选中
+                    this.TabPageCurve_Cbx_Curve4.Checked = false;//曲线4不选中
+                    this.TabPageCurve_Cbx_Curve5.Checked = false;//曲线5不选中
+                    this.TabPageCurve_Cbx_Curve6.Checked = false;//曲线6不选中
+                    this.TabPageCurve_Cbx_Curve7.Checked = false;//曲线7不选中
+                    this.TabPageCurve_Cbx_Curve8.Checked = false;//曲线8不选中
+
+                    this.TabPageCurve_Lab_Curve1.Enabled = true;//曲线1数值可用
+                    this.TabPageCurve_Lab_Curve2.Enabled = true;//曲线2数值可用
+                    this.TabPageCurve_Lab_Curve3.Enabled = true;//曲线3数值可用
+                    this.TabPageCurve_Lab_Curve4.Enabled = false;//曲线4数值不可用
+                    this.TabPageCurve_Lab_Curve5.Enabled = false;//曲线5数值不可用
+                    this.TabPageCurve_Lab_Curve6.Enabled = false;//曲线6数值不可用
+                    this.TabPageCurve_Lab_Curve7.Enabled = false;//曲线7数值不可用
+                    this.TabPageCurve_Lab_Curve8.Enabled = false;//曲线8数值不可用
+                    break;
+                case 4://当前选中4条曲线
+                    this.TabPageCurve_Cbx_Curve1.Enabled = true;//曲线1可用
+                    this.TabPageCurve_Cbx_Curve2.Enabled = true;//曲线2可用
+                    this.TabPageCurve_Cbx_Curve3.Enabled = true;//曲线3可用
+                    this.TabPageCurve_Cbx_Curve4.Enabled = true;//曲线4可用
+                    this.TabPageCurve_Cbx_Curve5.Enabled = false;//曲线5不可用
+                    this.TabPageCurve_Cbx_Curve6.Enabled = false;//曲线6不可用
+                    this.TabPageCurve_Cbx_Curve7.Enabled = false;//曲线7不可用
+                    this.TabPageCurve_Cbx_Curve8.Enabled = false;//曲线8不可用
+
+                    this.TabPageCurve_Cbx_Curve1.Checked = true;//曲线1选中
+                    this.TabPageCurve_Cbx_Curve2.Checked = true;//曲线2选中
+                    this.TabPageCurve_Cbx_Curve3.Checked = true;//曲线3选中
+                    this.TabPageCurve_Cbx_Curve4.Checked = true;//曲线4选中
+                    this.TabPageCurve_Cbx_Curve5.Checked = false;//曲线5不选中
+                    this.TabPageCurve_Cbx_Curve6.Checked = false;//曲线6不选中
+                    this.TabPageCurve_Cbx_Curve7.Checked = false;//曲线7不选中
+                    this.TabPageCurve_Cbx_Curve8.Checked = false;//曲线8不选中
+
+                    this.TabPageCurve_Lab_Curve1.Enabled = true;//曲线1数值可用
+                    this.TabPageCurve_Lab_Curve2.Enabled = true;//曲线2数值可用
+                    this.TabPageCurve_Lab_Curve3.Enabled = true;//曲线3数值可用
+                    this.TabPageCurve_Lab_Curve4.Enabled = true;//曲线4数值可用
+                    this.TabPageCurve_Lab_Curve5.Enabled = false;//曲线5数值不可用
+                    this.TabPageCurve_Lab_Curve6.Enabled = false;//曲线6数值不可用
+                    this.TabPageCurve_Lab_Curve7.Enabled = false;//曲线7数值不可用
+                    this.TabPageCurve_Lab_Curve8.Enabled = false;//曲线8数值不可用
+                    break;
+                case 5://当前选中5条曲线
+                    this.TabPageCurve_Cbx_Curve1.Enabled = true;//曲线1可用
+                    this.TabPageCurve_Cbx_Curve2.Enabled = true;//曲线2可用
+                    this.TabPageCurve_Cbx_Curve3.Enabled = true;//曲线3可用
+                    this.TabPageCurve_Cbx_Curve4.Enabled = true;//曲线4可用
+                    this.TabPageCurve_Cbx_Curve5.Enabled = true;//曲线5可用
+                    this.TabPageCurve_Cbx_Curve6.Enabled = false;//曲线6不可用
+                    this.TabPageCurve_Cbx_Curve7.Enabled = false;//曲线7不可用
+                    this.TabPageCurve_Cbx_Curve8.Enabled = false;//曲线8不可用
+
+                    this.TabPageCurve_Cbx_Curve1.Checked = true;//曲线1选中
+                    this.TabPageCurve_Cbx_Curve2.Checked = true;//曲线2选中
+                    this.TabPageCurve_Cbx_Curve3.Checked = true;//曲线3选中
+                    this.TabPageCurve_Cbx_Curve4.Checked = true;//曲线4选中
+                    this.TabPageCurve_Cbx_Curve5.Checked = true;//曲线5选中
+                    this.TabPageCurve_Cbx_Curve6.Checked = false;//曲线6不选中
+                    this.TabPageCurve_Cbx_Curve7.Checked = false;//曲线7不选中
+                    this.TabPageCurve_Cbx_Curve8.Checked = false;//曲线8不选中
+
+                    this.TabPageCurve_Lab_Curve1.Enabled = true;//曲线1数值可用
+                    this.TabPageCurve_Lab_Curve2.Enabled = true;//曲线2数值可用
+                    this.TabPageCurve_Lab_Curve3.Enabled = true;//曲线3数值可用
+                    this.TabPageCurve_Lab_Curve4.Enabled = true;//曲线4数值可用
+                    this.TabPageCurve_Lab_Curve5.Enabled = true;//曲线5数值可用
+                    this.TabPageCurve_Lab_Curve6.Enabled = false;//曲线6数值不可用
+                    this.TabPageCurve_Lab_Curve7.Enabled = false;//曲线7数值不可用
+                    this.TabPageCurve_Lab_Curve8.Enabled = false;//曲线8数值不可用
+                    break;
+                case 6://当前选中6条曲线
+                    this.TabPageCurve_Cbx_Curve1.Enabled = true;//曲线1可用
+                    this.TabPageCurve_Cbx_Curve2.Enabled = true;//曲线2可用
+                    this.TabPageCurve_Cbx_Curve3.Enabled = true;//曲线3可用
+                    this.TabPageCurve_Cbx_Curve4.Enabled = true;//曲线4可用
+                    this.TabPageCurve_Cbx_Curve5.Enabled = true;//曲线5可用
+                    this.TabPageCurve_Cbx_Curve6.Enabled = true;//曲线6可用
+                    this.TabPageCurve_Cbx_Curve7.Enabled = false;//曲线7不可用
+                    this.TabPageCurve_Cbx_Curve8.Enabled = false;//曲线8不可用
+
+                    this.TabPageCurve_Cbx_Curve1.Checked = true;//曲线1选中
+                    this.TabPageCurve_Cbx_Curve2.Checked = true;//曲线2选中
+                    this.TabPageCurve_Cbx_Curve3.Checked = true;//曲线3选中
+                    this.TabPageCurve_Cbx_Curve4.Checked = true;//曲线4选中
+                    this.TabPageCurve_Cbx_Curve5.Checked = true;//曲线5选中
+                    this.TabPageCurve_Cbx_Curve6.Checked = true;//曲线6选中
+                    this.TabPageCurve_Cbx_Curve7.Checked = false;//曲线7不选中
+                    this.TabPageCurve_Cbx_Curve8.Checked = false;//曲线8不选中
+
+                    this.TabPageCurve_Lab_Curve1.Enabled = true;//曲线1数值可用
+                    this.TabPageCurve_Lab_Curve2.Enabled = true;//曲线2数值可用
+                    this.TabPageCurve_Lab_Curve3.Enabled = true;//曲线3数值可用
+                    this.TabPageCurve_Lab_Curve4.Enabled = true;//曲线4数值可用
+                    this.TabPageCurve_Lab_Curve5.Enabled = true;//曲线5数值可用
+                    this.TabPageCurve_Lab_Curve6.Enabled = true;//曲线6数值可用
+                    this.TabPageCurve_Lab_Curve7.Enabled = false;//曲线7数值不可用
+                    this.TabPageCurve_Lab_Curve8.Enabled = false;//曲线8数值不可用
+                    break;
+                case 7://当前选中7条曲线
+                    this.TabPageCurve_Cbx_Curve1.Enabled = true;//曲线1可用
+                    this.TabPageCurve_Cbx_Curve2.Enabled = true;//曲线2可用
+                    this.TabPageCurve_Cbx_Curve3.Enabled = true;//曲线3可用
+                    this.TabPageCurve_Cbx_Curve4.Enabled = true;//曲线4可用
+                    this.TabPageCurve_Cbx_Curve5.Enabled = true;//曲线5可用
+                    this.TabPageCurve_Cbx_Curve6.Enabled = true;//曲线6可用
+                    this.TabPageCurve_Cbx_Curve7.Enabled = true;//曲线7可用
+                    this.TabPageCurve_Cbx_Curve8.Enabled = false;//曲线8不可用
+
+                    this.TabPageCurve_Cbx_Curve1.Checked = true;//曲线1选中
+                    this.TabPageCurve_Cbx_Curve2.Checked = true;//曲线2选中
+                    this.TabPageCurve_Cbx_Curve3.Checked = true;//曲线3选中
+                    this.TabPageCurve_Cbx_Curve4.Checked = true;//曲线4选中
+                    this.TabPageCurve_Cbx_Curve5.Checked = true;//曲线5选中
+                    this.TabPageCurve_Cbx_Curve6.Checked = true;//曲线6选中
+                    this.TabPageCurve_Cbx_Curve7.Checked = true;//曲线7选中
+                    this.TabPageCurve_Cbx_Curve8.Checked = false;//曲线8不选中
+
+                    this.TabPageCurve_Lab_Curve1.Enabled = true;//曲线1数值可用
+                    this.TabPageCurve_Lab_Curve2.Enabled = true;//曲线2数值可用
+                    this.TabPageCurve_Lab_Curve3.Enabled = true;//曲线3数值可用
+                    this.TabPageCurve_Lab_Curve4.Enabled = true;//曲线4数值可用
+                    this.TabPageCurve_Lab_Curve5.Enabled = true;//曲线5数值可用
+                    this.TabPageCurve_Lab_Curve6.Enabled = true;//曲线6数值可用
+                    this.TabPageCurve_Lab_Curve7.Enabled = true;//曲线7数值可用
+                    this.TabPageCurve_Lab_Curve8.Enabled = false;//曲线8数值不可用
+                    break;
+                case 8://当前选中8条曲线
+                    this.TabPageCurve_Cbx_Curve1.Enabled = true;//曲线1可用
+                    this.TabPageCurve_Cbx_Curve2.Enabled = true;//曲线2可用
+                    this.TabPageCurve_Cbx_Curve3.Enabled = true;//曲线3可用
+                    this.TabPageCurve_Cbx_Curve4.Enabled = true;//曲线4可用
+                    this.TabPageCurve_Cbx_Curve5.Enabled = true;//曲线5可用
+                    this.TabPageCurve_Cbx_Curve6.Enabled = true;//曲线6可用
+                    this.TabPageCurve_Cbx_Curve7.Enabled = true;//曲线7可用
+                    this.TabPageCurve_Cbx_Curve8.Enabled = true;//曲线8可用
+
+                    this.TabPageCurve_Cbx_Curve1.Checked = true;//曲线1选中
+                    this.TabPageCurve_Cbx_Curve2.Checked = true;//曲线2选中
+                    this.TabPageCurve_Cbx_Curve3.Checked = true;//曲线3选中
+                    this.TabPageCurve_Cbx_Curve4.Checked = true;//曲线4选中
+                    this.TabPageCurve_Cbx_Curve5.Checked = true;//曲线5选中
+                    this.TabPageCurve_Cbx_Curve6.Checked = true;//曲线6选中
+                    this.TabPageCurve_Cbx_Curve7.Checked = true;//曲线7选中
+                    this.TabPageCurve_Cbx_Curve8.Checked = true;//曲线8选中
+
+                    this.TabPageCurve_Lab_Curve1.Enabled = true;//曲线1数值可用
+                    this.TabPageCurve_Lab_Curve2.Enabled = true;//曲线2数值可用
+                    this.TabPageCurve_Lab_Curve3.Enabled = true;//曲线3数值可用
+                    this.TabPageCurve_Lab_Curve4.Enabled = true;//曲线4数值可用
+                    this.TabPageCurve_Lab_Curve5.Enabled = true;//曲线5数值可用
+                    this.TabPageCurve_Lab_Curve6.Enabled = true;//曲线6数值可用
+                    this.TabPageCurve_Lab_Curve7.Enabled = true;//曲线7数值可用
+                    this.TabPageCurve_Lab_Curve8.Enabled = true;//曲线8数值可用
+                    break;
+                default: // 默认情况
+                    MessageBox.Show("曲线数量输入错误!", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+            }
+        }
+
+        #endregion
+
+        #region 曲线复选框事件
+
+        #region 曲线复选框Checked变化
+        private void TabPageCurve_Cbx_Curve1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.TabPageCurve_Cbx_Curve1.Checked)//曲线1复选框选中
+            {
+                ZedGraph_Curve_1.IsVisible = true;//曲线1可见
+            }
+            else//曲线1复选框未选中
+            {
+                ZedGraph_Curve_1.IsVisible = false;//曲线1不可见
+            }
+        }
+
+        private void TabPageCurve_Cbx_Curve2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.TabPageCurve_Cbx_Curve2.Checked)//曲线2复选框选中
+            {
+                ZedGraph_Curve_2.IsVisible = true;//曲线2可见
+            }
+            else//曲线2复选框未选中
+            {
+                ZedGraph_Curve_2.IsVisible = false;//曲线2不可见
+            }
+        }
+
+        private void TabPageCurve_Cbx_Curve3_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.TabPageCurve_Cbx_Curve3.Checked)//曲线3复选框选中
+            {
+                ZedGraph_Curve_3.IsVisible = true;//曲线3可见
+            }
+            else//曲线3复选框未选中
+            {
+                ZedGraph_Curve_3.IsVisible = false;//曲线3不可见
+            }
+        }
+
+        private void TabPageCurve_Cbx_Curve4_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.TabPageCurve_Cbx_Curve4.Checked)//曲线4复选框选中
+            {
+                ZedGraph_Curve_4.IsVisible = true;//曲线4可见
+            }
+            else//曲线4复选框未选中
+            {
+                ZedGraph_Curve_4.IsVisible = false;//曲线4不可见
+            }
+        }
+
+        private void TabPageCurve_Cbx_Curve5_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.TabPageCurve_Cbx_Curve5.Checked)//曲线5复选框选中
+            {
+                ZedGraph_Curve_5.IsVisible = true;//曲线5可见
+            }
+            else//曲线5复选框未选中
+            {
+                ZedGraph_Curve_5.IsVisible = false;//曲线5不可见
+            }
+        }
+
+        private void TabPageCurve_Cbx_Curve6_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.TabPageCurve_Cbx_Curve6.Checked)//曲线6复选框选中
+            {
+                ZedGraph_Curve_6.IsVisible = true;//曲线6可见
+            }
+            else//曲线6复选框未选中
+            {
+                ZedGraph_Curve_6.IsVisible = false;//曲线6不可见
+            }
+        }
+
+        private void TabPageCurve_Cbx_Curve7_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.TabPageCurve_Cbx_Curve7.Checked)//曲线7复选框选中
+            {
+                ZedGraph_Curve_7.IsVisible = true;//曲线7可见
+            }
+            else//曲线7复选框未选中
+            {
+                ZedGraph_Curve_7.IsVisible = false;//曲线7不可见
+            }
+        }
+
+        private void TabPageCurve_Cbx_Curve8_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.TabPageCurve_Cbx_Curve8.Checked)//曲线8复选框选中
+            {
+                ZedGraph_Curve_8.IsVisible = true;//曲线8可见
+            }
+            else//曲线8复选框未选中
+            {
+                ZedGraph_Curve_8.IsVisible = false;//曲线8不可见
+            }
+        }
+
+        #endregion
+
+        #region 曲线复选框Enabled变化
+        private void TabPageCurve_Cbx_Curve1_EnabledChanged(object sender, EventArgs e)
+        {
+            if (this.TabPageCurve_Cbx_Curve1.Enabled == false)//曲线1复选框禁止
+            {
+                ZedGraph_Curve_1.IsVisible = false;//曲线1不可见
+            }
+            else//曲线1复选框可用
+            {
+                if (this.TabPageCurve_Cbx_Curve1.Checked)//曲线1复选框选中
+                {
+                    ZedGraph_Curve_1.IsVisible = true;//曲线1可见
+                }
+                else
+                {
+                    ZedGraph_Curve_1.IsVisible = false;//曲线1不可见
+                }
+            }
+        }
+
+        private void TabPageCurve_Cbx_Curve2_EnabledChanged(object sender, EventArgs e)
+        {
+            if (this.TabPageCurve_Cbx_Curve2.Enabled == false)//曲线2复选框禁止
+            {
+                ZedGraph_Curve_2.IsVisible = false;//曲线2不可见
+            }
+            else//曲线2复选框可用
+            {
+                if (this.TabPageCurve_Cbx_Curve2.Checked)//曲线2复选框选中
+                {
+                    ZedGraph_Curve_2.IsVisible = true;//曲线2可见
+                }
+                else
+                {
+                    ZedGraph_Curve_2.IsVisible = false;//曲线2不可见
+                }
+            }
+        }
+
+        private void TabPageCurve_Cbx_Curve3_EnabledChanged(object sender, EventArgs e)
+        {
+            if (this.TabPageCurve_Cbx_Curve3.Enabled == false)//曲线3复选框禁止
+            {
+                ZedGraph_Curve_3.IsVisible = false;//曲线3不可见
+            }
+            else//曲线3复选框可用
+            {
+                if (this.TabPageCurve_Cbx_Curve3.Checked)//曲线3复选框选中
+                {
+                    ZedGraph_Curve_3.IsVisible = true;//曲线3可见
+                }
+                else
+                {
+                    ZedGraph_Curve_3.IsVisible = false;//曲线3不可见
+                }
+            }
+        }
+
+        private void TabPageCurve_Cbx_Curve4_EnabledChanged(object sender, EventArgs e)
+        {
+            if (this.TabPageCurve_Cbx_Curve4.Enabled == false)//曲线4复选框禁止
+            {
+                ZedGraph_Curve_4.IsVisible = false;//曲线4不可见
+            }
+            else//曲线4复选框可用
+            {
+                if (this.TabPageCurve_Cbx_Curve4.Checked)//曲线4复选框选中
+                {
+                    ZedGraph_Curve_4.IsVisible = true;//曲线4可见
+                }
+                else
+                {
+                    ZedGraph_Curve_4.IsVisible = false;//曲线4不可见
+                }
+            }
+        }
+
+        private void TabPageCurve_Cbx_Curve5_EnabledChanged(object sender, EventArgs e)
+        {
+            if (this.TabPageCurve_Cbx_Curve5.Enabled == false)//曲线5复选框禁止
+            {
+                ZedGraph_Curve_5.IsVisible = false;//曲线5不可见
+            }
+            else//曲线5复选框可用
+            {
+                if (this.TabPageCurve_Cbx_Curve5.Checked)//曲线5复选框选中
+                {
+                    ZedGraph_Curve_5.IsVisible = true;//曲线5可见
+                }
+                else
+                {
+                    ZedGraph_Curve_5.IsVisible = false;//曲线5不可见
+                }
+            }
+        }
+
+        private void TabPageCurve_Cbx_Curve6_EnabledChanged(object sender, EventArgs e)
+        {
+            if (this.TabPageCurve_Cbx_Curve6.Enabled == false)//曲线6复选框禁止
+            {
+                ZedGraph_Curve_6.IsVisible = false;//曲线6不可见
+            }
+            else//曲线6复选框可用
+            {
+                if (this.TabPageCurve_Cbx_Curve6.Checked)//曲线6复选框选中
+                {
+                    ZedGraph_Curve_6.IsVisible = true;//曲线6可见
+                }
+                else
+                {
+                    ZedGraph_Curve_6.IsVisible = false;//曲线6不可见
+                }
+            }
+        }
+
+        private void TabPageCurve_Cbx_Curve7_EnabledChanged(object sender, EventArgs e)
+        {
+            if (this.TabPageCurve_Cbx_Curve7.Enabled == false)//曲线7复选框禁止
+            {
+                ZedGraph_Curve_7.IsVisible = false;//曲线7不可见
+            }
+            else//曲线7复选框可用
+            {
+                if (this.TabPageCurve_Cbx_Curve7.Checked)//曲线7复选框选中
+                {
+                    ZedGraph_Curve_7.IsVisible = true;//曲线7可见
+                }
+                else
+                {
+                    ZedGraph_Curve_7.IsVisible = false;//曲线7不可见
+                }
+            }
+        }
+
+        private void TabPageCurve_Cbx_Curve8_EnabledChanged(object sender, EventArgs e)
+        {
+            if (this.TabPageCurve_Cbx_Curve8.Enabled == false)//曲线8复选框禁止
+            {
+                ZedGraph_Curve_8.IsVisible = false;//曲线8不可见
+            }
+            else//曲线8复选框可用
+            {
+                if (this.TabPageCurve_Cbx_Curve8.Checked)//曲线8复选框选中
+                {
+                    ZedGraph_Curve_8.IsVisible = true;//曲线8可见
+                }
+                else
+                {
+                    ZedGraph_Curve_8.IsVisible = false;//曲线8不可见
+                }
+            }
+        }
+        #endregion
+
         #endregion
 
         #endregion

@@ -861,6 +861,7 @@
             this.TabPageCurve_Btn_CurveClear.TabIndex = 1;
             this.TabPageCurve_Btn_CurveClear.Text = "清除曲线";
             this.TabPageCurve_Btn_CurveClear.UseVisualStyleBackColor = true;
+            this.TabPageCurve_Btn_CurveClear.Click += new System.EventHandler(this.TabPageCurve_Btn_CurveClear_Click);
             // 
             // TabPageCurve_Lab_Curve8
             // 
@@ -965,6 +966,7 @@
             0,
             0,
             0});
+            this.TabPageCurve_Nud_CurveNum.ValueChanged += new System.EventHandler(this.TabPageCurve_Nud_CurveNum_ValueChanged);
             // 
             // TabPageCurve_Lab_CurveNum
             // 
@@ -985,6 +987,8 @@
             this.TabPageCurve_Cbx_Curve8.TabIndex = 6;
             this.TabPageCurve_Cbx_Curve8.Text = "曲线8";
             this.TabPageCurve_Cbx_Curve8.UseVisualStyleBackColor = false;
+            this.TabPageCurve_Cbx_Curve8.CheckedChanged += new System.EventHandler(this.TabPageCurve_Cbx_Curve8_CheckedChanged);
+            this.TabPageCurve_Cbx_Curve8.EnabledChanged += new System.EventHandler(this.TabPageCurve_Cbx_Curve8_EnabledChanged);
             // 
             // TabPageCurve_Cbx_Curve7
             // 
@@ -996,6 +1000,8 @@
             this.TabPageCurve_Cbx_Curve7.TabIndex = 1;
             this.TabPageCurve_Cbx_Curve7.Text = "曲线7";
             this.TabPageCurve_Cbx_Curve7.UseVisualStyleBackColor = false;
+            this.TabPageCurve_Cbx_Curve7.CheckedChanged += new System.EventHandler(this.TabPageCurve_Cbx_Curve7_CheckedChanged);
+            this.TabPageCurve_Cbx_Curve7.EnabledChanged += new System.EventHandler(this.TabPageCurve_Cbx_Curve7_EnabledChanged);
             // 
             // TabPageCurve_Cbx_Curve6
             // 
@@ -1007,6 +1013,8 @@
             this.TabPageCurve_Cbx_Curve6.TabIndex = 5;
             this.TabPageCurve_Cbx_Curve6.Text = "曲线6";
             this.TabPageCurve_Cbx_Curve6.UseVisualStyleBackColor = false;
+            this.TabPageCurve_Cbx_Curve6.CheckedChanged += new System.EventHandler(this.TabPageCurve_Cbx_Curve6_CheckedChanged);
+            this.TabPageCurve_Cbx_Curve6.EnabledChanged += new System.EventHandler(this.TabPageCurve_Cbx_Curve6_EnabledChanged);
             // 
             // TabPageCurve_Cbx_Curve5
             // 
@@ -1018,6 +1026,8 @@
             this.TabPageCurve_Cbx_Curve5.TabIndex = 4;
             this.TabPageCurve_Cbx_Curve5.Text = "曲线5";
             this.TabPageCurve_Cbx_Curve5.UseVisualStyleBackColor = false;
+            this.TabPageCurve_Cbx_Curve5.CheckedChanged += new System.EventHandler(this.TabPageCurve_Cbx_Curve5_CheckedChanged);
+            this.TabPageCurve_Cbx_Curve5.EnabledChanged += new System.EventHandler(this.TabPageCurve_Cbx_Curve5_EnabledChanged);
             // 
             // TabPageCurve_Cbx_Curve4
             // 
@@ -1029,6 +1039,8 @@
             this.TabPageCurve_Cbx_Curve4.TabIndex = 3;
             this.TabPageCurve_Cbx_Curve4.Text = "曲线4";
             this.TabPageCurve_Cbx_Curve4.UseVisualStyleBackColor = false;
+            this.TabPageCurve_Cbx_Curve4.CheckedChanged += new System.EventHandler(this.TabPageCurve_Cbx_Curve4_CheckedChanged);
+            this.TabPageCurve_Cbx_Curve4.EnabledChanged += new System.EventHandler(this.TabPageCurve_Cbx_Curve4_EnabledChanged);
             // 
             // TabPageCurve_Cbx_Curve3
             // 
@@ -1040,6 +1052,8 @@
             this.TabPageCurve_Cbx_Curve3.TabIndex = 2;
             this.TabPageCurve_Cbx_Curve3.Text = "曲线3";
             this.TabPageCurve_Cbx_Curve3.UseVisualStyleBackColor = false;
+            this.TabPageCurve_Cbx_Curve3.CheckedChanged += new System.EventHandler(this.TabPageCurve_Cbx_Curve3_CheckedChanged);
+            this.TabPageCurve_Cbx_Curve3.EnabledChanged += new System.EventHandler(this.TabPageCurve_Cbx_Curve3_EnabledChanged);
             // 
             // TabPageCurve_Cbx_Curve2
             // 
@@ -1051,6 +1065,8 @@
             this.TabPageCurve_Cbx_Curve2.TabIndex = 1;
             this.TabPageCurve_Cbx_Curve2.Text = "曲线2";
             this.TabPageCurve_Cbx_Curve2.UseVisualStyleBackColor = false;
+            this.TabPageCurve_Cbx_Curve2.CheckedChanged += new System.EventHandler(this.TabPageCurve_Cbx_Curve2_CheckedChanged);
+            this.TabPageCurve_Cbx_Curve2.EnabledChanged += new System.EventHandler(this.TabPageCurve_Cbx_Curve2_EnabledChanged);
             // 
             // TabPageCurve_Cbx_Curve1
             // 
@@ -1062,6 +1078,8 @@
             this.TabPageCurve_Cbx_Curve1.TabIndex = 0;
             this.TabPageCurve_Cbx_Curve1.Text = "曲线1";
             this.TabPageCurve_Cbx_Curve1.UseVisualStyleBackColor = false;
+            this.TabPageCurve_Cbx_Curve1.CheckedChanged += new System.EventHandler(this.TabPageCurve_Cbx_Curve1_CheckedChanged);
+            this.TabPageCurve_Cbx_Curve1.EnabledChanged += new System.EventHandler(this.TabPageCurve_Cbx_Curve1_EnabledChanged);
             // 
             // TabPageCurve_Gbx_SerialInfo
             // 
@@ -1157,6 +1175,7 @@
             this.TabPageCurve_Btn_ExportData.TabIndex = 12;
             this.TabPageCurve_Btn_ExportData.Text = "导出数据";
             this.TabPageCurve_Btn_ExportData.UseVisualStyleBackColor = true;
+            this.TabPageCurve_Btn_ExportData.Click += new System.EventHandler(this.TabPageCurve_Btn_ExportData_Click);
             // 
             // TabPageCurve_Gbx_SerialCurve
             // 
@@ -1183,9 +1202,14 @@
             this.TabPageCurve_Zed_Graph.Size = new System.Drawing.Size(732, 540);
             this.TabPageCurve_Zed_Graph.TabIndex = 1;
             // 
+            // SerialPortCurve
+            // 
+            this.SerialPortCurve.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.SerialPortCurve_DataReceived);
+            // 
             // CurveRefresh
             // 
             this.CurveRefresh.Interval = 1;
+            this.CurveRefresh.Tick += new System.EventHandler(this.CurveRefresh_Tick);
             // 
             // FormMain
             // 
