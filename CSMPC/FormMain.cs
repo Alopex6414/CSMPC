@@ -1372,7 +1372,7 @@ namespace CSMPC
         #endregion
 
         #region 定时刷新曲线
-        private void CurveRefresh_Tick(object sender, EventArgs e)
+        private void CurveRefresh_Tick(object sender, EventArgs e)  // 定时刷新曲线
         {
             if (m_bSerialCurveDataCheckFinish)  // 数据拆分完成
             {
@@ -1450,7 +1450,7 @@ namespace CSMPC
         #endregion
 
         #region 清除曲线
-        private void TabPageCurve_Btn_CurveClear_Click(object sender, EventArgs e)
+        private void TabPageCurve_Btn_CurveClear_Click(object sender, EventArgs e)  // 清除曲线
         {
             // 清除绘图曲线
             ZedGraph_List_1.RemoveRange(0, ZedGraph_List_1.Count);  // 清除曲线1数据
@@ -1480,14 +1480,14 @@ namespace CSMPC
         #endregion
 
         #region 曲线导出
-        private void TabPageCurve_Btn_ExportData_Click(object sender, EventArgs e)
+        private void TabPageCurve_Btn_ExportData_Click(object sender, EventArgs e)  // 曲线导出
         {
 
         }
         #endregion
 
         #region 曲线数量变化
-        private void TabPageCurve_Nud_CurveNum_ValueChanged(object sender, EventArgs e)
+        private void TabPageCurve_Nud_CurveNum_ValueChanged(object sender, EventArgs e) // 曲线数量变化
         {
             // 当前曲线数量
             switch ((int)this.TabPageCurve_Nud_CurveNum.Value)
@@ -1727,7 +1727,7 @@ namespace CSMPC
         #region 曲线复选框事件
 
         #region 曲线复选框Checked变化
-        private void TabPageCurve_Cbx_Curve1_CheckedChanged(object sender, EventArgs e)
+        private void TabPageCurve_Cbx_Curve1_CheckedChanged(object sender, EventArgs e) // 曲线1复选框Checked变化
         {
             if (this.TabPageCurve_Cbx_Curve1.Checked)//曲线1复选框选中
             {
@@ -1739,7 +1739,7 @@ namespace CSMPC
             }
         }
 
-        private void TabPageCurve_Cbx_Curve2_CheckedChanged(object sender, EventArgs e)
+        private void TabPageCurve_Cbx_Curve2_CheckedChanged(object sender, EventArgs e) // 曲线2复选框Checked变化
         {
             if (this.TabPageCurve_Cbx_Curve2.Checked)//曲线2复选框选中
             {
@@ -1751,7 +1751,7 @@ namespace CSMPC
             }
         }
 
-        private void TabPageCurve_Cbx_Curve3_CheckedChanged(object sender, EventArgs e)
+        private void TabPageCurve_Cbx_Curve3_CheckedChanged(object sender, EventArgs e) // 曲线3复选框Checked变化
         {
             if (this.TabPageCurve_Cbx_Curve3.Checked)//曲线3复选框选中
             {
@@ -1763,7 +1763,7 @@ namespace CSMPC
             }
         }
 
-        private void TabPageCurve_Cbx_Curve4_CheckedChanged(object sender, EventArgs e)
+        private void TabPageCurve_Cbx_Curve4_CheckedChanged(object sender, EventArgs e) // 曲线4复选框Checked变化
         {
             if (this.TabPageCurve_Cbx_Curve4.Checked)//曲线4复选框选中
             {
@@ -1775,7 +1775,7 @@ namespace CSMPC
             }
         }
 
-        private void TabPageCurve_Cbx_Curve5_CheckedChanged(object sender, EventArgs e)
+        private void TabPageCurve_Cbx_Curve5_CheckedChanged(object sender, EventArgs e) // 曲线5复选框Checked变化
         {
             if (this.TabPageCurve_Cbx_Curve5.Checked)//曲线5复选框选中
             {
@@ -1787,7 +1787,7 @@ namespace CSMPC
             }
         }
 
-        private void TabPageCurve_Cbx_Curve6_CheckedChanged(object sender, EventArgs e)
+        private void TabPageCurve_Cbx_Curve6_CheckedChanged(object sender, EventArgs e) // 曲线6复选框Checked变化
         {
             if (this.TabPageCurve_Cbx_Curve6.Checked)//曲线6复选框选中
             {
@@ -1799,7 +1799,7 @@ namespace CSMPC
             }
         }
 
-        private void TabPageCurve_Cbx_Curve7_CheckedChanged(object sender, EventArgs e)
+        private void TabPageCurve_Cbx_Curve7_CheckedChanged(object sender, EventArgs e) // 曲线7复选框Checked变化
         {
             if (this.TabPageCurve_Cbx_Curve7.Checked)//曲线7复选框选中
             {
@@ -1811,7 +1811,7 @@ namespace CSMPC
             }
         }
 
-        private void TabPageCurve_Cbx_Curve8_CheckedChanged(object sender, EventArgs e)
+        private void TabPageCurve_Cbx_Curve8_CheckedChanged(object sender, EventArgs e) // 曲线8复选框Checked变化
         {
             if (this.TabPageCurve_Cbx_Curve8.Checked)//曲线8复选框选中
             {
@@ -1826,7 +1826,7 @@ namespace CSMPC
         #endregion
 
         #region 曲线复选框Enabled变化
-        private void TabPageCurve_Cbx_Curve1_EnabledChanged(object sender, EventArgs e)
+        private void TabPageCurve_Cbx_Curve1_EnabledChanged(object sender, EventArgs e) // 曲线1复选框Enable变化
         {
             if (this.TabPageCurve_Cbx_Curve1.Enabled == false)//曲线1复选框禁止
             {
@@ -1845,7 +1845,7 @@ namespace CSMPC
             }
         }
 
-        private void TabPageCurve_Cbx_Curve2_EnabledChanged(object sender, EventArgs e)
+        private void TabPageCurve_Cbx_Curve2_EnabledChanged(object sender, EventArgs e) // 曲线2复选框Enable变化
         {
             if (this.TabPageCurve_Cbx_Curve2.Enabled == false)//曲线2复选框禁止
             {
@@ -1864,7 +1864,7 @@ namespace CSMPC
             }
         }
 
-        private void TabPageCurve_Cbx_Curve3_EnabledChanged(object sender, EventArgs e)
+        private void TabPageCurve_Cbx_Curve3_EnabledChanged(object sender, EventArgs e) // 曲线3复选框Enable变化
         {
             if (this.TabPageCurve_Cbx_Curve3.Enabled == false)//曲线3复选框禁止
             {
@@ -1883,7 +1883,7 @@ namespace CSMPC
             }
         }
 
-        private void TabPageCurve_Cbx_Curve4_EnabledChanged(object sender, EventArgs e)
+        private void TabPageCurve_Cbx_Curve4_EnabledChanged(object sender, EventArgs e) // 曲线4复选框Enable变化
         {
             if (this.TabPageCurve_Cbx_Curve4.Enabled == false)//曲线4复选框禁止
             {
@@ -1902,7 +1902,7 @@ namespace CSMPC
             }
         }
 
-        private void TabPageCurve_Cbx_Curve5_EnabledChanged(object sender, EventArgs e)
+        private void TabPageCurve_Cbx_Curve5_EnabledChanged(object sender, EventArgs e) // 曲线5复选框Enable变化
         {
             if (this.TabPageCurve_Cbx_Curve5.Enabled == false)//曲线5复选框禁止
             {
@@ -1921,7 +1921,7 @@ namespace CSMPC
             }
         }
 
-        private void TabPageCurve_Cbx_Curve6_EnabledChanged(object sender, EventArgs e)
+        private void TabPageCurve_Cbx_Curve6_EnabledChanged(object sender, EventArgs e) // 曲线6复选框Enable变化
         {
             if (this.TabPageCurve_Cbx_Curve6.Enabled == false)//曲线6复选框禁止
             {
@@ -1940,7 +1940,7 @@ namespace CSMPC
             }
         }
 
-        private void TabPageCurve_Cbx_Curve7_EnabledChanged(object sender, EventArgs e)
+        private void TabPageCurve_Cbx_Curve7_EnabledChanged(object sender, EventArgs e) // 曲线7复选框Enable变化
         {
             if (this.TabPageCurve_Cbx_Curve7.Enabled == false)//曲线7复选框禁止
             {
@@ -1959,7 +1959,7 @@ namespace CSMPC
             }
         }
 
-        private void TabPageCurve_Cbx_Curve8_EnabledChanged(object sender, EventArgs e)
+        private void TabPageCurve_Cbx_Curve8_EnabledChanged(object sender, EventArgs e) // 曲线8复选框Enable变化
         {
             if (this.TabPageCurve_Cbx_Curve8.Enabled == false)//曲线8复选框禁止
             {
