@@ -1440,7 +1440,7 @@ namespace CSMPC
                     {
                         m_lSerialCurveRecvCount = 32767;
                     }
-                    this.TabPageCurve_Lab_SerialInfoRecv.Text = "已接收数据:" + m_lSerialCurveRecvCount.ToString();
+                    this.TabPageCurve_Lab_SerialInfoRecv.Text = "已接收:" + m_lSerialCurveRecvCount.ToString();
                 }
                     ));
                 m_bSerialCurveDataCheckFinish = false;  // 等待拆分数据
@@ -1475,7 +1475,7 @@ namespace CSMPC
 
             // 清除接收曲线数据
             m_lSerialCurveRecvCount = 0;
-            this.TabPageCurve_Lab_SerialInfoRecv.Text = "已接收数据:0";
+            this.TabPageCurve_Lab_SerialInfoRecv.Text = "已接收:0";
         }
         #endregion
 
