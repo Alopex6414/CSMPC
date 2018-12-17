@@ -1482,6 +1482,144 @@ namespace CSMPC
         #region 曲线导出
         private void TabPageCurve_Btn_ExportData_Click(object sender, EventArgs e)  // 曲线导出
         {
+            // 串口曲线当前有数据
+            if (ZedGraph_List_1.Count != 0 || ZedGraph_List_2.Count != 0
+                || ZedGraph_List_3.Count != 0 || ZedGraph_List_4.Count != 0
+                    || ZedGraph_List_5.Count != 0 || ZedGraph_List_6.Count != 0
+                        || ZedGraph_List_7.Count != 0 || ZedGraph_List_8.Count != 0)
+            {
+                // 串口曲线导出当前数据
+                try
+                {
+                    FolderBrowserDialog FilePath = new FolderBrowserDialog();   // 创建保存文件对话框
+                    if (FilePath.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                    {
+                        FileStream FileData = File.Create(FilePath.SelectedPath + "\\" + "SerialCurve" + DateTime.Now.ToString("yyyyMMdd") + ".csv");
+                        StreamWriter FileWriter = new StreamWriter(FileData);
+
+                        FileData.SetLength(0);  // 设置数据流长度
+                        FileWriter.Flush();     // 清除缓冲区
+
+                        // 写入信息
+                        FileWriter.WriteLine("CSMPC SerialCurve Export");
+                        FileWriter.WriteLine(DateTime.Now.ToString("yyyy/MM/dd hh:mm:ss"));
+                        FileWriter.WriteLine("\n");
+
+                        // 写入表头
+                        FileWriter.WriteLine("曲线1,曲线2,曲线3,曲线4,曲线5,曲线6,曲线7,曲线8");
+
+                        // 写入数据
+                        int nSize = ZedGraph_List_1.Count;
+
+                        for(int i = 0; i < nSize; ++i)
+                        {
+                            // 曲线1
+                            if (this.TabPageCurve_Cbx_Curve1.Checked)
+                            {
+                                FileWriter.Write(ZedGraph_List_1[i].Y.ToString());
+                            }
+                            else
+                            {
+                                FileWriter.Write("0");
+                            }
+                            FileWriter.Write(",");
+
+                            // 曲线2
+                            if (this.TabPageCurve_Cbx_Curve2.Checked)
+                            {
+                                FileWriter.Write(ZedGraph_List_2[i].Y.ToString());
+                            }
+                            else
+                            {
+                                FileWriter.Write("0");
+                            }
+                            FileWriter.Write(",");
+
+                            // 曲线3
+                            if (this.TabPageCurve_Cbx_Curve3.Checked)
+                            {
+                                FileWriter.Write(ZedGraph_List_3[i].Y.ToString());
+                            }
+                            else
+                            {
+                                FileWriter.Write("0");
+                            }
+                            FileWriter.Write(",");
+
+                            // 曲线4
+                            if (this.TabPageCurve_Cbx_Curve4.Checked)
+                            {
+                                FileWriter.Write(ZedGraph_List_4[i].Y.ToString());
+                            }
+                            else
+                            {
+                                FileWriter.Write("0");
+                            }
+                            FileWriter.Write(",");
+
+                            // 曲线5
+                            if (this.TabPageCurve_Cbx_Curve5.Checked)
+                            {
+                                FileWriter.Write(ZedGraph_List_5[i].Y.ToString());
+                            }
+                            else
+                            {
+                                FileWriter.Write("0");
+                            }
+                            FileWriter.Write(",");
+
+                            // 曲线6
+                            if (this.TabPageCurve_Cbx_Curve6.Checked)
+                            {
+                                FileWriter.Write(ZedGraph_List_6[i].Y.ToString());
+                            }
+                            else
+                            {
+                                FileWriter.Write("0");
+                            }
+                            FileWriter.Write(",");
+
+                            // 曲线7
+                            if (this.TabPageCurve_Cbx_Curve7.Checked)
+                            {
+                                FileWriter.Write(ZedGraph_List_7[i].Y.ToString());
+                            }
+                            else
+                            {
+                                FileWriter.Write("0");
+                            }
+                            FileWriter.Write(",");
+
+                            // 曲线8
+                            if (this.TabPageCurve_Cbx_Curve8.Checked)
+                            {
+                                FileWriter.Write(ZedGraph_List_8[i].Y.ToString());
+                            }
+                            else
+                            {
+                                FileWriter.Write("0");
+                            }
+                            FileWriter.WriteLine("\n");
+                        }
+
+                        FileWriter.Close(); // 关闭数据流
+                        FileData.Close();   // 关闭文件
+
+                        MessageBox.Show("串口曲线数据导出成功!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    }
+
+                }
+                catch(Exception)
+                {
+                    MessageBox.Show("串口曲线数据导出失败!", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
+            else
+            {
+                MessageBox.Show("串口曲线数据不存在,无法导出!", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
 
         }
         #endregion
