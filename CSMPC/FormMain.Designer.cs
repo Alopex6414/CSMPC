@@ -43,6 +43,7 @@
             this.TabPageSerial_Lab_SerialRecvSpeed = new System.Windows.Forms.Label();
             this.TabPageSerial_Tbx_SerialRecv = new System.Windows.Forms.TextBox();
             this.TabPageSerial_Gbx_SerialInfo = new System.Windows.Forms.GroupBox();
+            this.TabPageSerial_Lab_SerialTipSend = new System.Windows.Forms.Label();
             this.TabPageSerial_Lab_SerialTipRecv = new System.Windows.Forms.Label();
             this.TabPageSerial_Tbx_SerialTipBaud = new System.Windows.Forms.TextBox();
             this.TabPageSerial_Lab_SerialTipBaud = new System.Windows.Forms.Label();
@@ -75,27 +76,17 @@
             this.TabPageSerial_Lab_SerialName = new System.Windows.Forms.Label();
             this.TabPageNet = new System.Windows.Forms.TabPage();
             this.TabPageCurve = new System.Windows.Forms.TabPage();
-            this.TabPageAnalysis = new System.Windows.Forms.TabPage();
-            this.TabPageConsole = new System.Windows.Forms.TabPage();
-            this.TabPageHelp = new System.Windows.Forms.TabPage();
-            this.TabPageAbout = new System.Windows.Forms.TabPage();
-            this.SerialPortDebug = new System.IO.Ports.SerialPort(this.components);
-            this.SerialTimerSend = new System.Windows.Forms.Timer(this.components);
-            this.SerialTimerRecvSpeed = new System.Windows.Forms.Timer(this.components);
-            this.SerialTimerRefresh = new System.Windows.Forms.Timer(this.components);
-            this.TabPageCurve_Gbx_SerialConfig = new System.Windows.Forms.GroupBox();
-            this.TabPageCurve_Btn_SerialOpen = new System.Windows.Forms.Button();
-            this.TabPageCurve_Btn_SerialRefresh = new System.Windows.Forms.Button();
-            this.TabPageCurve_Cbx_SerialCheckBit = new System.Windows.Forms.ComboBox();
-            this.TabPageCurve_Lab_SerialCheckBit = new System.Windows.Forms.Label();
-            this.TabPageCurve_Cbx_SerialStopBit = new System.Windows.Forms.ComboBox();
-            this.TabPageCurve_Lab_SerialStopBit = new System.Windows.Forms.Label();
-            this.TabPageCurve_Cbx_SerialDataBit = new System.Windows.Forms.ComboBox();
-            this.TabPageCurve_Lab_SerialDataBit = new System.Windows.Forms.Label();
-            this.TabPageCurve_Cbx_SerialBaud = new System.Windows.Forms.ComboBox();
-            this.TabPageCurve_Lab_SerialBaud = new System.Windows.Forms.Label();
-            this.TabPageCurve_Cbx_SerialName = new System.Windows.Forms.ComboBox();
-            this.TabPageCurve_Lab_SerialName = new System.Windows.Forms.Label();
+            this.TabPageCurve_Gbx_SerialCurve = new System.Windows.Forms.GroupBox();
+            this.TabPageCurve_Zed_Graph = new ZedGraph.ZedGraphControl();
+            this.TabPageCurve_Gbx_SerialInfo = new System.Windows.Forms.GroupBox();
+            this.TabPageCurve_Btn_ExportData = new System.Windows.Forms.Button();
+            this.TabPageCurve_Lab_SerialInfoRecv = new System.Windows.Forms.Label();
+            this.TabPageCurve_Tbx_SerialInfoBaud = new System.Windows.Forms.TextBox();
+            this.TabPageCurve_Lab_SerialInfoBaud = new System.Windows.Forms.Label();
+            this.TabPageCurve_Tbx_SerialInfoName = new System.Windows.Forms.TextBox();
+            this.TabPageCurve_Lab_SerialInfoName = new System.Windows.Forms.Label();
+            this.TabPageCurve_Tbx_SerialInfo = new System.Windows.Forms.TextBox();
+            this.TabPageCurve_Lab_SerialInfo = new System.Windows.Forms.Label();
             this.TabPageCurve_Gbx_Function = new System.Windows.Forms.GroupBox();
             this.TabPageCurve_Btn_CurveClear = new System.Windows.Forms.Button();
             this.TabPageCurve_Lab_Curve8 = new System.Windows.Forms.Label();
@@ -116,20 +107,58 @@
             this.TabPageCurve_Cbx_Curve3 = new System.Windows.Forms.CheckBox();
             this.TabPageCurve_Cbx_Curve2 = new System.Windows.Forms.CheckBox();
             this.TabPageCurve_Cbx_Curve1 = new System.Windows.Forms.CheckBox();
-            this.TabPageCurve_Gbx_SerialInfo = new System.Windows.Forms.GroupBox();
-            this.TabPageCurve_Lab_SerialInfoRecv = new System.Windows.Forms.Label();
-            this.TabPageCurve_Tbx_SerialInfoBaud = new System.Windows.Forms.TextBox();
-            this.TabPageCurve_Lab_SerialInfoBaud = new System.Windows.Forms.Label();
-            this.TabPageCurve_Tbx_SerialInfoName = new System.Windows.Forms.TextBox();
-            this.TabPageCurve_Lab_SerialInfoName = new System.Windows.Forms.Label();
-            this.TabPageCurve_Tbx_SerialInfo = new System.Windows.Forms.TextBox();
-            this.TabPageCurve_Lab_SerialInfo = new System.Windows.Forms.Label();
-            this.TabPageSerial_Lab_SerialTipSend = new System.Windows.Forms.Label();
-            this.TabPageCurve_Btn_ExportData = new System.Windows.Forms.Button();
-            this.TabPageCurve_Gbx_SerialCurve = new System.Windows.Forms.GroupBox();
-            this.TabPageCurve_Zed_Graph = new ZedGraph.ZedGraphControl();
+            this.TabPageCurve_Gbx_SerialConfig = new System.Windows.Forms.GroupBox();
+            this.TabPageCurve_Btn_SerialOpen = new System.Windows.Forms.Button();
+            this.TabPageCurve_Btn_SerialRefresh = new System.Windows.Forms.Button();
+            this.TabPageCurve_Cbx_SerialCheckBit = new System.Windows.Forms.ComboBox();
+            this.TabPageCurve_Lab_SerialCheckBit = new System.Windows.Forms.Label();
+            this.TabPageCurve_Cbx_SerialStopBit = new System.Windows.Forms.ComboBox();
+            this.TabPageCurve_Lab_SerialStopBit = new System.Windows.Forms.Label();
+            this.TabPageCurve_Cbx_SerialDataBit = new System.Windows.Forms.ComboBox();
+            this.TabPageCurve_Lab_SerialDataBit = new System.Windows.Forms.Label();
+            this.TabPageCurve_Cbx_SerialBaud = new System.Windows.Forms.ComboBox();
+            this.TabPageCurve_Lab_SerialBaud = new System.Windows.Forms.Label();
+            this.TabPageCurve_Cbx_SerialName = new System.Windows.Forms.ComboBox();
+            this.TabPageCurve_Lab_SerialName = new System.Windows.Forms.Label();
+            this.TabPageAnalysis = new System.Windows.Forms.TabPage();
+            this.TabPageConsole = new System.Windows.Forms.TabPage();
+            this.TabPageHelp = new System.Windows.Forms.TabPage();
+            this.TabPageAbout = new System.Windows.Forms.TabPage();
+            this.SerialPortDebug = new System.IO.Ports.SerialPort(this.components);
+            this.SerialTimerSend = new System.Windows.Forms.Timer(this.components);
+            this.SerialTimerRecvSpeed = new System.Windows.Forms.Timer(this.components);
+            this.SerialTimerRefresh = new System.Windows.Forms.Timer(this.components);
             this.SerialPortCurve = new System.IO.Ports.SerialPort(this.components);
             this.CurveRefresh = new System.Windows.Forms.Timer(this.components);
+            this.TabNet = new System.Windows.Forms.TabControl();
+            this.TabPageTCPServer = new System.Windows.Forms.TabPage();
+            this.TabPageTCPClient = new System.Windows.Forms.TabPage();
+            this.TabPageUDP = new System.Windows.Forms.TabPage();
+            this.TabPageTCPServer_Gbx_NetConfig = new System.Windows.Forms.GroupBox();
+            this.TabPageTCPServer_Lab_NetLocalHostIP = new System.Windows.Forms.Label();
+            this.TabPageTCPServer_Tbx_NetLocalHostIP = new System.Windows.Forms.TextBox();
+            this.TabPageTCPServer_Lab_NetLocalHostPort = new System.Windows.Forms.Label();
+            this.TabPageTCPServer_Tbx_NetLocalHostPort = new System.Windows.Forms.TextBox();
+            this.TabPageTCPServer_Tbx_NetServerMaxListen = new System.Windows.Forms.TextBox();
+            this.TabPageTCPServer_Lab_NetServerMaxListen = new System.Windows.Forms.Label();
+            this.TabPageTCPServer_Lab_NetListen = new System.Windows.Forms.Button();
+            this.TabPageTCPServer_Gbx_NetFunction = new System.Windows.Forms.GroupBox();
+            this.TabPageTCPServer_Gbx_NetFunc = new System.Windows.Forms.GroupBox();
+            this.TabPageTCPServer_Rad_NetSendClear = new System.Windows.Forms.Button();
+            this.TabPageTCPServer_Rad_NetRecvClear = new System.Windows.Forms.Button();
+            this.TabPageTCPServer_Gbx_NetSend = new System.Windows.Forms.GroupBox();
+            this.TabPageTCPServer_Rad_NetSendHex = new System.Windows.Forms.RadioButton();
+            this.TabPageTCPServer_Rad_NetSendString = new System.Windows.Forms.RadioButton();
+            this.TabPageTCPServer_Gbx_NetRecv = new System.Windows.Forms.GroupBox();
+            this.TabPageTCPServer_Rad_NetRecvHex = new System.Windows.Forms.RadioButton();
+            this.TabPageTCPServer_Rad_NetRecvString = new System.Windows.Forms.RadioButton();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.TabMain.SuspendLayout();
             this.TabPageSerial.SuspendLayout();
             this.TabPageSerial_Gbx_SerialSend.SuspendLayout();
@@ -141,12 +170,22 @@
             this.TabPageSerial_Gbx_Send.SuspendLayout();
             this.TabPageSerial_Gbx_Recv.SuspendLayout();
             this.TabPageSerial_Gbx_SerialConfig.SuspendLayout();
+            this.TabPageNet.SuspendLayout();
             this.TabPageCurve.SuspendLayout();
-            this.TabPageCurve_Gbx_SerialConfig.SuspendLayout();
+            this.TabPageCurve_Gbx_SerialCurve.SuspendLayout();
+            this.TabPageCurve_Gbx_SerialInfo.SuspendLayout();
             this.TabPageCurve_Gbx_Function.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TabPageCurve_Nud_CurveNum)).BeginInit();
-            this.TabPageCurve_Gbx_SerialInfo.SuspendLayout();
-            this.TabPageCurve_Gbx_SerialCurve.SuspendLayout();
+            this.TabPageCurve_Gbx_SerialConfig.SuspendLayout();
+            this.TabNet.SuspendLayout();
+            this.TabPageTCPServer.SuspendLayout();
+            this.TabPageTCPServer_Gbx_NetConfig.SuspendLayout();
+            this.TabPageTCPServer_Gbx_NetFunction.SuspendLayout();
+            this.TabPageTCPServer_Gbx_NetFunc.SuspendLayout();
+            this.TabPageTCPServer_Gbx_NetSend.SuspendLayout();
+            this.TabPageTCPServer_Gbx_NetRecv.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // TabMain
@@ -311,6 +350,15 @@
             this.TabPageSerial_Gbx_SerialInfo.TabIndex = 3;
             this.TabPageSerial_Gbx_SerialInfo.TabStop = false;
             this.TabPageSerial_Gbx_SerialInfo.Text = "串口信息";
+            // 
+            // TabPageSerial_Lab_SerialTipSend
+            // 
+            this.TabPageSerial_Lab_SerialTipSend.AutoSize = true;
+            this.TabPageSerial_Lab_SerialTipSend.Location = new System.Drawing.Point(816, 21);
+            this.TabPageSerial_Lab_SerialTipSend.Name = "TabPageSerial_Lab_SerialTipSend";
+            this.TabPageSerial_Lab_SerialTipSend.Size = new System.Drawing.Size(53, 12);
+            this.TabPageSerial_Lab_SerialTipSend.TabIndex = 10;
+            this.TabPageSerial_Lab_SerialTipSend.Text = "已发送:0";
             // 
             // TabPageSerial_Lab_SerialTipRecv
             // 
@@ -614,6 +662,7 @@
             // 
             // TabPageNet
             // 
+            this.TabPageNet.Controls.Add(this.TabNet);
             this.TabPageNet.Location = new System.Drawing.Point(4, 22);
             this.TabPageNet.Name = "TabPageNet";
             this.TabPageNet.Padding = new System.Windows.Forms.Padding(3);
@@ -636,194 +685,117 @@
             this.TabPageCurve.Text = "实时曲线";
             this.TabPageCurve.UseVisualStyleBackColor = true;
             // 
-            // TabPageAnalysis
+            // TabPageCurve_Gbx_SerialCurve
             // 
-            this.TabPageAnalysis.Location = new System.Drawing.Point(4, 22);
-            this.TabPageAnalysis.Name = "TabPageAnalysis";
-            this.TabPageAnalysis.Padding = new System.Windows.Forms.Padding(3);
-            this.TabPageAnalysis.Size = new System.Drawing.Size(912, 631);
-            this.TabPageAnalysis.TabIndex = 3;
-            this.TabPageAnalysis.Text = "数据分析";
-            this.TabPageAnalysis.UseVisualStyleBackColor = true;
+            this.TabPageCurve_Gbx_SerialCurve.Controls.Add(this.TabPageCurve_Zed_Graph);
+            this.TabPageCurve_Gbx_SerialCurve.Location = new System.Drawing.Point(162, 6);
+            this.TabPageCurve_Gbx_SerialCurve.Name = "TabPageCurve_Gbx_SerialCurve";
+            this.TabPageCurve_Gbx_SerialCurve.Size = new System.Drawing.Size(744, 566);
+            this.TabPageCurve_Gbx_SerialCurve.TabIndex = 7;
+            this.TabPageCurve_Gbx_SerialCurve.TabStop = false;
+            this.TabPageCurve_Gbx_SerialCurve.Text = "串口曲线";
             // 
-            // TabPageConsole
+            // TabPageCurve_Zed_Graph
             // 
-            this.TabPageConsole.Location = new System.Drawing.Point(4, 22);
-            this.TabPageConsole.Name = "TabPageConsole";
-            this.TabPageConsole.Padding = new System.Windows.Forms.Padding(3);
-            this.TabPageConsole.Size = new System.Drawing.Size(912, 631);
-            this.TabPageConsole.TabIndex = 4;
-            this.TabPageConsole.Text = "控制台";
-            this.TabPageConsole.UseVisualStyleBackColor = true;
+            this.TabPageCurve_Zed_Graph.BackColor = System.Drawing.Color.Transparent;
+            this.TabPageCurve_Zed_Graph.Location = new System.Drawing.Point(6, 20);
+            this.TabPageCurve_Zed_Graph.Name = "TabPageCurve_Zed_Graph";
+            this.TabPageCurve_Zed_Graph.ScrollGrace = 0D;
+            this.TabPageCurve_Zed_Graph.ScrollMaxX = 0D;
+            this.TabPageCurve_Zed_Graph.ScrollMaxY = 0D;
+            this.TabPageCurve_Zed_Graph.ScrollMaxY2 = 0D;
+            this.TabPageCurve_Zed_Graph.ScrollMinX = 0D;
+            this.TabPageCurve_Zed_Graph.ScrollMinY = 0D;
+            this.TabPageCurve_Zed_Graph.ScrollMinY2 = 0D;
+            this.TabPageCurve_Zed_Graph.Size = new System.Drawing.Size(732, 540);
+            this.TabPageCurve_Zed_Graph.TabIndex = 1;
             // 
-            // TabPageHelp
+            // TabPageCurve_Gbx_SerialInfo
             // 
-            this.TabPageHelp.Location = new System.Drawing.Point(4, 22);
-            this.TabPageHelp.Name = "TabPageHelp";
-            this.TabPageHelp.Padding = new System.Windows.Forms.Padding(3);
-            this.TabPageHelp.Size = new System.Drawing.Size(912, 631);
-            this.TabPageHelp.TabIndex = 5;
-            this.TabPageHelp.Text = "帮助";
-            this.TabPageHelp.UseVisualStyleBackColor = true;
+            this.TabPageCurve_Gbx_SerialInfo.Controls.Add(this.TabPageCurve_Btn_ExportData);
+            this.TabPageCurve_Gbx_SerialInfo.Controls.Add(this.TabPageCurve_Lab_SerialInfoRecv);
+            this.TabPageCurve_Gbx_SerialInfo.Controls.Add(this.TabPageCurve_Tbx_SerialInfoBaud);
+            this.TabPageCurve_Gbx_SerialInfo.Controls.Add(this.TabPageCurve_Lab_SerialInfoBaud);
+            this.TabPageCurve_Gbx_SerialInfo.Controls.Add(this.TabPageCurve_Tbx_SerialInfoName);
+            this.TabPageCurve_Gbx_SerialInfo.Controls.Add(this.TabPageCurve_Lab_SerialInfoName);
+            this.TabPageCurve_Gbx_SerialInfo.Controls.Add(this.TabPageCurve_Tbx_SerialInfo);
+            this.TabPageCurve_Gbx_SerialInfo.Controls.Add(this.TabPageCurve_Lab_SerialInfo);
+            this.TabPageCurve_Gbx_SerialInfo.Location = new System.Drawing.Point(6, 578);
+            this.TabPageCurve_Gbx_SerialInfo.Name = "TabPageCurve_Gbx_SerialInfo";
+            this.TabPageCurve_Gbx_SerialInfo.Size = new System.Drawing.Size(900, 47);
+            this.TabPageCurve_Gbx_SerialInfo.TabIndex = 6;
+            this.TabPageCurve_Gbx_SerialInfo.TabStop = false;
+            this.TabPageCurve_Gbx_SerialInfo.Text = "串口信息";
             // 
-            // TabPageAbout
+            // TabPageCurve_Btn_ExportData
             // 
-            this.TabPageAbout.Location = new System.Drawing.Point(4, 22);
-            this.TabPageAbout.Name = "TabPageAbout";
-            this.TabPageAbout.Padding = new System.Windows.Forms.Padding(3);
-            this.TabPageAbout.Size = new System.Drawing.Size(912, 631);
-            this.TabPageAbout.TabIndex = 6;
-            this.TabPageAbout.Text = "关于";
-            this.TabPageAbout.UseVisualStyleBackColor = true;
+            this.TabPageCurve_Btn_ExportData.Location = new System.Drawing.Point(819, 17);
+            this.TabPageCurve_Btn_ExportData.Name = "TabPageCurve_Btn_ExportData";
+            this.TabPageCurve_Btn_ExportData.Size = new System.Drawing.Size(75, 23);
+            this.TabPageCurve_Btn_ExportData.TabIndex = 12;
+            this.TabPageCurve_Btn_ExportData.Text = "导出数据";
+            this.TabPageCurve_Btn_ExportData.UseVisualStyleBackColor = true;
+            this.TabPageCurve_Btn_ExportData.Click += new System.EventHandler(this.TabPageCurve_Btn_ExportData_Click);
             // 
-            // SerialPortDebug
+            // TabPageCurve_Lab_SerialInfoRecv
             // 
-            this.SerialPortDebug.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.SerialPortDebug_DataReceived);
+            this.TabPageCurve_Lab_SerialInfoRecv.AutoSize = true;
+            this.TabPageCurve_Lab_SerialInfoRecv.Location = new System.Drawing.Point(724, 21);
+            this.TabPageCurve_Lab_SerialInfoRecv.Name = "TabPageCurve_Lab_SerialInfoRecv";
+            this.TabPageCurve_Lab_SerialInfoRecv.Size = new System.Drawing.Size(53, 12);
+            this.TabPageCurve_Lab_SerialInfoRecv.TabIndex = 1;
+            this.TabPageCurve_Lab_SerialInfoRecv.Text = "已接收:0";
             // 
-            // SerialTimerSend
+            // TabPageCurve_Tbx_SerialInfoBaud
             // 
-            this.SerialTimerSend.Tick += new System.EventHandler(this.SerialTimerSend_Tick);
+            this.TabPageCurve_Tbx_SerialInfoBaud.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TabPageCurve_Tbx_SerialInfoBaud.Location = new System.Drawing.Point(622, 18);
+            this.TabPageCurve_Tbx_SerialInfoBaud.Name = "TabPageCurve_Tbx_SerialInfoBaud";
+            this.TabPageCurve_Tbx_SerialInfoBaud.Size = new System.Drawing.Size(85, 22);
+            this.TabPageCurve_Tbx_SerialInfoBaud.TabIndex = 9;
             // 
-            // SerialTimerRecvSpeed
+            // TabPageCurve_Lab_SerialInfoBaud
             // 
-            this.SerialTimerRecvSpeed.Interval = 1000;
-            this.SerialTimerRecvSpeed.Tick += new System.EventHandler(this.SerialTimerRecvSpeed_Tick);
+            this.TabPageCurve_Lab_SerialInfoBaud.AutoSize = true;
+            this.TabPageCurve_Lab_SerialInfoBaud.Location = new System.Drawing.Point(569, 21);
+            this.TabPageCurve_Lab_SerialInfoBaud.Name = "TabPageCurve_Lab_SerialInfoBaud";
+            this.TabPageCurve_Lab_SerialInfoBaud.Size = new System.Drawing.Size(47, 12);
+            this.TabPageCurve_Lab_SerialInfoBaud.TabIndex = 8;
+            this.TabPageCurve_Lab_SerialInfoBaud.Text = "波特率:";
             // 
-            // SerialTimerRefresh
+            // TabPageCurve_Tbx_SerialInfoName
             // 
-            this.SerialTimerRefresh.Interval = 1;
-            this.SerialTimerRefresh.Tick += new System.EventHandler(this.SerialTimerRefresh_Tick);
+            this.TabPageCurve_Tbx_SerialInfoName.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TabPageCurve_Tbx_SerialInfoName.Location = new System.Drawing.Point(478, 18);
+            this.TabPageCurve_Tbx_SerialInfoName.Name = "TabPageCurve_Tbx_SerialInfoName";
+            this.TabPageCurve_Tbx_SerialInfoName.Size = new System.Drawing.Size(85, 22);
+            this.TabPageCurve_Tbx_SerialInfoName.TabIndex = 7;
             // 
-            // TabPageCurve_Gbx_SerialConfig
+            // TabPageCurve_Lab_SerialInfoName
             // 
-            this.TabPageCurve_Gbx_SerialConfig.Controls.Add(this.TabPageCurve_Btn_SerialOpen);
-            this.TabPageCurve_Gbx_SerialConfig.Controls.Add(this.TabPageCurve_Btn_SerialRefresh);
-            this.TabPageCurve_Gbx_SerialConfig.Controls.Add(this.TabPageCurve_Cbx_SerialCheckBit);
-            this.TabPageCurve_Gbx_SerialConfig.Controls.Add(this.TabPageCurve_Lab_SerialCheckBit);
-            this.TabPageCurve_Gbx_SerialConfig.Controls.Add(this.TabPageCurve_Cbx_SerialStopBit);
-            this.TabPageCurve_Gbx_SerialConfig.Controls.Add(this.TabPageCurve_Lab_SerialStopBit);
-            this.TabPageCurve_Gbx_SerialConfig.Controls.Add(this.TabPageCurve_Cbx_SerialDataBit);
-            this.TabPageCurve_Gbx_SerialConfig.Controls.Add(this.TabPageCurve_Lab_SerialDataBit);
-            this.TabPageCurve_Gbx_SerialConfig.Controls.Add(this.TabPageCurve_Cbx_SerialBaud);
-            this.TabPageCurve_Gbx_SerialConfig.Controls.Add(this.TabPageCurve_Lab_SerialBaud);
-            this.TabPageCurve_Gbx_SerialConfig.Controls.Add(this.TabPageCurve_Cbx_SerialName);
-            this.TabPageCurve_Gbx_SerialConfig.Controls.Add(this.TabPageCurve_Lab_SerialName);
-            this.TabPageCurve_Gbx_SerialConfig.Location = new System.Drawing.Point(6, 6);
-            this.TabPageCurve_Gbx_SerialConfig.Name = "TabPageCurve_Gbx_SerialConfig";
-            this.TabPageCurve_Gbx_SerialConfig.Size = new System.Drawing.Size(150, 211);
-            this.TabPageCurve_Gbx_SerialConfig.TabIndex = 1;
-            this.TabPageCurve_Gbx_SerialConfig.TabStop = false;
-            this.TabPageCurve_Gbx_SerialConfig.Text = "串口配置";
+            this.TabPageCurve_Lab_SerialInfoName.AutoSize = true;
+            this.TabPageCurve_Lab_SerialInfoName.Location = new System.Drawing.Point(425, 22);
+            this.TabPageCurve_Lab_SerialInfoName.Name = "TabPageCurve_Lab_SerialInfoName";
+            this.TabPageCurve_Lab_SerialInfoName.Size = new System.Drawing.Size(47, 12);
+            this.TabPageCurve_Lab_SerialInfoName.TabIndex = 6;
+            this.TabPageCurve_Lab_SerialInfoName.Text = "串口号:";
             // 
-            // TabPageCurve_Btn_SerialOpen
+            // TabPageCurve_Tbx_SerialInfo
             // 
-            this.TabPageCurve_Btn_SerialOpen.Location = new System.Drawing.Point(6, 182);
-            this.TabPageCurve_Btn_SerialOpen.Name = "TabPageCurve_Btn_SerialOpen";
-            this.TabPageCurve_Btn_SerialOpen.Size = new System.Drawing.Size(138, 23);
-            this.TabPageCurve_Btn_SerialOpen.TabIndex = 17;
-            this.TabPageCurve_Btn_SerialOpen.Text = "打开串口";
-            this.TabPageCurve_Btn_SerialOpen.UseVisualStyleBackColor = true;
-            this.TabPageCurve_Btn_SerialOpen.Click += new System.EventHandler(this.TabPageCurve_Btn_SerialOpen_Click);
+            this.TabPageCurve_Tbx_SerialInfo.Font = new System.Drawing.Font("等线", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.TabPageCurve_Tbx_SerialInfo.Location = new System.Drawing.Point(71, 19);
+            this.TabPageCurve_Tbx_SerialInfo.Name = "TabPageCurve_Tbx_SerialInfo";
+            this.TabPageCurve_Tbx_SerialInfo.Size = new System.Drawing.Size(348, 21);
+            this.TabPageCurve_Tbx_SerialInfo.TabIndex = 1;
             // 
-            // TabPageCurve_Btn_SerialRefresh
+            // TabPageCurve_Lab_SerialInfo
             // 
-            this.TabPageCurve_Btn_SerialRefresh.Location = new System.Drawing.Point(6, 153);
-            this.TabPageCurve_Btn_SerialRefresh.Name = "TabPageCurve_Btn_SerialRefresh";
-            this.TabPageCurve_Btn_SerialRefresh.Size = new System.Drawing.Size(138, 23);
-            this.TabPageCurve_Btn_SerialRefresh.TabIndex = 16;
-            this.TabPageCurve_Btn_SerialRefresh.Text = "刷新串口";
-            this.TabPageCurve_Btn_SerialRefresh.UseVisualStyleBackColor = true;
-            this.TabPageCurve_Btn_SerialRefresh.Click += new System.EventHandler(this.TabPageCurve_Btn_SerialRefresh_Click);
-            // 
-            // TabPageCurve_Cbx_SerialCheckBit
-            // 
-            this.TabPageCurve_Cbx_SerialCheckBit.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TabPageCurve_Cbx_SerialCheckBit.FormattingEnabled = true;
-            this.TabPageCurve_Cbx_SerialCheckBit.Location = new System.Drawing.Point(59, 125);
-            this.TabPageCurve_Cbx_SerialCheckBit.Name = "TabPageCurve_Cbx_SerialCheckBit";
-            this.TabPageCurve_Cbx_SerialCheckBit.Size = new System.Drawing.Size(85, 23);
-            this.TabPageCurve_Cbx_SerialCheckBit.TabIndex = 15;
-            // 
-            // TabPageCurve_Lab_SerialCheckBit
-            // 
-            this.TabPageCurve_Lab_SerialCheckBit.AutoSize = true;
-            this.TabPageCurve_Lab_SerialCheckBit.Location = new System.Drawing.Point(6, 129);
-            this.TabPageCurve_Lab_SerialCheckBit.Name = "TabPageCurve_Lab_SerialCheckBit";
-            this.TabPageCurve_Lab_SerialCheckBit.Size = new System.Drawing.Size(47, 12);
-            this.TabPageCurve_Lab_SerialCheckBit.TabIndex = 14;
-            this.TabPageCurve_Lab_SerialCheckBit.Text = "校验位:";
-            // 
-            // TabPageCurve_Cbx_SerialStopBit
-            // 
-            this.TabPageCurve_Cbx_SerialStopBit.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TabPageCurve_Cbx_SerialStopBit.FormattingEnabled = true;
-            this.TabPageCurve_Cbx_SerialStopBit.Location = new System.Drawing.Point(59, 97);
-            this.TabPageCurve_Cbx_SerialStopBit.Name = "TabPageCurve_Cbx_SerialStopBit";
-            this.TabPageCurve_Cbx_SerialStopBit.Size = new System.Drawing.Size(85, 23);
-            this.TabPageCurve_Cbx_SerialStopBit.TabIndex = 13;
-            // 
-            // TabPageCurve_Lab_SerialStopBit
-            // 
-            this.TabPageCurve_Lab_SerialStopBit.AutoSize = true;
-            this.TabPageCurve_Lab_SerialStopBit.Location = new System.Drawing.Point(6, 101);
-            this.TabPageCurve_Lab_SerialStopBit.Name = "TabPageCurve_Lab_SerialStopBit";
-            this.TabPageCurve_Lab_SerialStopBit.Size = new System.Drawing.Size(47, 12);
-            this.TabPageCurve_Lab_SerialStopBit.TabIndex = 12;
-            this.TabPageCurve_Lab_SerialStopBit.Text = "停止位:";
-            // 
-            // TabPageCurve_Cbx_SerialDataBit
-            // 
-            this.TabPageCurve_Cbx_SerialDataBit.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TabPageCurve_Cbx_SerialDataBit.FormattingEnabled = true;
-            this.TabPageCurve_Cbx_SerialDataBit.Location = new System.Drawing.Point(59, 69);
-            this.TabPageCurve_Cbx_SerialDataBit.Name = "TabPageCurve_Cbx_SerialDataBit";
-            this.TabPageCurve_Cbx_SerialDataBit.Size = new System.Drawing.Size(85, 23);
-            this.TabPageCurve_Cbx_SerialDataBit.TabIndex = 11;
-            // 
-            // TabPageCurve_Lab_SerialDataBit
-            // 
-            this.TabPageCurve_Lab_SerialDataBit.AutoSize = true;
-            this.TabPageCurve_Lab_SerialDataBit.Location = new System.Drawing.Point(6, 73);
-            this.TabPageCurve_Lab_SerialDataBit.Name = "TabPageCurve_Lab_SerialDataBit";
-            this.TabPageCurve_Lab_SerialDataBit.Size = new System.Drawing.Size(47, 12);
-            this.TabPageCurve_Lab_SerialDataBit.TabIndex = 10;
-            this.TabPageCurve_Lab_SerialDataBit.Text = "数据位:";
-            // 
-            // TabPageCurve_Cbx_SerialBaud
-            // 
-            this.TabPageCurve_Cbx_SerialBaud.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TabPageCurve_Cbx_SerialBaud.FormattingEnabled = true;
-            this.TabPageCurve_Cbx_SerialBaud.Location = new System.Drawing.Point(59, 41);
-            this.TabPageCurve_Cbx_SerialBaud.Name = "TabPageCurve_Cbx_SerialBaud";
-            this.TabPageCurve_Cbx_SerialBaud.Size = new System.Drawing.Size(85, 23);
-            this.TabPageCurve_Cbx_SerialBaud.TabIndex = 9;
-            // 
-            // TabPageCurve_Lab_SerialBaud
-            // 
-            this.TabPageCurve_Lab_SerialBaud.AutoSize = true;
-            this.TabPageCurve_Lab_SerialBaud.Location = new System.Drawing.Point(6, 45);
-            this.TabPageCurve_Lab_SerialBaud.Name = "TabPageCurve_Lab_SerialBaud";
-            this.TabPageCurve_Lab_SerialBaud.Size = new System.Drawing.Size(47, 12);
-            this.TabPageCurve_Lab_SerialBaud.TabIndex = 8;
-            this.TabPageCurve_Lab_SerialBaud.Text = "波特率:";
-            // 
-            // TabPageCurve_Cbx_SerialName
-            // 
-            this.TabPageCurve_Cbx_SerialName.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TabPageCurve_Cbx_SerialName.FormattingEnabled = true;
-            this.TabPageCurve_Cbx_SerialName.Location = new System.Drawing.Point(59, 13);
-            this.TabPageCurve_Cbx_SerialName.Name = "TabPageCurve_Cbx_SerialName";
-            this.TabPageCurve_Cbx_SerialName.Size = new System.Drawing.Size(85, 23);
-            this.TabPageCurve_Cbx_SerialName.TabIndex = 7;
-            // 
-            // TabPageCurve_Lab_SerialName
-            // 
-            this.TabPageCurve_Lab_SerialName.AutoSize = true;
-            this.TabPageCurve_Lab_SerialName.Location = new System.Drawing.Point(6, 17);
-            this.TabPageCurve_Lab_SerialName.Name = "TabPageCurve_Lab_SerialName";
-            this.TabPageCurve_Lab_SerialName.Size = new System.Drawing.Size(47, 12);
-            this.TabPageCurve_Lab_SerialName.TabIndex = 0;
-            this.TabPageCurve_Lab_SerialName.Text = "串口号:";
+            this.TabPageCurve_Lab_SerialInfo.AutoSize = true;
+            this.TabPageCurve_Lab_SerialInfo.Location = new System.Drawing.Point(6, 22);
+            this.TabPageCurve_Lab_SerialInfo.Name = "TabPageCurve_Lab_SerialInfo";
+            this.TabPageCurve_Lab_SerialInfo.Size = new System.Drawing.Size(59, 12);
+            this.TabPageCurve_Lab_SerialInfo.TabIndex = 5;
+            this.TabPageCurve_Lab_SerialInfo.Text = "提示信息:";
             // 
             // TabPageCurve_Gbx_Function
             // 
@@ -1081,126 +1053,194 @@
             this.TabPageCurve_Cbx_Curve1.CheckedChanged += new System.EventHandler(this.TabPageCurve_Cbx_Curve1_CheckedChanged);
             this.TabPageCurve_Cbx_Curve1.EnabledChanged += new System.EventHandler(this.TabPageCurve_Cbx_Curve1_EnabledChanged);
             // 
-            // TabPageCurve_Gbx_SerialInfo
+            // TabPageCurve_Gbx_SerialConfig
             // 
-            this.TabPageCurve_Gbx_SerialInfo.Controls.Add(this.TabPageCurve_Btn_ExportData);
-            this.TabPageCurve_Gbx_SerialInfo.Controls.Add(this.TabPageCurve_Lab_SerialInfoRecv);
-            this.TabPageCurve_Gbx_SerialInfo.Controls.Add(this.TabPageCurve_Tbx_SerialInfoBaud);
-            this.TabPageCurve_Gbx_SerialInfo.Controls.Add(this.TabPageCurve_Lab_SerialInfoBaud);
-            this.TabPageCurve_Gbx_SerialInfo.Controls.Add(this.TabPageCurve_Tbx_SerialInfoName);
-            this.TabPageCurve_Gbx_SerialInfo.Controls.Add(this.TabPageCurve_Lab_SerialInfoName);
-            this.TabPageCurve_Gbx_SerialInfo.Controls.Add(this.TabPageCurve_Tbx_SerialInfo);
-            this.TabPageCurve_Gbx_SerialInfo.Controls.Add(this.TabPageCurve_Lab_SerialInfo);
-            this.TabPageCurve_Gbx_SerialInfo.Location = new System.Drawing.Point(6, 578);
-            this.TabPageCurve_Gbx_SerialInfo.Name = "TabPageCurve_Gbx_SerialInfo";
-            this.TabPageCurve_Gbx_SerialInfo.Size = new System.Drawing.Size(900, 47);
-            this.TabPageCurve_Gbx_SerialInfo.TabIndex = 6;
-            this.TabPageCurve_Gbx_SerialInfo.TabStop = false;
-            this.TabPageCurve_Gbx_SerialInfo.Text = "串口信息";
+            this.TabPageCurve_Gbx_SerialConfig.Controls.Add(this.TabPageCurve_Btn_SerialOpen);
+            this.TabPageCurve_Gbx_SerialConfig.Controls.Add(this.TabPageCurve_Btn_SerialRefresh);
+            this.TabPageCurve_Gbx_SerialConfig.Controls.Add(this.TabPageCurve_Cbx_SerialCheckBit);
+            this.TabPageCurve_Gbx_SerialConfig.Controls.Add(this.TabPageCurve_Lab_SerialCheckBit);
+            this.TabPageCurve_Gbx_SerialConfig.Controls.Add(this.TabPageCurve_Cbx_SerialStopBit);
+            this.TabPageCurve_Gbx_SerialConfig.Controls.Add(this.TabPageCurve_Lab_SerialStopBit);
+            this.TabPageCurve_Gbx_SerialConfig.Controls.Add(this.TabPageCurve_Cbx_SerialDataBit);
+            this.TabPageCurve_Gbx_SerialConfig.Controls.Add(this.TabPageCurve_Lab_SerialDataBit);
+            this.TabPageCurve_Gbx_SerialConfig.Controls.Add(this.TabPageCurve_Cbx_SerialBaud);
+            this.TabPageCurve_Gbx_SerialConfig.Controls.Add(this.TabPageCurve_Lab_SerialBaud);
+            this.TabPageCurve_Gbx_SerialConfig.Controls.Add(this.TabPageCurve_Cbx_SerialName);
+            this.TabPageCurve_Gbx_SerialConfig.Controls.Add(this.TabPageCurve_Lab_SerialName);
+            this.TabPageCurve_Gbx_SerialConfig.Location = new System.Drawing.Point(6, 6);
+            this.TabPageCurve_Gbx_SerialConfig.Name = "TabPageCurve_Gbx_SerialConfig";
+            this.TabPageCurve_Gbx_SerialConfig.Size = new System.Drawing.Size(150, 211);
+            this.TabPageCurve_Gbx_SerialConfig.TabIndex = 1;
+            this.TabPageCurve_Gbx_SerialConfig.TabStop = false;
+            this.TabPageCurve_Gbx_SerialConfig.Text = "串口配置";
             // 
-            // TabPageCurve_Lab_SerialInfoRecv
+            // TabPageCurve_Btn_SerialOpen
             // 
-            this.TabPageCurve_Lab_SerialInfoRecv.AutoSize = true;
-            this.TabPageCurve_Lab_SerialInfoRecv.Location = new System.Drawing.Point(724, 21);
-            this.TabPageCurve_Lab_SerialInfoRecv.Name = "TabPageCurve_Lab_SerialInfoRecv";
-            this.TabPageCurve_Lab_SerialInfoRecv.Size = new System.Drawing.Size(53, 12);
-            this.TabPageCurve_Lab_SerialInfoRecv.TabIndex = 1;
-            this.TabPageCurve_Lab_SerialInfoRecv.Text = "已接收:0";
+            this.TabPageCurve_Btn_SerialOpen.Location = new System.Drawing.Point(6, 182);
+            this.TabPageCurve_Btn_SerialOpen.Name = "TabPageCurve_Btn_SerialOpen";
+            this.TabPageCurve_Btn_SerialOpen.Size = new System.Drawing.Size(138, 23);
+            this.TabPageCurve_Btn_SerialOpen.TabIndex = 17;
+            this.TabPageCurve_Btn_SerialOpen.Text = "打开串口";
+            this.TabPageCurve_Btn_SerialOpen.UseVisualStyleBackColor = true;
+            this.TabPageCurve_Btn_SerialOpen.Click += new System.EventHandler(this.TabPageCurve_Btn_SerialOpen_Click);
             // 
-            // TabPageCurve_Tbx_SerialInfoBaud
+            // TabPageCurve_Btn_SerialRefresh
             // 
-            this.TabPageCurve_Tbx_SerialInfoBaud.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TabPageCurve_Tbx_SerialInfoBaud.Location = new System.Drawing.Point(622, 18);
-            this.TabPageCurve_Tbx_SerialInfoBaud.Name = "TabPageCurve_Tbx_SerialInfoBaud";
-            this.TabPageCurve_Tbx_SerialInfoBaud.Size = new System.Drawing.Size(85, 22);
-            this.TabPageCurve_Tbx_SerialInfoBaud.TabIndex = 9;
+            this.TabPageCurve_Btn_SerialRefresh.Location = new System.Drawing.Point(6, 153);
+            this.TabPageCurve_Btn_SerialRefresh.Name = "TabPageCurve_Btn_SerialRefresh";
+            this.TabPageCurve_Btn_SerialRefresh.Size = new System.Drawing.Size(138, 23);
+            this.TabPageCurve_Btn_SerialRefresh.TabIndex = 16;
+            this.TabPageCurve_Btn_SerialRefresh.Text = "刷新串口";
+            this.TabPageCurve_Btn_SerialRefresh.UseVisualStyleBackColor = true;
+            this.TabPageCurve_Btn_SerialRefresh.Click += new System.EventHandler(this.TabPageCurve_Btn_SerialRefresh_Click);
             // 
-            // TabPageCurve_Lab_SerialInfoBaud
+            // TabPageCurve_Cbx_SerialCheckBit
             // 
-            this.TabPageCurve_Lab_SerialInfoBaud.AutoSize = true;
-            this.TabPageCurve_Lab_SerialInfoBaud.Location = new System.Drawing.Point(569, 21);
-            this.TabPageCurve_Lab_SerialInfoBaud.Name = "TabPageCurve_Lab_SerialInfoBaud";
-            this.TabPageCurve_Lab_SerialInfoBaud.Size = new System.Drawing.Size(47, 12);
-            this.TabPageCurve_Lab_SerialInfoBaud.TabIndex = 8;
-            this.TabPageCurve_Lab_SerialInfoBaud.Text = "波特率:";
+            this.TabPageCurve_Cbx_SerialCheckBit.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TabPageCurve_Cbx_SerialCheckBit.FormattingEnabled = true;
+            this.TabPageCurve_Cbx_SerialCheckBit.Location = new System.Drawing.Point(59, 125);
+            this.TabPageCurve_Cbx_SerialCheckBit.Name = "TabPageCurve_Cbx_SerialCheckBit";
+            this.TabPageCurve_Cbx_SerialCheckBit.Size = new System.Drawing.Size(85, 23);
+            this.TabPageCurve_Cbx_SerialCheckBit.TabIndex = 15;
             // 
-            // TabPageCurve_Tbx_SerialInfoName
+            // TabPageCurve_Lab_SerialCheckBit
             // 
-            this.TabPageCurve_Tbx_SerialInfoName.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TabPageCurve_Tbx_SerialInfoName.Location = new System.Drawing.Point(478, 18);
-            this.TabPageCurve_Tbx_SerialInfoName.Name = "TabPageCurve_Tbx_SerialInfoName";
-            this.TabPageCurve_Tbx_SerialInfoName.Size = new System.Drawing.Size(85, 22);
-            this.TabPageCurve_Tbx_SerialInfoName.TabIndex = 7;
+            this.TabPageCurve_Lab_SerialCheckBit.AutoSize = true;
+            this.TabPageCurve_Lab_SerialCheckBit.Location = new System.Drawing.Point(6, 129);
+            this.TabPageCurve_Lab_SerialCheckBit.Name = "TabPageCurve_Lab_SerialCheckBit";
+            this.TabPageCurve_Lab_SerialCheckBit.Size = new System.Drawing.Size(47, 12);
+            this.TabPageCurve_Lab_SerialCheckBit.TabIndex = 14;
+            this.TabPageCurve_Lab_SerialCheckBit.Text = "校验位:";
             // 
-            // TabPageCurve_Lab_SerialInfoName
+            // TabPageCurve_Cbx_SerialStopBit
             // 
-            this.TabPageCurve_Lab_SerialInfoName.AutoSize = true;
-            this.TabPageCurve_Lab_SerialInfoName.Location = new System.Drawing.Point(425, 22);
-            this.TabPageCurve_Lab_SerialInfoName.Name = "TabPageCurve_Lab_SerialInfoName";
-            this.TabPageCurve_Lab_SerialInfoName.Size = new System.Drawing.Size(47, 12);
-            this.TabPageCurve_Lab_SerialInfoName.TabIndex = 6;
-            this.TabPageCurve_Lab_SerialInfoName.Text = "串口号:";
+            this.TabPageCurve_Cbx_SerialStopBit.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TabPageCurve_Cbx_SerialStopBit.FormattingEnabled = true;
+            this.TabPageCurve_Cbx_SerialStopBit.Location = new System.Drawing.Point(59, 97);
+            this.TabPageCurve_Cbx_SerialStopBit.Name = "TabPageCurve_Cbx_SerialStopBit";
+            this.TabPageCurve_Cbx_SerialStopBit.Size = new System.Drawing.Size(85, 23);
+            this.TabPageCurve_Cbx_SerialStopBit.TabIndex = 13;
             // 
-            // TabPageCurve_Tbx_SerialInfo
+            // TabPageCurve_Lab_SerialStopBit
             // 
-            this.TabPageCurve_Tbx_SerialInfo.Font = new System.Drawing.Font("等线", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.TabPageCurve_Tbx_SerialInfo.Location = new System.Drawing.Point(71, 19);
-            this.TabPageCurve_Tbx_SerialInfo.Name = "TabPageCurve_Tbx_SerialInfo";
-            this.TabPageCurve_Tbx_SerialInfo.Size = new System.Drawing.Size(348, 21);
-            this.TabPageCurve_Tbx_SerialInfo.TabIndex = 1;
+            this.TabPageCurve_Lab_SerialStopBit.AutoSize = true;
+            this.TabPageCurve_Lab_SerialStopBit.Location = new System.Drawing.Point(6, 101);
+            this.TabPageCurve_Lab_SerialStopBit.Name = "TabPageCurve_Lab_SerialStopBit";
+            this.TabPageCurve_Lab_SerialStopBit.Size = new System.Drawing.Size(47, 12);
+            this.TabPageCurve_Lab_SerialStopBit.TabIndex = 12;
+            this.TabPageCurve_Lab_SerialStopBit.Text = "停止位:";
             // 
-            // TabPageCurve_Lab_SerialInfo
+            // TabPageCurve_Cbx_SerialDataBit
             // 
-            this.TabPageCurve_Lab_SerialInfo.AutoSize = true;
-            this.TabPageCurve_Lab_SerialInfo.Location = new System.Drawing.Point(6, 22);
-            this.TabPageCurve_Lab_SerialInfo.Name = "TabPageCurve_Lab_SerialInfo";
-            this.TabPageCurve_Lab_SerialInfo.Size = new System.Drawing.Size(59, 12);
-            this.TabPageCurve_Lab_SerialInfo.TabIndex = 5;
-            this.TabPageCurve_Lab_SerialInfo.Text = "提示信息:";
+            this.TabPageCurve_Cbx_SerialDataBit.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TabPageCurve_Cbx_SerialDataBit.FormattingEnabled = true;
+            this.TabPageCurve_Cbx_SerialDataBit.Location = new System.Drawing.Point(59, 69);
+            this.TabPageCurve_Cbx_SerialDataBit.Name = "TabPageCurve_Cbx_SerialDataBit";
+            this.TabPageCurve_Cbx_SerialDataBit.Size = new System.Drawing.Size(85, 23);
+            this.TabPageCurve_Cbx_SerialDataBit.TabIndex = 11;
             // 
-            // TabPageSerial_Lab_SerialTipSend
+            // TabPageCurve_Lab_SerialDataBit
             // 
-            this.TabPageSerial_Lab_SerialTipSend.AutoSize = true;
-            this.TabPageSerial_Lab_SerialTipSend.Location = new System.Drawing.Point(816, 21);
-            this.TabPageSerial_Lab_SerialTipSend.Name = "TabPageSerial_Lab_SerialTipSend";
-            this.TabPageSerial_Lab_SerialTipSend.Size = new System.Drawing.Size(53, 12);
-            this.TabPageSerial_Lab_SerialTipSend.TabIndex = 10;
-            this.TabPageSerial_Lab_SerialTipSend.Text = "已发送:0";
+            this.TabPageCurve_Lab_SerialDataBit.AutoSize = true;
+            this.TabPageCurve_Lab_SerialDataBit.Location = new System.Drawing.Point(6, 73);
+            this.TabPageCurve_Lab_SerialDataBit.Name = "TabPageCurve_Lab_SerialDataBit";
+            this.TabPageCurve_Lab_SerialDataBit.Size = new System.Drawing.Size(47, 12);
+            this.TabPageCurve_Lab_SerialDataBit.TabIndex = 10;
+            this.TabPageCurve_Lab_SerialDataBit.Text = "数据位:";
             // 
-            // TabPageCurve_Btn_ExportData
+            // TabPageCurve_Cbx_SerialBaud
             // 
-            this.TabPageCurve_Btn_ExportData.Location = new System.Drawing.Point(819, 17);
-            this.TabPageCurve_Btn_ExportData.Name = "TabPageCurve_Btn_ExportData";
-            this.TabPageCurve_Btn_ExportData.Size = new System.Drawing.Size(75, 23);
-            this.TabPageCurve_Btn_ExportData.TabIndex = 12;
-            this.TabPageCurve_Btn_ExportData.Text = "导出数据";
-            this.TabPageCurve_Btn_ExportData.UseVisualStyleBackColor = true;
-            this.TabPageCurve_Btn_ExportData.Click += new System.EventHandler(this.TabPageCurve_Btn_ExportData_Click);
+            this.TabPageCurve_Cbx_SerialBaud.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TabPageCurve_Cbx_SerialBaud.FormattingEnabled = true;
+            this.TabPageCurve_Cbx_SerialBaud.Location = new System.Drawing.Point(59, 41);
+            this.TabPageCurve_Cbx_SerialBaud.Name = "TabPageCurve_Cbx_SerialBaud";
+            this.TabPageCurve_Cbx_SerialBaud.Size = new System.Drawing.Size(85, 23);
+            this.TabPageCurve_Cbx_SerialBaud.TabIndex = 9;
             // 
-            // TabPageCurve_Gbx_SerialCurve
+            // TabPageCurve_Lab_SerialBaud
             // 
-            this.TabPageCurve_Gbx_SerialCurve.Controls.Add(this.TabPageCurve_Zed_Graph);
-            this.TabPageCurve_Gbx_SerialCurve.Location = new System.Drawing.Point(162, 6);
-            this.TabPageCurve_Gbx_SerialCurve.Name = "TabPageCurve_Gbx_SerialCurve";
-            this.TabPageCurve_Gbx_SerialCurve.Size = new System.Drawing.Size(744, 566);
-            this.TabPageCurve_Gbx_SerialCurve.TabIndex = 7;
-            this.TabPageCurve_Gbx_SerialCurve.TabStop = false;
-            this.TabPageCurve_Gbx_SerialCurve.Text = "串口曲线";
+            this.TabPageCurve_Lab_SerialBaud.AutoSize = true;
+            this.TabPageCurve_Lab_SerialBaud.Location = new System.Drawing.Point(6, 45);
+            this.TabPageCurve_Lab_SerialBaud.Name = "TabPageCurve_Lab_SerialBaud";
+            this.TabPageCurve_Lab_SerialBaud.Size = new System.Drawing.Size(47, 12);
+            this.TabPageCurve_Lab_SerialBaud.TabIndex = 8;
+            this.TabPageCurve_Lab_SerialBaud.Text = "波特率:";
             // 
-            // TabPageCurve_Zed_Graph
+            // TabPageCurve_Cbx_SerialName
             // 
-            this.TabPageCurve_Zed_Graph.BackColor = System.Drawing.Color.Transparent;
-            this.TabPageCurve_Zed_Graph.Location = new System.Drawing.Point(6, 20);
-            this.TabPageCurve_Zed_Graph.Name = "TabPageCurve_Zed_Graph";
-            this.TabPageCurve_Zed_Graph.ScrollGrace = 0D;
-            this.TabPageCurve_Zed_Graph.ScrollMaxX = 0D;
-            this.TabPageCurve_Zed_Graph.ScrollMaxY = 0D;
-            this.TabPageCurve_Zed_Graph.ScrollMaxY2 = 0D;
-            this.TabPageCurve_Zed_Graph.ScrollMinX = 0D;
-            this.TabPageCurve_Zed_Graph.ScrollMinY = 0D;
-            this.TabPageCurve_Zed_Graph.ScrollMinY2 = 0D;
-            this.TabPageCurve_Zed_Graph.Size = new System.Drawing.Size(732, 540);
-            this.TabPageCurve_Zed_Graph.TabIndex = 1;
+            this.TabPageCurve_Cbx_SerialName.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TabPageCurve_Cbx_SerialName.FormattingEnabled = true;
+            this.TabPageCurve_Cbx_SerialName.Location = new System.Drawing.Point(59, 13);
+            this.TabPageCurve_Cbx_SerialName.Name = "TabPageCurve_Cbx_SerialName";
+            this.TabPageCurve_Cbx_SerialName.Size = new System.Drawing.Size(85, 23);
+            this.TabPageCurve_Cbx_SerialName.TabIndex = 7;
+            // 
+            // TabPageCurve_Lab_SerialName
+            // 
+            this.TabPageCurve_Lab_SerialName.AutoSize = true;
+            this.TabPageCurve_Lab_SerialName.Location = new System.Drawing.Point(6, 17);
+            this.TabPageCurve_Lab_SerialName.Name = "TabPageCurve_Lab_SerialName";
+            this.TabPageCurve_Lab_SerialName.Size = new System.Drawing.Size(47, 12);
+            this.TabPageCurve_Lab_SerialName.TabIndex = 0;
+            this.TabPageCurve_Lab_SerialName.Text = "串口号:";
+            // 
+            // TabPageAnalysis
+            // 
+            this.TabPageAnalysis.Location = new System.Drawing.Point(4, 22);
+            this.TabPageAnalysis.Name = "TabPageAnalysis";
+            this.TabPageAnalysis.Padding = new System.Windows.Forms.Padding(3);
+            this.TabPageAnalysis.Size = new System.Drawing.Size(912, 631);
+            this.TabPageAnalysis.TabIndex = 3;
+            this.TabPageAnalysis.Text = "数据分析";
+            this.TabPageAnalysis.UseVisualStyleBackColor = true;
+            // 
+            // TabPageConsole
+            // 
+            this.TabPageConsole.Location = new System.Drawing.Point(4, 22);
+            this.TabPageConsole.Name = "TabPageConsole";
+            this.TabPageConsole.Padding = new System.Windows.Forms.Padding(3);
+            this.TabPageConsole.Size = new System.Drawing.Size(912, 631);
+            this.TabPageConsole.TabIndex = 4;
+            this.TabPageConsole.Text = "控制台";
+            this.TabPageConsole.UseVisualStyleBackColor = true;
+            // 
+            // TabPageHelp
+            // 
+            this.TabPageHelp.Location = new System.Drawing.Point(4, 22);
+            this.TabPageHelp.Name = "TabPageHelp";
+            this.TabPageHelp.Padding = new System.Windows.Forms.Padding(3);
+            this.TabPageHelp.Size = new System.Drawing.Size(912, 631);
+            this.TabPageHelp.TabIndex = 5;
+            this.TabPageHelp.Text = "帮助";
+            this.TabPageHelp.UseVisualStyleBackColor = true;
+            // 
+            // TabPageAbout
+            // 
+            this.TabPageAbout.Location = new System.Drawing.Point(4, 22);
+            this.TabPageAbout.Name = "TabPageAbout";
+            this.TabPageAbout.Padding = new System.Windows.Forms.Padding(3);
+            this.TabPageAbout.Size = new System.Drawing.Size(912, 631);
+            this.TabPageAbout.TabIndex = 6;
+            this.TabPageAbout.Text = "关于";
+            this.TabPageAbout.UseVisualStyleBackColor = true;
+            // 
+            // SerialPortDebug
+            // 
+            this.SerialPortDebug.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.SerialPortDebug_DataReceived);
+            // 
+            // SerialTimerSend
+            // 
+            this.SerialTimerSend.Tick += new System.EventHandler(this.SerialTimerSend_Tick);
+            // 
+            // SerialTimerRecvSpeed
+            // 
+            this.SerialTimerRecvSpeed.Interval = 1000;
+            this.SerialTimerRecvSpeed.Tick += new System.EventHandler(this.SerialTimerRecvSpeed_Tick);
+            // 
+            // SerialTimerRefresh
+            // 
+            this.SerialTimerRefresh.Interval = 1;
+            this.SerialTimerRefresh.Tick += new System.EventHandler(this.SerialTimerRefresh_Tick);
             // 
             // SerialPortCurve
             // 
@@ -1210,6 +1250,299 @@
             // 
             this.CurveRefresh.Interval = 1;
             this.CurveRefresh.Tick += new System.EventHandler(this.CurveRefresh_Tick);
+            // 
+            // TabNet
+            // 
+            this.TabNet.Controls.Add(this.TabPageTCPServer);
+            this.TabNet.Controls.Add(this.TabPageTCPClient);
+            this.TabNet.Controls.Add(this.TabPageUDP);
+            this.TabNet.Location = new System.Drawing.Point(6, 6);
+            this.TabNet.Name = "TabNet";
+            this.TabNet.SelectedIndex = 0;
+            this.TabNet.Size = new System.Drawing.Size(900, 619);
+            this.TabNet.TabIndex = 0;
+            // 
+            // TabPageTCPServer
+            // 
+            this.TabPageTCPServer.Controls.Add(this.groupBox2);
+            this.TabPageTCPServer.Controls.Add(this.groupBox1);
+            this.TabPageTCPServer.Controls.Add(this.TabPageTCPServer_Gbx_NetFunction);
+            this.TabPageTCPServer.Controls.Add(this.TabPageTCPServer_Gbx_NetConfig);
+            this.TabPageTCPServer.Location = new System.Drawing.Point(4, 22);
+            this.TabPageTCPServer.Name = "TabPageTCPServer";
+            this.TabPageTCPServer.Padding = new System.Windows.Forms.Padding(3);
+            this.TabPageTCPServer.Size = new System.Drawing.Size(892, 593);
+            this.TabPageTCPServer.TabIndex = 0;
+            this.TabPageTCPServer.Text = "TCP服务端";
+            this.TabPageTCPServer.UseVisualStyleBackColor = true;
+            // 
+            // TabPageTCPClient
+            // 
+            this.TabPageTCPClient.Location = new System.Drawing.Point(4, 22);
+            this.TabPageTCPClient.Name = "TabPageTCPClient";
+            this.TabPageTCPClient.Padding = new System.Windows.Forms.Padding(3);
+            this.TabPageTCPClient.Size = new System.Drawing.Size(892, 593);
+            this.TabPageTCPClient.TabIndex = 1;
+            this.TabPageTCPClient.Text = "TCP客户端";
+            this.TabPageTCPClient.UseVisualStyleBackColor = true;
+            // 
+            // TabPageUDP
+            // 
+            this.TabPageUDP.Location = new System.Drawing.Point(4, 22);
+            this.TabPageUDP.Name = "TabPageUDP";
+            this.TabPageUDP.Padding = new System.Windows.Forms.Padding(3);
+            this.TabPageUDP.Size = new System.Drawing.Size(892, 593);
+            this.TabPageUDP.TabIndex = 2;
+            this.TabPageUDP.Text = "UDP";
+            this.TabPageUDP.UseVisualStyleBackColor = true;
+            // 
+            // TabPageTCPServer_Gbx_NetConfig
+            // 
+            this.TabPageTCPServer_Gbx_NetConfig.Controls.Add(this.TabPageTCPServer_Lab_NetListen);
+            this.TabPageTCPServer_Gbx_NetConfig.Controls.Add(this.TabPageTCPServer_Tbx_NetServerMaxListen);
+            this.TabPageTCPServer_Gbx_NetConfig.Controls.Add(this.TabPageTCPServer_Lab_NetServerMaxListen);
+            this.TabPageTCPServer_Gbx_NetConfig.Controls.Add(this.TabPageTCPServer_Tbx_NetLocalHostPort);
+            this.TabPageTCPServer_Gbx_NetConfig.Controls.Add(this.TabPageTCPServer_Lab_NetLocalHostPort);
+            this.TabPageTCPServer_Gbx_NetConfig.Controls.Add(this.TabPageTCPServer_Tbx_NetLocalHostIP);
+            this.TabPageTCPServer_Gbx_NetConfig.Controls.Add(this.TabPageTCPServer_Lab_NetLocalHostIP);
+            this.TabPageTCPServer_Gbx_NetConfig.Location = new System.Drawing.Point(6, 6);
+            this.TabPageTCPServer_Gbx_NetConfig.Name = "TabPageTCPServer_Gbx_NetConfig";
+            this.TabPageTCPServer_Gbx_NetConfig.Size = new System.Drawing.Size(150, 200);
+            this.TabPageTCPServer_Gbx_NetConfig.TabIndex = 0;
+            this.TabPageTCPServer_Gbx_NetConfig.TabStop = false;
+            this.TabPageTCPServer_Gbx_NetConfig.Text = "网络配置";
+            // 
+            // TabPageTCPServer_Lab_NetLocalHostIP
+            // 
+            this.TabPageTCPServer_Lab_NetLocalHostIP.AutoSize = true;
+            this.TabPageTCPServer_Lab_NetLocalHostIP.Location = new System.Drawing.Point(6, 17);
+            this.TabPageTCPServer_Lab_NetLocalHostIP.Name = "TabPageTCPServer_Lab_NetLocalHostIP";
+            this.TabPageTCPServer_Lab_NetLocalHostIP.Size = new System.Drawing.Size(71, 12);
+            this.TabPageTCPServer_Lab_NetLocalHostIP.TabIndex = 1;
+            this.TabPageTCPServer_Lab_NetLocalHostIP.Text = "本机IP地址:";
+            // 
+            // TabPageTCPServer_Tbx_NetLocalHostIP
+            // 
+            this.TabPageTCPServer_Tbx_NetLocalHostIP.Location = new System.Drawing.Point(6, 32);
+            this.TabPageTCPServer_Tbx_NetLocalHostIP.Name = "TabPageTCPServer_Tbx_NetLocalHostIP";
+            this.TabPageTCPServer_Tbx_NetLocalHostIP.Size = new System.Drawing.Size(138, 21);
+            this.TabPageTCPServer_Tbx_NetLocalHostIP.TabIndex = 2;
+            // 
+            // TabPageTCPServer_Lab_NetLocalHostPort
+            // 
+            this.TabPageTCPServer_Lab_NetLocalHostPort.AutoSize = true;
+            this.TabPageTCPServer_Lab_NetLocalHostPort.Location = new System.Drawing.Point(6, 66);
+            this.TabPageTCPServer_Lab_NetLocalHostPort.Name = "TabPageTCPServer_Lab_NetLocalHostPort";
+            this.TabPageTCPServer_Lab_NetLocalHostPort.Size = new System.Drawing.Size(71, 12);
+            this.TabPageTCPServer_Lab_NetLocalHostPort.TabIndex = 3;
+            this.TabPageTCPServer_Lab_NetLocalHostPort.Text = "本机端口号:";
+            // 
+            // TabPageTCPServer_Tbx_NetLocalHostPort
+            // 
+            this.TabPageTCPServer_Tbx_NetLocalHostPort.Location = new System.Drawing.Point(6, 81);
+            this.TabPageTCPServer_Tbx_NetLocalHostPort.Name = "TabPageTCPServer_Tbx_NetLocalHostPort";
+            this.TabPageTCPServer_Tbx_NetLocalHostPort.Size = new System.Drawing.Size(71, 21);
+            this.TabPageTCPServer_Tbx_NetLocalHostPort.TabIndex = 4;
+            // 
+            // TabPageTCPServer_Tbx_NetServerMaxListen
+            // 
+            this.TabPageTCPServer_Tbx_NetServerMaxListen.Location = new System.Drawing.Point(6, 132);
+            this.TabPageTCPServer_Tbx_NetServerMaxListen.Name = "TabPageTCPServer_Tbx_NetServerMaxListen";
+            this.TabPageTCPServer_Tbx_NetServerMaxListen.Size = new System.Drawing.Size(71, 21);
+            this.TabPageTCPServer_Tbx_NetServerMaxListen.TabIndex = 6;
+            // 
+            // TabPageTCPServer_Lab_NetServerMaxListen
+            // 
+            this.TabPageTCPServer_Lab_NetServerMaxListen.AutoSize = true;
+            this.TabPageTCPServer_Lab_NetServerMaxListen.Location = new System.Drawing.Point(6, 117);
+            this.TabPageTCPServer_Lab_NetServerMaxListen.Name = "TabPageTCPServer_Lab_NetServerMaxListen";
+            this.TabPageTCPServer_Lab_NetServerMaxListen.Size = new System.Drawing.Size(71, 12);
+            this.TabPageTCPServer_Lab_NetServerMaxListen.TabIndex = 5;
+            this.TabPageTCPServer_Lab_NetServerMaxListen.Text = "最大连接数:";
+            // 
+            // TabPageTCPServer_Lab_NetListen
+            // 
+            this.TabPageTCPServer_Lab_NetListen.Location = new System.Drawing.Point(6, 171);
+            this.TabPageTCPServer_Lab_NetListen.Name = "TabPageTCPServer_Lab_NetListen";
+            this.TabPageTCPServer_Lab_NetListen.Size = new System.Drawing.Size(138, 23);
+            this.TabPageTCPServer_Lab_NetListen.TabIndex = 1;
+            this.TabPageTCPServer_Lab_NetListen.Text = "监听";
+            this.TabPageTCPServer_Lab_NetListen.UseVisualStyleBackColor = true;
+            // 
+            // TabPageTCPServer_Gbx_NetFunction
+            // 
+            this.TabPageTCPServer_Gbx_NetFunction.Controls.Add(this.TabPageTCPServer_Gbx_NetFunc);
+            this.TabPageTCPServer_Gbx_NetFunction.Controls.Add(this.TabPageTCPServer_Gbx_NetSend);
+            this.TabPageTCPServer_Gbx_NetFunction.Controls.Add(this.TabPageTCPServer_Gbx_NetRecv);
+            this.TabPageTCPServer_Gbx_NetFunction.Location = new System.Drawing.Point(6, 212);
+            this.TabPageTCPServer_Gbx_NetFunction.Name = "TabPageTCPServer_Gbx_NetFunction";
+            this.TabPageTCPServer_Gbx_NetFunction.Size = new System.Drawing.Size(150, 240);
+            this.TabPageTCPServer_Gbx_NetFunction.TabIndex = 3;
+            this.TabPageTCPServer_Gbx_NetFunction.TabStop = false;
+            this.TabPageTCPServer_Gbx_NetFunction.Text = "网络辅助";
+            // 
+            // TabPageTCPServer_Gbx_NetFunc
+            // 
+            this.TabPageTCPServer_Gbx_NetFunc.Controls.Add(this.TabPageTCPServer_Rad_NetSendClear);
+            this.TabPageTCPServer_Gbx_NetFunc.Controls.Add(this.TabPageTCPServer_Rad_NetRecvClear);
+            this.TabPageTCPServer_Gbx_NetFunc.Location = new System.Drawing.Point(6, 160);
+            this.TabPageTCPServer_Gbx_NetFunc.Name = "TabPageTCPServer_Gbx_NetFunc";
+            this.TabPageTCPServer_Gbx_NetFunc.Size = new System.Drawing.Size(138, 74);
+            this.TabPageTCPServer_Gbx_NetFunc.TabIndex = 1;
+            this.TabPageTCPServer_Gbx_NetFunc.TabStop = false;
+            this.TabPageTCPServer_Gbx_NetFunc.Text = "功能";
+            // 
+            // TabPageTCPServer_Rad_NetSendClear
+            // 
+            this.TabPageTCPServer_Rad_NetSendClear.Location = new System.Drawing.Point(6, 45);
+            this.TabPageTCPServer_Rad_NetSendClear.Name = "TabPageTCPServer_Rad_NetSendClear";
+            this.TabPageTCPServer_Rad_NetSendClear.Size = new System.Drawing.Size(126, 23);
+            this.TabPageTCPServer_Rad_NetSendClear.TabIndex = 2;
+            this.TabPageTCPServer_Rad_NetSendClear.Text = "清发送区";
+            this.TabPageTCPServer_Rad_NetSendClear.UseVisualStyleBackColor = true;
+            // 
+            // TabPageTCPServer_Rad_NetRecvClear
+            // 
+            this.TabPageTCPServer_Rad_NetRecvClear.Location = new System.Drawing.Point(6, 16);
+            this.TabPageTCPServer_Rad_NetRecvClear.Name = "TabPageTCPServer_Rad_NetRecvClear";
+            this.TabPageTCPServer_Rad_NetRecvClear.Size = new System.Drawing.Size(126, 23);
+            this.TabPageTCPServer_Rad_NetRecvClear.TabIndex = 1;
+            this.TabPageTCPServer_Rad_NetRecvClear.Text = "清接收区";
+            this.TabPageTCPServer_Rad_NetRecvClear.UseVisualStyleBackColor = true;
+            // 
+            // TabPageTCPServer_Gbx_NetSend
+            // 
+            this.TabPageTCPServer_Gbx_NetSend.Controls.Add(this.TabPageTCPServer_Rad_NetSendHex);
+            this.TabPageTCPServer_Gbx_NetSend.Controls.Add(this.TabPageTCPServer_Rad_NetSendString);
+            this.TabPageTCPServer_Gbx_NetSend.Location = new System.Drawing.Point(6, 90);
+            this.TabPageTCPServer_Gbx_NetSend.Name = "TabPageTCPServer_Gbx_NetSend";
+            this.TabPageTCPServer_Gbx_NetSend.Size = new System.Drawing.Size(138, 64);
+            this.TabPageTCPServer_Gbx_NetSend.TabIndex = 1;
+            this.TabPageTCPServer_Gbx_NetSend.TabStop = false;
+            this.TabPageTCPServer_Gbx_NetSend.Text = "发码区";
+            // 
+            // TabPageTCPServer_Rad_NetSendHex
+            // 
+            this.TabPageTCPServer_Rad_NetSendHex.AutoSize = true;
+            this.TabPageTCPServer_Rad_NetSendHex.Location = new System.Drawing.Point(6, 42);
+            this.TabPageTCPServer_Rad_NetSendHex.Name = "TabPageTCPServer_Rad_NetSendHex";
+            this.TabPageTCPServer_Rad_NetSendHex.Size = new System.Drawing.Size(95, 16);
+            this.TabPageTCPServer_Rad_NetSendHex.TabIndex = 2;
+            this.TabPageTCPServer_Rad_NetSendHex.TabStop = true;
+            this.TabPageTCPServer_Rad_NetSendHex.Text = "十六进制发送";
+            this.TabPageTCPServer_Rad_NetSendHex.UseVisualStyleBackColor = true;
+            // 
+            // TabPageTCPServer_Rad_NetSendString
+            // 
+            this.TabPageTCPServer_Rad_NetSendString.AutoSize = true;
+            this.TabPageTCPServer_Rad_NetSendString.Location = new System.Drawing.Point(6, 20);
+            this.TabPageTCPServer_Rad_NetSendString.Name = "TabPageTCPServer_Rad_NetSendString";
+            this.TabPageTCPServer_Rad_NetSendString.Size = new System.Drawing.Size(83, 16);
+            this.TabPageTCPServer_Rad_NetSendString.TabIndex = 1;
+            this.TabPageTCPServer_Rad_NetSendString.TabStop = true;
+            this.TabPageTCPServer_Rad_NetSendString.Text = "字符串发送";
+            this.TabPageTCPServer_Rad_NetSendString.UseVisualStyleBackColor = true;
+            // 
+            // TabPageTCPServer_Gbx_NetRecv
+            // 
+            this.TabPageTCPServer_Gbx_NetRecv.Controls.Add(this.TabPageTCPServer_Rad_NetRecvHex);
+            this.TabPageTCPServer_Gbx_NetRecv.Controls.Add(this.TabPageTCPServer_Rad_NetRecvString);
+            this.TabPageTCPServer_Gbx_NetRecv.Location = new System.Drawing.Point(6, 20);
+            this.TabPageTCPServer_Gbx_NetRecv.Name = "TabPageTCPServer_Gbx_NetRecv";
+            this.TabPageTCPServer_Gbx_NetRecv.Size = new System.Drawing.Size(138, 64);
+            this.TabPageTCPServer_Gbx_NetRecv.TabIndex = 1;
+            this.TabPageTCPServer_Gbx_NetRecv.TabStop = false;
+            this.TabPageTCPServer_Gbx_NetRecv.Text = "消息区";
+            // 
+            // TabPageTCPServer_Rad_NetRecvHex
+            // 
+            this.TabPageTCPServer_Rad_NetRecvHex.AutoSize = true;
+            this.TabPageTCPServer_Rad_NetRecvHex.Location = new System.Drawing.Point(6, 42);
+            this.TabPageTCPServer_Rad_NetRecvHex.Name = "TabPageTCPServer_Rad_NetRecvHex";
+            this.TabPageTCPServer_Rad_NetRecvHex.Size = new System.Drawing.Size(95, 16);
+            this.TabPageTCPServer_Rad_NetRecvHex.TabIndex = 1;
+            this.TabPageTCPServer_Rad_NetRecvHex.TabStop = true;
+            this.TabPageTCPServer_Rad_NetRecvHex.Text = "十六进制显示";
+            this.TabPageTCPServer_Rad_NetRecvHex.UseVisualStyleBackColor = true;
+            // 
+            // TabPageTCPServer_Rad_NetRecvString
+            // 
+            this.TabPageTCPServer_Rad_NetRecvString.AutoSize = true;
+            this.TabPageTCPServer_Rad_NetRecvString.Location = new System.Drawing.Point(6, 20);
+            this.TabPageTCPServer_Rad_NetRecvString.Name = "TabPageTCPServer_Rad_NetRecvString";
+            this.TabPageTCPServer_Rad_NetRecvString.Size = new System.Drawing.Size(83, 16);
+            this.TabPageTCPServer_Rad_NetRecvString.TabIndex = 0;
+            this.TabPageTCPServer_Rad_NetRecvString.TabStop = true;
+            this.TabPageTCPServer_Rad_NetRecvString.Text = "字符串显示";
+            this.TabPageTCPServer_Rad_NetRecvString.UseVisualStyleBackColor = true;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Location = new System.Drawing.Point(162, 6);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(724, 290);
+            this.groupBox1.TabIndex = 5;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "消息区";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox1.Location = new System.Drawing.Point(6, 20);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(712, 264);
+            this.textBox1.TabIndex = 1;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.comboBox1);
+            this.groupBox2.Controls.Add(this.label1);
+            this.groupBox2.Controls.Add(this.button1);
+            this.groupBox2.Controls.Add(this.textBox2);
+            this.groupBox2.Location = new System.Drawing.Point(162, 302);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(724, 270);
+            this.groupBox2.TabIndex = 6;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "发送区";
+            // 
+            // button1
+            // 
+            this.button1.Enabled = false;
+            this.button1.Location = new System.Drawing.Point(612, 241);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(106, 23);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "发送";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox2.Location = new System.Drawing.Point(6, 20);
+            this.textBox2.Multiline = true;
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(712, 215);
+            this.textBox2.TabIndex = 1;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 246);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(59, 12);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "连接对象:";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(71, 243);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(240, 20);
+            this.comboBox1.TabIndex = 4;
             // 
             // FormMain
             // 
@@ -1242,15 +1575,30 @@
             this.TabPageSerial_Gbx_Recv.PerformLayout();
             this.TabPageSerial_Gbx_SerialConfig.ResumeLayout(false);
             this.TabPageSerial_Gbx_SerialConfig.PerformLayout();
+            this.TabPageNet.ResumeLayout(false);
             this.TabPageCurve.ResumeLayout(false);
-            this.TabPageCurve_Gbx_SerialConfig.ResumeLayout(false);
-            this.TabPageCurve_Gbx_SerialConfig.PerformLayout();
+            this.TabPageCurve_Gbx_SerialCurve.ResumeLayout(false);
+            this.TabPageCurve_Gbx_SerialInfo.ResumeLayout(false);
+            this.TabPageCurve_Gbx_SerialInfo.PerformLayout();
             this.TabPageCurve_Gbx_Function.ResumeLayout(false);
             this.TabPageCurve_Gbx_Function.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TabPageCurve_Nud_CurveNum)).EndInit();
-            this.TabPageCurve_Gbx_SerialInfo.ResumeLayout(false);
-            this.TabPageCurve_Gbx_SerialInfo.PerformLayout();
-            this.TabPageCurve_Gbx_SerialCurve.ResumeLayout(false);
+            this.TabPageCurve_Gbx_SerialConfig.ResumeLayout(false);
+            this.TabPageCurve_Gbx_SerialConfig.PerformLayout();
+            this.TabNet.ResumeLayout(false);
+            this.TabPageTCPServer.ResumeLayout(false);
+            this.TabPageTCPServer_Gbx_NetConfig.ResumeLayout(false);
+            this.TabPageTCPServer_Gbx_NetConfig.PerformLayout();
+            this.TabPageTCPServer_Gbx_NetFunction.ResumeLayout(false);
+            this.TabPageTCPServer_Gbx_NetFunc.ResumeLayout(false);
+            this.TabPageTCPServer_Gbx_NetSend.ResumeLayout(false);
+            this.TabPageTCPServer_Gbx_NetSend.PerformLayout();
+            this.TabPageTCPServer_Gbx_NetRecv.ResumeLayout(false);
+            this.TabPageTCPServer_Gbx_NetRecv.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1357,6 +1705,35 @@
         private ZedGraph.ZedGraphControl TabPageCurve_Zed_Graph;
         private System.IO.Ports.SerialPort SerialPortCurve;
         private System.Windows.Forms.Timer CurveRefresh;
+        private System.Windows.Forms.TabControl TabNet;
+        private System.Windows.Forms.TabPage TabPageTCPServer;
+        private System.Windows.Forms.TabPage TabPageTCPClient;
+        private System.Windows.Forms.TabPage TabPageUDP;
+        private System.Windows.Forms.GroupBox TabPageTCPServer_Gbx_NetConfig;
+        private System.Windows.Forms.Label TabPageTCPServer_Lab_NetLocalHostIP;
+        private System.Windows.Forms.Button TabPageTCPServer_Lab_NetListen;
+        private System.Windows.Forms.TextBox TabPageTCPServer_Tbx_NetServerMaxListen;
+        private System.Windows.Forms.Label TabPageTCPServer_Lab_NetServerMaxListen;
+        private System.Windows.Forms.TextBox TabPageTCPServer_Tbx_NetLocalHostPort;
+        private System.Windows.Forms.Label TabPageTCPServer_Lab_NetLocalHostPort;
+        private System.Windows.Forms.TextBox TabPageTCPServer_Tbx_NetLocalHostIP;
+        private System.Windows.Forms.GroupBox TabPageTCPServer_Gbx_NetFunction;
+        private System.Windows.Forms.GroupBox TabPageTCPServer_Gbx_NetFunc;
+        private System.Windows.Forms.Button TabPageTCPServer_Rad_NetSendClear;
+        private System.Windows.Forms.Button TabPageTCPServer_Rad_NetRecvClear;
+        private System.Windows.Forms.GroupBox TabPageTCPServer_Gbx_NetSend;
+        private System.Windows.Forms.RadioButton TabPageTCPServer_Rad_NetSendHex;
+        private System.Windows.Forms.RadioButton TabPageTCPServer_Rad_NetSendString;
+        private System.Windows.Forms.GroupBox TabPageTCPServer_Gbx_NetRecv;
+        private System.Windows.Forms.RadioButton TabPageTCPServer_Rad_NetRecvHex;
+        private System.Windows.Forms.RadioButton TabPageTCPServer_Rad_NetRecvString;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
 

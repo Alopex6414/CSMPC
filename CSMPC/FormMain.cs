@@ -63,6 +63,8 @@ namespace CSMPC
         public static volatile PointPairList ZedGraph_List_7 = new PointPairList(); // 曲线7数据
         public static volatile PointPairList ZedGraph_List_8 = new PointPairList(); // 曲线8数据
 
+        // 网络调试
+
         public FormMain()
         {
             InitializeComponent();
