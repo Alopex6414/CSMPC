@@ -197,15 +197,7 @@ namespace CSMPC
             // TCP服务端
 
             // 本机IP地址设置
-            string strHostName = Dns.GetHostName();
-            IPHostEntry iPHostEntry = Dns.GetHostEntry(strHostName);
-            for(int i = 0; i < iPHostEntry.AddressList.Length; ++i)
-            {
-                if(iPHostEntry.AddressList[i].AddressFamily == AddressFamily.InterNetwork)
-                {
-                    TabPageTCPServer_Tbx_NetLocalHostIP.Text = iPHostEntry.AddressList[i].ToString();
-                }
-            }
+            TabPageTCPServer_Tbx_NetLocalHostIP.Text = GetLocalIP();
 
             // 本机端口号设置
             TabPageTCPServer_Tbx_NetLocalHostPort.Text = "6000";
@@ -231,6 +223,31 @@ namespace CSMPC
             TabPageTCPServer_Cbx_ConnectObject.DropDownStyle = ComboBoxStyle.DropDownList;
             TabPageTCPServer_Cbx_ConnectObject.Items.Clear();
             TabPageTCPServer_Cbx_ConnectObject.SelectedIndex = -1;
+
+            // TCP客户端
+
+            // 服务器IP地址设置(暂定为本机IP地址...)
+            TabPageTCPClient_Tbx_NetLocalHostIP.Text = GetLocalIP();
+
+            // 服务器端口号设置
+            TabPageTCPClient_Tbx_NetLocalHostPort.Text = "6000";
+
+            // 网络辅助设置
+            TabPageTCPClient_Rad_NetRecvString.Checked = true;
+            TabPageTCPClient_Rad_NetRecvHex.Checked = false;
+            TabPageTCPClient_Rad_NetSendString.Checked = true;
+            TabPageTCPClient_Rad_NetSendHex.Checked = false;
+
+            // 消息区设置
+            TabPageTCPClient_Tbx_Recv.ReadOnly = true;
+            TabPageTCPClient_Tbx_Recv.BackColor = Color.White;
+            TabPageTCPClient_Tbx_Recv.ScrollBars = ScrollBars.Vertical;
+
+            // 发送区设置
+            TabPageTCPClient_Tbx_Send.ReadOnly = false;
+            TabPageTCPClient_Tbx_Send.ScrollBars = ScrollBars.Vertical;
+
+            // UDP
 
             #endregion
 
@@ -991,6 +1008,33 @@ namespace CSMPC
         #endregion
 
         #region 网络调试
+
+        #region 获取本地IP地址
+        public static string GetLocalIP()
+        {
+            try
+            {
+                string strLocalIP = "";
+                string strHostName = Dns.GetHostName();
+                IPHostEntry iPHostEntry = Dns.GetHostEntry(strHostName);
+                for (int i = 0; i < iPHostEntry.AddressList.Length; ++i)
+                {
+                    if (iPHostEntry.AddressList[i].AddressFamily == AddressFamily.InterNetwork)
+                    {
+                        strLocalIP = iPHostEntry.AddressList[i].ToString();
+                    }
+                }
+
+                return strLocalIP;
+            }
+            catch(Exception)
+            {
+                MessageBox.Show("获取本地IP地址出错!", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return "";
+            }
+        }
+        #endregion
+
         #endregion
 
         #region 实时曲线

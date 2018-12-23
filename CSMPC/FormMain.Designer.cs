@@ -86,8 +86,8 @@
             this.TabPageTCPServer_Tbx_Recv = new System.Windows.Forms.TextBox();
             this.TabPageTCPServer_Gbx_NetFunction = new System.Windows.Forms.GroupBox();
             this.TabPageTCPServer_Gbx_NetFunc = new System.Windows.Forms.GroupBox();
-            this.TabPageTCPServer_Rad_NetSendClear = new System.Windows.Forms.Button();
-            this.TabPageTCPServer_Rad_NetRecvClear = new System.Windows.Forms.Button();
+            this.TabPageTCPServer_Btn_NetSendClear = new System.Windows.Forms.Button();
+            this.TabPageTCPServer_Btn_NetRecvClear = new System.Windows.Forms.Button();
             this.TabPageTCPServer_Gbx_NetSend = new System.Windows.Forms.GroupBox();
             this.TabPageTCPServer_Rad_NetSendHex = new System.Windows.Forms.RadioButton();
             this.TabPageTCPServer_Rad_NetSendString = new System.Windows.Forms.RadioButton();
@@ -95,7 +95,7 @@
             this.TabPageTCPServer_Rad_NetRecvHex = new System.Windows.Forms.RadioButton();
             this.TabPageTCPServer_Rad_NetRecvString = new System.Windows.Forms.RadioButton();
             this.TabPageTCPServer_Gbx_NetConfig = new System.Windows.Forms.GroupBox();
-            this.TabPageTCPServer_Lab_NetListen = new System.Windows.Forms.Button();
+            this.TabPageTCPServer_Btn_NetListen = new System.Windows.Forms.Button();
             this.TabPageTCPServer_Tbx_NetServerMaxListen = new System.Windows.Forms.TextBox();
             this.TabPageTCPServer_Lab_NetServerMaxListen = new System.Windows.Forms.Label();
             this.TabPageTCPServer_Tbx_NetLocalHostPort = new System.Windows.Forms.TextBox();
@@ -103,53 +103,53 @@
             this.TabPageTCPServer_Tbx_NetLocalHostIP = new System.Windows.Forms.TextBox();
             this.TabPageTCPServer_Lab_NetLocalHostIP = new System.Windows.Forms.Label();
             this.TabPageTCPClient = new System.Windows.Forms.TabPage();
-            this.groupBox7 = new System.Windows.Forms.GroupBox();
-            this.button4 = new System.Windows.Forms.Button();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
-            this.radioButton4 = new System.Windows.Forms.RadioButton();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.TabPageTCPClient_Gbx_Send = new System.Windows.Forms.GroupBox();
+            this.TabPageTCPClient_Btn_Send = new System.Windows.Forms.Button();
+            this.TabPageTCPClient_Tbx_Send = new System.Windows.Forms.TextBox();
+            this.TabPageTCPClient_Gbx_Recv = new System.Windows.Forms.GroupBox();
+            this.TabPageTCPClient_Tbx_Recv = new System.Windows.Forms.TextBox();
+            this.TabPageTCPClient_Gbx_NetFunction = new System.Windows.Forms.GroupBox();
+            this.TabPageTCPClient_Gbx_NetFunc = new System.Windows.Forms.GroupBox();
+            this.TabPageTCPClient_Btn_NetSendClear = new System.Windows.Forms.Button();
+            this.TabPageTCPClient_Btn_NetRecvClear = new System.Windows.Forms.Button();
+            this.TabPageTCPClient_Gbx_NetSend = new System.Windows.Forms.GroupBox();
+            this.TabPageTCPClient_Rad_NetSendHex = new System.Windows.Forms.RadioButton();
+            this.TabPageTCPClient_Rad_NetSendString = new System.Windows.Forms.RadioButton();
+            this.TabPageTCPClient_Gbx_NetRecv = new System.Windows.Forms.GroupBox();
+            this.TabPageTCPClient_Rad_NetRecvHex = new System.Windows.Forms.RadioButton();
+            this.TabPageTCPClient_Rad_NetRecvString = new System.Windows.Forms.RadioButton();
+            this.TabPageTCPClient_Gbx_NetConfig = new System.Windows.Forms.GroupBox();
+            this.TabPageTCPServer_Btn_NetConnect = new System.Windows.Forms.Button();
+            this.TabPageTCPClient_Tbx_NetLocalHostPort = new System.Windows.Forms.TextBox();
+            this.TabPageTCPClient_Lab_NetLocalHostPort = new System.Windows.Forms.Label();
+            this.TabPageTCPClient_Tbx_NetLocalHostIP = new System.Windows.Forms.TextBox();
+            this.TabPageTCPClient_Lab_NetLocalHostIP = new System.Windows.Forms.Label();
             this.TabPageUDP = new System.Windows.Forms.TabPage();
-            this.groupBox13 = new System.Windows.Forms.GroupBox();
-            this.textBox10 = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.textBox9 = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.button8 = new System.Windows.Forms.Button();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.groupBox14 = new System.Windows.Forms.GroupBox();
-            this.textBox8 = new System.Windows.Forms.TextBox();
-            this.groupBox9 = new System.Windows.Forms.GroupBox();
-            this.groupBox10 = new System.Windows.Forms.GroupBox();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
-            this.groupBox11 = new System.Windows.Forms.GroupBox();
-            this.radioButton5 = new System.Windows.Forms.RadioButton();
-            this.radioButton6 = new System.Windows.Forms.RadioButton();
-            this.groupBox12 = new System.Windows.Forms.GroupBox();
-            this.radioButton7 = new System.Windows.Forms.RadioButton();
-            this.radioButton8 = new System.Windows.Forms.RadioButton();
-            this.groupBox8 = new System.Windows.Forms.GroupBox();
-            this.button5 = new System.Windows.Forms.Button();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
+            this.TabPageUDP_Gbx_Send = new System.Windows.Forms.GroupBox();
+            this.TabPageUDP_Tbx_TargetPort = new System.Windows.Forms.TextBox();
+            this.TabPageUDP_Lab_TargetPort = new System.Windows.Forms.Label();
+            this.TabPageUDP_Tbx_TargetIP = new System.Windows.Forms.TextBox();
+            this.TabPageUDP_Lab_TargetIP = new System.Windows.Forms.Label();
+            this.TabPageUDP_Btn_Send = new System.Windows.Forms.Button();
+            this.TabPageUDP_Tbx_Send = new System.Windows.Forms.TextBox();
+            this.TabPageUDP_Gbx_Recv = new System.Windows.Forms.GroupBox();
+            this.TabPageUDP_Tbx_Recv = new System.Windows.Forms.TextBox();
+            this.TabPageUDP_Gbx_NetFunction = new System.Windows.Forms.GroupBox();
+            this.TabPageUDP_Gbx_NetFunc = new System.Windows.Forms.GroupBox();
+            this.TabPageUDP_Btn_NetSendClear = new System.Windows.Forms.Button();
+            this.TabPageUDP_Btn_NetRecvClear = new System.Windows.Forms.Button();
+            this.TabPageUDP_Gbx_NetSend = new System.Windows.Forms.GroupBox();
+            this.TabPageUDP_Rad_NetSendHex = new System.Windows.Forms.RadioButton();
+            this.TabPageUDP_Rad_NetSendString = new System.Windows.Forms.RadioButton();
+            this.TabPageUDP_Gbx_NetRecv = new System.Windows.Forms.GroupBox();
+            this.TabPageUDP_Rad_NetRecvHex = new System.Windows.Forms.RadioButton();
+            this.TabPageUDP_Rad_NetRecvString = new System.Windows.Forms.RadioButton();
+            this.TabPageUDP_Gbx_NetConfig = new System.Windows.Forms.GroupBox();
+            this.TabPageUDP_Btn_NetOpen = new System.Windows.Forms.Button();
+            this.TabPageUDP_Tbx_NetLocalHostPort = new System.Windows.Forms.TextBox();
+            this.TabPageUDP_Lab_NetLocalHostPort = new System.Windows.Forms.Label();
+            this.TabPageUDP_Tbx_NetLocalHostIP = new System.Windows.Forms.TextBox();
+            this.TabPageUDP_Lab_NetLocalHostIP = new System.Windows.Forms.Label();
             this.TabPageCurve = new System.Windows.Forms.TabPage();
             this.TabPageCurve_Gbx_SerialCurve = new System.Windows.Forms.GroupBox();
             this.TabPageCurve_Zed_Graph = new ZedGraph.ZedGraphControl();
@@ -227,21 +227,21 @@
             this.TabPageTCPServer_Gbx_NetRecv.SuspendLayout();
             this.TabPageTCPServer_Gbx_NetConfig.SuspendLayout();
             this.TabPageTCPClient.SuspendLayout();
-            this.groupBox7.SuspendLayout();
-            this.groupBox6.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.groupBox3.SuspendLayout();
-            this.groupBox4.SuspendLayout();
-            this.groupBox5.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.TabPageTCPClient_Gbx_Send.SuspendLayout();
+            this.TabPageTCPClient_Gbx_Recv.SuspendLayout();
+            this.TabPageTCPClient_Gbx_NetFunction.SuspendLayout();
+            this.TabPageTCPClient_Gbx_NetFunc.SuspendLayout();
+            this.TabPageTCPClient_Gbx_NetSend.SuspendLayout();
+            this.TabPageTCPClient_Gbx_NetRecv.SuspendLayout();
+            this.TabPageTCPClient_Gbx_NetConfig.SuspendLayout();
             this.TabPageUDP.SuspendLayout();
-            this.groupBox13.SuspendLayout();
-            this.groupBox14.SuspendLayout();
-            this.groupBox9.SuspendLayout();
-            this.groupBox10.SuspendLayout();
-            this.groupBox11.SuspendLayout();
-            this.groupBox12.SuspendLayout();
-            this.groupBox8.SuspendLayout();
+            this.TabPageUDP_Gbx_Send.SuspendLayout();
+            this.TabPageUDP_Gbx_Recv.SuspendLayout();
+            this.TabPageUDP_Gbx_NetFunction.SuspendLayout();
+            this.TabPageUDP_Gbx_NetFunc.SuspendLayout();
+            this.TabPageUDP_Gbx_NetSend.SuspendLayout();
+            this.TabPageUDP_Gbx_NetRecv.SuspendLayout();
+            this.TabPageUDP_Gbx_NetConfig.SuspendLayout();
             this.TabPageCurve.SuspendLayout();
             this.TabPageCurve_Gbx_SerialCurve.SuspendLayout();
             this.TabPageCurve_Gbx_SerialInfo.SuspendLayout();
@@ -840,8 +840,8 @@
             // 
             // TabPageTCPServer_Gbx_NetFunc
             // 
-            this.TabPageTCPServer_Gbx_NetFunc.Controls.Add(this.TabPageTCPServer_Rad_NetSendClear);
-            this.TabPageTCPServer_Gbx_NetFunc.Controls.Add(this.TabPageTCPServer_Rad_NetRecvClear);
+            this.TabPageTCPServer_Gbx_NetFunc.Controls.Add(this.TabPageTCPServer_Btn_NetSendClear);
+            this.TabPageTCPServer_Gbx_NetFunc.Controls.Add(this.TabPageTCPServer_Btn_NetRecvClear);
             this.TabPageTCPServer_Gbx_NetFunc.Location = new System.Drawing.Point(6, 160);
             this.TabPageTCPServer_Gbx_NetFunc.Name = "TabPageTCPServer_Gbx_NetFunc";
             this.TabPageTCPServer_Gbx_NetFunc.Size = new System.Drawing.Size(138, 74);
@@ -849,23 +849,23 @@
             this.TabPageTCPServer_Gbx_NetFunc.TabStop = false;
             this.TabPageTCPServer_Gbx_NetFunc.Text = "功能";
             // 
-            // TabPageTCPServer_Rad_NetSendClear
+            // TabPageTCPServer_Btn_NetSendClear
             // 
-            this.TabPageTCPServer_Rad_NetSendClear.Location = new System.Drawing.Point(6, 45);
-            this.TabPageTCPServer_Rad_NetSendClear.Name = "TabPageTCPServer_Rad_NetSendClear";
-            this.TabPageTCPServer_Rad_NetSendClear.Size = new System.Drawing.Size(126, 23);
-            this.TabPageTCPServer_Rad_NetSendClear.TabIndex = 2;
-            this.TabPageTCPServer_Rad_NetSendClear.Text = "清发送区";
-            this.TabPageTCPServer_Rad_NetSendClear.UseVisualStyleBackColor = true;
+            this.TabPageTCPServer_Btn_NetSendClear.Location = new System.Drawing.Point(6, 45);
+            this.TabPageTCPServer_Btn_NetSendClear.Name = "TabPageTCPServer_Btn_NetSendClear";
+            this.TabPageTCPServer_Btn_NetSendClear.Size = new System.Drawing.Size(126, 23);
+            this.TabPageTCPServer_Btn_NetSendClear.TabIndex = 2;
+            this.TabPageTCPServer_Btn_NetSendClear.Text = "清发送区";
+            this.TabPageTCPServer_Btn_NetSendClear.UseVisualStyleBackColor = true;
             // 
-            // TabPageTCPServer_Rad_NetRecvClear
+            // TabPageTCPServer_Btn_NetRecvClear
             // 
-            this.TabPageTCPServer_Rad_NetRecvClear.Location = new System.Drawing.Point(6, 16);
-            this.TabPageTCPServer_Rad_NetRecvClear.Name = "TabPageTCPServer_Rad_NetRecvClear";
-            this.TabPageTCPServer_Rad_NetRecvClear.Size = new System.Drawing.Size(126, 23);
-            this.TabPageTCPServer_Rad_NetRecvClear.TabIndex = 1;
-            this.TabPageTCPServer_Rad_NetRecvClear.Text = "清消息区";
-            this.TabPageTCPServer_Rad_NetRecvClear.UseVisualStyleBackColor = true;
+            this.TabPageTCPServer_Btn_NetRecvClear.Location = new System.Drawing.Point(6, 16);
+            this.TabPageTCPServer_Btn_NetRecvClear.Name = "TabPageTCPServer_Btn_NetRecvClear";
+            this.TabPageTCPServer_Btn_NetRecvClear.Size = new System.Drawing.Size(126, 23);
+            this.TabPageTCPServer_Btn_NetRecvClear.TabIndex = 1;
+            this.TabPageTCPServer_Btn_NetRecvClear.Text = "清消息区";
+            this.TabPageTCPServer_Btn_NetRecvClear.UseVisualStyleBackColor = true;
             // 
             // TabPageTCPServer_Gbx_NetSend
             // 
@@ -935,7 +935,7 @@
             // 
             // TabPageTCPServer_Gbx_NetConfig
             // 
-            this.TabPageTCPServer_Gbx_NetConfig.Controls.Add(this.TabPageTCPServer_Lab_NetListen);
+            this.TabPageTCPServer_Gbx_NetConfig.Controls.Add(this.TabPageTCPServer_Btn_NetListen);
             this.TabPageTCPServer_Gbx_NetConfig.Controls.Add(this.TabPageTCPServer_Tbx_NetServerMaxListen);
             this.TabPageTCPServer_Gbx_NetConfig.Controls.Add(this.TabPageTCPServer_Lab_NetServerMaxListen);
             this.TabPageTCPServer_Gbx_NetConfig.Controls.Add(this.TabPageTCPServer_Tbx_NetLocalHostPort);
@@ -949,14 +949,14 @@
             this.TabPageTCPServer_Gbx_NetConfig.TabStop = false;
             this.TabPageTCPServer_Gbx_NetConfig.Text = "网络配置";
             // 
-            // TabPageTCPServer_Lab_NetListen
+            // TabPageTCPServer_Btn_NetListen
             // 
-            this.TabPageTCPServer_Lab_NetListen.Location = new System.Drawing.Point(6, 171);
-            this.TabPageTCPServer_Lab_NetListen.Name = "TabPageTCPServer_Lab_NetListen";
-            this.TabPageTCPServer_Lab_NetListen.Size = new System.Drawing.Size(138, 23);
-            this.TabPageTCPServer_Lab_NetListen.TabIndex = 1;
-            this.TabPageTCPServer_Lab_NetListen.Text = "监听";
-            this.TabPageTCPServer_Lab_NetListen.UseVisualStyleBackColor = true;
+            this.TabPageTCPServer_Btn_NetListen.Location = new System.Drawing.Point(6, 171);
+            this.TabPageTCPServer_Btn_NetListen.Name = "TabPageTCPServer_Btn_NetListen";
+            this.TabPageTCPServer_Btn_NetListen.Size = new System.Drawing.Size(138, 23);
+            this.TabPageTCPServer_Btn_NetListen.TabIndex = 1;
+            this.TabPageTCPServer_Btn_NetListen.Text = "监听";
+            this.TabPageTCPServer_Btn_NetListen.UseVisualStyleBackColor = true;
             // 
             // TabPageTCPServer_Tbx_NetServerMaxListen
             // 
@@ -1011,10 +1011,10 @@
             // 
             // TabPageTCPClient
             // 
-            this.TabPageTCPClient.Controls.Add(this.groupBox7);
-            this.TabPageTCPClient.Controls.Add(this.groupBox6);
-            this.TabPageTCPClient.Controls.Add(this.groupBox2);
-            this.TabPageTCPClient.Controls.Add(this.groupBox1);
+            this.TabPageTCPClient.Controls.Add(this.TabPageTCPClient_Gbx_Send);
+            this.TabPageTCPClient.Controls.Add(this.TabPageTCPClient_Gbx_Recv);
+            this.TabPageTCPClient.Controls.Add(this.TabPageTCPClient_Gbx_NetFunction);
+            this.TabPageTCPClient.Controls.Add(this.TabPageTCPClient_Gbx_NetConfig);
             this.TabPageTCPClient.Location = new System.Drawing.Point(4, 22);
             this.TabPageTCPClient.Name = "TabPageTCPClient";
             this.TabPageTCPClient.Padding = new System.Windows.Forms.Padding(3);
@@ -1023,223 +1023,223 @@
             this.TabPageTCPClient.Text = "TCP客户端";
             this.TabPageTCPClient.UseVisualStyleBackColor = true;
             // 
-            // groupBox7
+            // TabPageTCPClient_Gbx_Send
             // 
-            this.groupBox7.Controls.Add(this.button4);
-            this.groupBox7.Controls.Add(this.textBox4);
-            this.groupBox7.Location = new System.Drawing.Point(162, 302);
-            this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(724, 285);
-            this.groupBox7.TabIndex = 7;
-            this.groupBox7.TabStop = false;
-            this.groupBox7.Text = "发送区";
+            this.TabPageTCPClient_Gbx_Send.Controls.Add(this.TabPageTCPClient_Btn_Send);
+            this.TabPageTCPClient_Gbx_Send.Controls.Add(this.TabPageTCPClient_Tbx_Send);
+            this.TabPageTCPClient_Gbx_Send.Location = new System.Drawing.Point(162, 302);
+            this.TabPageTCPClient_Gbx_Send.Name = "TabPageTCPClient_Gbx_Send";
+            this.TabPageTCPClient_Gbx_Send.Size = new System.Drawing.Size(724, 285);
+            this.TabPageTCPClient_Gbx_Send.TabIndex = 7;
+            this.TabPageTCPClient_Gbx_Send.TabStop = false;
+            this.TabPageTCPClient_Gbx_Send.Text = "发送区";
             // 
-            // button4
+            // TabPageTCPClient_Btn_Send
             // 
-            this.button4.Enabled = false;
-            this.button4.Location = new System.Drawing.Point(612, 256);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(106, 23);
-            this.button4.TabIndex = 2;
-            this.button4.Text = "发送";
-            this.button4.UseVisualStyleBackColor = true;
+            this.TabPageTCPClient_Btn_Send.Enabled = false;
+            this.TabPageTCPClient_Btn_Send.Location = new System.Drawing.Point(612, 256);
+            this.TabPageTCPClient_Btn_Send.Name = "TabPageTCPClient_Btn_Send";
+            this.TabPageTCPClient_Btn_Send.Size = new System.Drawing.Size(106, 23);
+            this.TabPageTCPClient_Btn_Send.TabIndex = 2;
+            this.TabPageTCPClient_Btn_Send.Text = "发送";
+            this.TabPageTCPClient_Btn_Send.UseVisualStyleBackColor = true;
             // 
-            // textBox4
+            // TabPageTCPClient_Tbx_Send
             // 
-            this.textBox4.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox4.Location = new System.Drawing.Point(6, 20);
-            this.textBox4.Multiline = true;
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(712, 230);
-            this.textBox4.TabIndex = 1;
+            this.TabPageTCPClient_Tbx_Send.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TabPageTCPClient_Tbx_Send.Location = new System.Drawing.Point(6, 20);
+            this.TabPageTCPClient_Tbx_Send.Multiline = true;
+            this.TabPageTCPClient_Tbx_Send.Name = "TabPageTCPClient_Tbx_Send";
+            this.TabPageTCPClient_Tbx_Send.Size = new System.Drawing.Size(712, 230);
+            this.TabPageTCPClient_Tbx_Send.TabIndex = 1;
             // 
-            // groupBox6
+            // TabPageTCPClient_Gbx_Recv
             // 
-            this.groupBox6.Controls.Add(this.textBox1);
-            this.groupBox6.Location = new System.Drawing.Point(162, 6);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(724, 290);
-            this.groupBox6.TabIndex = 6;
-            this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "消息区";
+            this.TabPageTCPClient_Gbx_Recv.Controls.Add(this.TabPageTCPClient_Tbx_Recv);
+            this.TabPageTCPClient_Gbx_Recv.Location = new System.Drawing.Point(162, 6);
+            this.TabPageTCPClient_Gbx_Recv.Name = "TabPageTCPClient_Gbx_Recv";
+            this.TabPageTCPClient_Gbx_Recv.Size = new System.Drawing.Size(724, 290);
+            this.TabPageTCPClient_Gbx_Recv.TabIndex = 6;
+            this.TabPageTCPClient_Gbx_Recv.TabStop = false;
+            this.TabPageTCPClient_Gbx_Recv.Text = "消息区";
             // 
-            // textBox1
+            // TabPageTCPClient_Tbx_Recv
             // 
-            this.textBox1.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(6, 20);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(712, 264);
-            this.textBox1.TabIndex = 1;
+            this.TabPageTCPClient_Tbx_Recv.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TabPageTCPClient_Tbx_Recv.Location = new System.Drawing.Point(6, 20);
+            this.TabPageTCPClient_Tbx_Recv.Multiline = true;
+            this.TabPageTCPClient_Tbx_Recv.Name = "TabPageTCPClient_Tbx_Recv";
+            this.TabPageTCPClient_Tbx_Recv.Size = new System.Drawing.Size(712, 264);
+            this.TabPageTCPClient_Tbx_Recv.TabIndex = 1;
             // 
-            // groupBox2
+            // TabPageTCPClient_Gbx_NetFunction
             // 
-            this.groupBox2.Controls.Add(this.groupBox3);
-            this.groupBox2.Controls.Add(this.groupBox4);
-            this.groupBox2.Controls.Add(this.groupBox5);
-            this.groupBox2.Location = new System.Drawing.Point(6, 159);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(150, 240);
-            this.groupBox2.TabIndex = 4;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "网络辅助";
+            this.TabPageTCPClient_Gbx_NetFunction.Controls.Add(this.TabPageTCPClient_Gbx_NetFunc);
+            this.TabPageTCPClient_Gbx_NetFunction.Controls.Add(this.TabPageTCPClient_Gbx_NetSend);
+            this.TabPageTCPClient_Gbx_NetFunction.Controls.Add(this.TabPageTCPClient_Gbx_NetRecv);
+            this.TabPageTCPClient_Gbx_NetFunction.Location = new System.Drawing.Point(6, 159);
+            this.TabPageTCPClient_Gbx_NetFunction.Name = "TabPageTCPClient_Gbx_NetFunction";
+            this.TabPageTCPClient_Gbx_NetFunction.Size = new System.Drawing.Size(150, 240);
+            this.TabPageTCPClient_Gbx_NetFunction.TabIndex = 4;
+            this.TabPageTCPClient_Gbx_NetFunction.TabStop = false;
+            this.TabPageTCPClient_Gbx_NetFunction.Text = "网络辅助";
             // 
-            // groupBox3
+            // TabPageTCPClient_Gbx_NetFunc
             // 
-            this.groupBox3.Controls.Add(this.button2);
-            this.groupBox3.Controls.Add(this.button3);
-            this.groupBox3.Location = new System.Drawing.Point(6, 160);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(138, 74);
-            this.groupBox3.TabIndex = 1;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "功能";
+            this.TabPageTCPClient_Gbx_NetFunc.Controls.Add(this.TabPageTCPClient_Btn_NetSendClear);
+            this.TabPageTCPClient_Gbx_NetFunc.Controls.Add(this.TabPageTCPClient_Btn_NetRecvClear);
+            this.TabPageTCPClient_Gbx_NetFunc.Location = new System.Drawing.Point(6, 160);
+            this.TabPageTCPClient_Gbx_NetFunc.Name = "TabPageTCPClient_Gbx_NetFunc";
+            this.TabPageTCPClient_Gbx_NetFunc.Size = new System.Drawing.Size(138, 74);
+            this.TabPageTCPClient_Gbx_NetFunc.TabIndex = 1;
+            this.TabPageTCPClient_Gbx_NetFunc.TabStop = false;
+            this.TabPageTCPClient_Gbx_NetFunc.Text = "功能";
             // 
-            // button2
+            // TabPageTCPClient_Btn_NetSendClear
             // 
-            this.button2.Location = new System.Drawing.Point(6, 45);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(126, 23);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "清发送区";
-            this.button2.UseVisualStyleBackColor = true;
+            this.TabPageTCPClient_Btn_NetSendClear.Location = new System.Drawing.Point(6, 45);
+            this.TabPageTCPClient_Btn_NetSendClear.Name = "TabPageTCPClient_Btn_NetSendClear";
+            this.TabPageTCPClient_Btn_NetSendClear.Size = new System.Drawing.Size(126, 23);
+            this.TabPageTCPClient_Btn_NetSendClear.TabIndex = 2;
+            this.TabPageTCPClient_Btn_NetSendClear.Text = "清发送区";
+            this.TabPageTCPClient_Btn_NetSendClear.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // TabPageTCPClient_Btn_NetRecvClear
             // 
-            this.button3.Location = new System.Drawing.Point(6, 16);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(126, 23);
-            this.button3.TabIndex = 1;
-            this.button3.Text = "清消息区";
-            this.button3.UseVisualStyleBackColor = true;
+            this.TabPageTCPClient_Btn_NetRecvClear.Location = new System.Drawing.Point(6, 16);
+            this.TabPageTCPClient_Btn_NetRecvClear.Name = "TabPageTCPClient_Btn_NetRecvClear";
+            this.TabPageTCPClient_Btn_NetRecvClear.Size = new System.Drawing.Size(126, 23);
+            this.TabPageTCPClient_Btn_NetRecvClear.TabIndex = 1;
+            this.TabPageTCPClient_Btn_NetRecvClear.Text = "清消息区";
+            this.TabPageTCPClient_Btn_NetRecvClear.UseVisualStyleBackColor = true;
             // 
-            // groupBox4
+            // TabPageTCPClient_Gbx_NetSend
             // 
-            this.groupBox4.Controls.Add(this.radioButton1);
-            this.groupBox4.Controls.Add(this.radioButton2);
-            this.groupBox4.Location = new System.Drawing.Point(6, 90);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(138, 64);
-            this.groupBox4.TabIndex = 1;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "发码区";
+            this.TabPageTCPClient_Gbx_NetSend.Controls.Add(this.TabPageTCPClient_Rad_NetSendHex);
+            this.TabPageTCPClient_Gbx_NetSend.Controls.Add(this.TabPageTCPClient_Rad_NetSendString);
+            this.TabPageTCPClient_Gbx_NetSend.Location = new System.Drawing.Point(6, 90);
+            this.TabPageTCPClient_Gbx_NetSend.Name = "TabPageTCPClient_Gbx_NetSend";
+            this.TabPageTCPClient_Gbx_NetSend.Size = new System.Drawing.Size(138, 64);
+            this.TabPageTCPClient_Gbx_NetSend.TabIndex = 1;
+            this.TabPageTCPClient_Gbx_NetSend.TabStop = false;
+            this.TabPageTCPClient_Gbx_NetSend.Text = "发码区";
             // 
-            // radioButton1
+            // TabPageTCPClient_Rad_NetSendHex
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(6, 42);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(95, 16);
-            this.radioButton1.TabIndex = 2;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "十六进制发送";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.TabPageTCPClient_Rad_NetSendHex.AutoSize = true;
+            this.TabPageTCPClient_Rad_NetSendHex.Location = new System.Drawing.Point(6, 42);
+            this.TabPageTCPClient_Rad_NetSendHex.Name = "TabPageTCPClient_Rad_NetSendHex";
+            this.TabPageTCPClient_Rad_NetSendHex.Size = new System.Drawing.Size(95, 16);
+            this.TabPageTCPClient_Rad_NetSendHex.TabIndex = 2;
+            this.TabPageTCPClient_Rad_NetSendHex.TabStop = true;
+            this.TabPageTCPClient_Rad_NetSendHex.Text = "十六进制发送";
+            this.TabPageTCPClient_Rad_NetSendHex.UseVisualStyleBackColor = true;
             // 
-            // radioButton2
+            // TabPageTCPClient_Rad_NetSendString
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(6, 20);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(83, 16);
-            this.radioButton2.TabIndex = 1;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "字符串发送";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.TabPageTCPClient_Rad_NetSendString.AutoSize = true;
+            this.TabPageTCPClient_Rad_NetSendString.Location = new System.Drawing.Point(6, 20);
+            this.TabPageTCPClient_Rad_NetSendString.Name = "TabPageTCPClient_Rad_NetSendString";
+            this.TabPageTCPClient_Rad_NetSendString.Size = new System.Drawing.Size(83, 16);
+            this.TabPageTCPClient_Rad_NetSendString.TabIndex = 1;
+            this.TabPageTCPClient_Rad_NetSendString.TabStop = true;
+            this.TabPageTCPClient_Rad_NetSendString.Text = "字符串发送";
+            this.TabPageTCPClient_Rad_NetSendString.UseVisualStyleBackColor = true;
             // 
-            // groupBox5
+            // TabPageTCPClient_Gbx_NetRecv
             // 
-            this.groupBox5.Controls.Add(this.radioButton3);
-            this.groupBox5.Controls.Add(this.radioButton4);
-            this.groupBox5.Location = new System.Drawing.Point(6, 20);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(138, 64);
-            this.groupBox5.TabIndex = 1;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "消息区";
+            this.TabPageTCPClient_Gbx_NetRecv.Controls.Add(this.TabPageTCPClient_Rad_NetRecvHex);
+            this.TabPageTCPClient_Gbx_NetRecv.Controls.Add(this.TabPageTCPClient_Rad_NetRecvString);
+            this.TabPageTCPClient_Gbx_NetRecv.Location = new System.Drawing.Point(6, 20);
+            this.TabPageTCPClient_Gbx_NetRecv.Name = "TabPageTCPClient_Gbx_NetRecv";
+            this.TabPageTCPClient_Gbx_NetRecv.Size = new System.Drawing.Size(138, 64);
+            this.TabPageTCPClient_Gbx_NetRecv.TabIndex = 1;
+            this.TabPageTCPClient_Gbx_NetRecv.TabStop = false;
+            this.TabPageTCPClient_Gbx_NetRecv.Text = "消息区";
             // 
-            // radioButton3
+            // TabPageTCPClient_Rad_NetRecvHex
             // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(6, 42);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(95, 16);
-            this.radioButton3.TabIndex = 1;
-            this.radioButton3.TabStop = true;
-            this.radioButton3.Text = "十六进制显示";
-            this.radioButton3.UseVisualStyleBackColor = true;
+            this.TabPageTCPClient_Rad_NetRecvHex.AutoSize = true;
+            this.TabPageTCPClient_Rad_NetRecvHex.Location = new System.Drawing.Point(6, 42);
+            this.TabPageTCPClient_Rad_NetRecvHex.Name = "TabPageTCPClient_Rad_NetRecvHex";
+            this.TabPageTCPClient_Rad_NetRecvHex.Size = new System.Drawing.Size(95, 16);
+            this.TabPageTCPClient_Rad_NetRecvHex.TabIndex = 1;
+            this.TabPageTCPClient_Rad_NetRecvHex.TabStop = true;
+            this.TabPageTCPClient_Rad_NetRecvHex.Text = "十六进制显示";
+            this.TabPageTCPClient_Rad_NetRecvHex.UseVisualStyleBackColor = true;
             // 
-            // radioButton4
+            // TabPageTCPClient_Rad_NetRecvString
             // 
-            this.radioButton4.AutoSize = true;
-            this.radioButton4.Location = new System.Drawing.Point(6, 20);
-            this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(83, 16);
-            this.radioButton4.TabIndex = 0;
-            this.radioButton4.TabStop = true;
-            this.radioButton4.Text = "字符串显示";
-            this.radioButton4.UseVisualStyleBackColor = true;
+            this.TabPageTCPClient_Rad_NetRecvString.AutoSize = true;
+            this.TabPageTCPClient_Rad_NetRecvString.Location = new System.Drawing.Point(6, 20);
+            this.TabPageTCPClient_Rad_NetRecvString.Name = "TabPageTCPClient_Rad_NetRecvString";
+            this.TabPageTCPClient_Rad_NetRecvString.Size = new System.Drawing.Size(83, 16);
+            this.TabPageTCPClient_Rad_NetRecvString.TabIndex = 0;
+            this.TabPageTCPClient_Rad_NetRecvString.TabStop = true;
+            this.TabPageTCPClient_Rad_NetRecvString.Text = "字符串显示";
+            this.TabPageTCPClient_Rad_NetRecvString.UseVisualStyleBackColor = true;
             // 
-            // groupBox1
+            // TabPageTCPClient_Gbx_NetConfig
             // 
-            this.groupBox1.Controls.Add(this.button1);
-            this.groupBox1.Controls.Add(this.textBox2);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.textBox3);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Location = new System.Drawing.Point(6, 6);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(150, 147);
-            this.groupBox1.TabIndex = 1;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "网络配置";
+            this.TabPageTCPClient_Gbx_NetConfig.Controls.Add(this.TabPageTCPServer_Btn_NetConnect);
+            this.TabPageTCPClient_Gbx_NetConfig.Controls.Add(this.TabPageTCPClient_Tbx_NetLocalHostPort);
+            this.TabPageTCPClient_Gbx_NetConfig.Controls.Add(this.TabPageTCPClient_Lab_NetLocalHostPort);
+            this.TabPageTCPClient_Gbx_NetConfig.Controls.Add(this.TabPageTCPClient_Tbx_NetLocalHostIP);
+            this.TabPageTCPClient_Gbx_NetConfig.Controls.Add(this.TabPageTCPClient_Lab_NetLocalHostIP);
+            this.TabPageTCPClient_Gbx_NetConfig.Location = new System.Drawing.Point(6, 6);
+            this.TabPageTCPClient_Gbx_NetConfig.Name = "TabPageTCPClient_Gbx_NetConfig";
+            this.TabPageTCPClient_Gbx_NetConfig.Size = new System.Drawing.Size(150, 147);
+            this.TabPageTCPClient_Gbx_NetConfig.TabIndex = 1;
+            this.TabPageTCPClient_Gbx_NetConfig.TabStop = false;
+            this.TabPageTCPClient_Gbx_NetConfig.Text = "网络配置";
             // 
-            // button1
+            // TabPageTCPServer_Btn_NetConnect
             // 
-            this.button1.Location = new System.Drawing.Point(6, 118);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(138, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "连接";
-            this.button1.UseVisualStyleBackColor = true;
+            this.TabPageTCPServer_Btn_NetConnect.Location = new System.Drawing.Point(6, 118);
+            this.TabPageTCPServer_Btn_NetConnect.Name = "TabPageTCPServer_Btn_NetConnect";
+            this.TabPageTCPServer_Btn_NetConnect.Size = new System.Drawing.Size(138, 23);
+            this.TabPageTCPServer_Btn_NetConnect.TabIndex = 1;
+            this.TabPageTCPServer_Btn_NetConnect.Text = "连接";
+            this.TabPageTCPServer_Btn_NetConnect.UseVisualStyleBackColor = true;
             // 
-            // textBox2
+            // TabPageTCPClient_Tbx_NetLocalHostPort
             // 
-            this.textBox2.Location = new System.Drawing.Point(6, 81);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(71, 21);
-            this.textBox2.TabIndex = 4;
+            this.TabPageTCPClient_Tbx_NetLocalHostPort.Location = new System.Drawing.Point(6, 81);
+            this.TabPageTCPClient_Tbx_NetLocalHostPort.Name = "TabPageTCPClient_Tbx_NetLocalHostPort";
+            this.TabPageTCPClient_Tbx_NetLocalHostPort.Size = new System.Drawing.Size(71, 21);
+            this.TabPageTCPClient_Tbx_NetLocalHostPort.TabIndex = 4;
             // 
-            // label2
+            // TabPageTCPClient_Lab_NetLocalHostPort
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 66);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(47, 12);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "端口号:";
+            this.TabPageTCPClient_Lab_NetLocalHostPort.AutoSize = true;
+            this.TabPageTCPClient_Lab_NetLocalHostPort.Location = new System.Drawing.Point(6, 66);
+            this.TabPageTCPClient_Lab_NetLocalHostPort.Name = "TabPageTCPClient_Lab_NetLocalHostPort";
+            this.TabPageTCPClient_Lab_NetLocalHostPort.Size = new System.Drawing.Size(47, 12);
+            this.TabPageTCPClient_Lab_NetLocalHostPort.TabIndex = 3;
+            this.TabPageTCPClient_Lab_NetLocalHostPort.Text = "端口号:";
             // 
-            // textBox3
+            // TabPageTCPClient_Tbx_NetLocalHostIP
             // 
-            this.textBox3.Location = new System.Drawing.Point(6, 32);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(138, 21);
-            this.textBox3.TabIndex = 2;
+            this.TabPageTCPClient_Tbx_NetLocalHostIP.Location = new System.Drawing.Point(6, 32);
+            this.TabPageTCPClient_Tbx_NetLocalHostIP.Name = "TabPageTCPClient_Tbx_NetLocalHostIP";
+            this.TabPageTCPClient_Tbx_NetLocalHostIP.Size = new System.Drawing.Size(138, 21);
+            this.TabPageTCPClient_Tbx_NetLocalHostIP.TabIndex = 2;
             // 
-            // label3
+            // TabPageTCPClient_Lab_NetLocalHostIP
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 17);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(83, 12);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "服务器IP地址:";
+            this.TabPageTCPClient_Lab_NetLocalHostIP.AutoSize = true;
+            this.TabPageTCPClient_Lab_NetLocalHostIP.Location = new System.Drawing.Point(6, 17);
+            this.TabPageTCPClient_Lab_NetLocalHostIP.Name = "TabPageTCPClient_Lab_NetLocalHostIP";
+            this.TabPageTCPClient_Lab_NetLocalHostIP.Size = new System.Drawing.Size(83, 12);
+            this.TabPageTCPClient_Lab_NetLocalHostIP.TabIndex = 1;
+            this.TabPageTCPClient_Lab_NetLocalHostIP.Text = "服务器IP地址:";
             // 
             // TabPageUDP
             // 
-            this.TabPageUDP.Controls.Add(this.groupBox13);
-            this.TabPageUDP.Controls.Add(this.groupBox14);
-            this.TabPageUDP.Controls.Add(this.groupBox9);
-            this.TabPageUDP.Controls.Add(this.groupBox8);
+            this.TabPageUDP.Controls.Add(this.TabPageUDP_Gbx_Send);
+            this.TabPageUDP.Controls.Add(this.TabPageUDP_Gbx_Recv);
+            this.TabPageUDP.Controls.Add(this.TabPageUDP_Gbx_NetFunction);
+            this.TabPageUDP.Controls.Add(this.TabPageUDP_Gbx_NetConfig);
             this.TabPageUDP.Location = new System.Drawing.Point(4, 22);
             this.TabPageUDP.Name = "TabPageUDP";
             this.TabPageUDP.Padding = new System.Windows.Forms.Padding(3);
@@ -1248,252 +1248,252 @@
             this.TabPageUDP.Text = "UDP";
             this.TabPageUDP.UseVisualStyleBackColor = true;
             // 
-            // groupBox13
+            // TabPageUDP_Gbx_Send
             // 
-            this.groupBox13.Controls.Add(this.textBox10);
-            this.groupBox13.Controls.Add(this.label6);
-            this.groupBox13.Controls.Add(this.textBox9);
-            this.groupBox13.Controls.Add(this.label5);
-            this.groupBox13.Controls.Add(this.button8);
-            this.groupBox13.Controls.Add(this.textBox7);
-            this.groupBox13.Location = new System.Drawing.Point(162, 302);
-            this.groupBox13.Name = "groupBox13";
-            this.groupBox13.Size = new System.Drawing.Size(724, 285);
-            this.groupBox13.TabIndex = 8;
-            this.groupBox13.TabStop = false;
-            this.groupBox13.Text = "发送区";
+            this.TabPageUDP_Gbx_Send.Controls.Add(this.TabPageUDP_Tbx_TargetPort);
+            this.TabPageUDP_Gbx_Send.Controls.Add(this.TabPageUDP_Lab_TargetPort);
+            this.TabPageUDP_Gbx_Send.Controls.Add(this.TabPageUDP_Tbx_TargetIP);
+            this.TabPageUDP_Gbx_Send.Controls.Add(this.TabPageUDP_Lab_TargetIP);
+            this.TabPageUDP_Gbx_Send.Controls.Add(this.TabPageUDP_Btn_Send);
+            this.TabPageUDP_Gbx_Send.Controls.Add(this.TabPageUDP_Tbx_Send);
+            this.TabPageUDP_Gbx_Send.Location = new System.Drawing.Point(162, 302);
+            this.TabPageUDP_Gbx_Send.Name = "TabPageUDP_Gbx_Send";
+            this.TabPageUDP_Gbx_Send.Size = new System.Drawing.Size(724, 285);
+            this.TabPageUDP_Gbx_Send.TabIndex = 8;
+            this.TabPageUDP_Gbx_Send.TabStop = false;
+            this.TabPageUDP_Gbx_Send.Text = "发送区";
             // 
-            // textBox10
+            // TabPageUDP_Tbx_TargetPort
             // 
-            this.textBox10.Location = new System.Drawing.Point(292, 258);
-            this.textBox10.Name = "textBox10";
-            this.textBox10.Size = new System.Drawing.Size(71, 21);
-            this.textBox10.TabIndex = 5;
+            this.TabPageUDP_Tbx_TargetPort.Location = new System.Drawing.Point(292, 258);
+            this.TabPageUDP_Tbx_TargetPort.Name = "TabPageUDP_Tbx_TargetPort";
+            this.TabPageUDP_Tbx_TargetPort.Size = new System.Drawing.Size(71, 21);
+            this.TabPageUDP_Tbx_TargetPort.TabIndex = 5;
             // 
-            // label6
+            // TabPageUDP_Lab_TargetPort
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(239, 261);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(47, 12);
-            this.label6.TabIndex = 6;
-            this.label6.Text = "端口号:";
+            this.TabPageUDP_Lab_TargetPort.AutoSize = true;
+            this.TabPageUDP_Lab_TargetPort.Location = new System.Drawing.Point(239, 261);
+            this.TabPageUDP_Lab_TargetPort.Name = "TabPageUDP_Lab_TargetPort";
+            this.TabPageUDP_Lab_TargetPort.Size = new System.Drawing.Size(47, 12);
+            this.TabPageUDP_Lab_TargetPort.TabIndex = 6;
+            this.TabPageUDP_Lab_TargetPort.Text = "端口号:";
             // 
-            // textBox9
+            // TabPageUDP_Tbx_TargetIP
             // 
-            this.textBox9.Location = new System.Drawing.Point(83, 258);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(138, 21);
-            this.textBox9.TabIndex = 5;
+            this.TabPageUDP_Tbx_TargetIP.Location = new System.Drawing.Point(83, 258);
+            this.TabPageUDP_Tbx_TargetIP.Name = "TabPageUDP_Tbx_TargetIP";
+            this.TabPageUDP_Tbx_TargetIP.Size = new System.Drawing.Size(138, 21);
+            this.TabPageUDP_Tbx_TargetIP.TabIndex = 5;
             // 
-            // label5
+            // TabPageUDP_Lab_TargetIP
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 261);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(71, 12);
-            this.label5.TabIndex = 3;
-            this.label5.Text = "目标IP地址:";
+            this.TabPageUDP_Lab_TargetIP.AutoSize = true;
+            this.TabPageUDP_Lab_TargetIP.Location = new System.Drawing.Point(6, 261);
+            this.TabPageUDP_Lab_TargetIP.Name = "TabPageUDP_Lab_TargetIP";
+            this.TabPageUDP_Lab_TargetIP.Size = new System.Drawing.Size(71, 12);
+            this.TabPageUDP_Lab_TargetIP.TabIndex = 3;
+            this.TabPageUDP_Lab_TargetIP.Text = "目标IP地址:";
             // 
-            // button8
+            // TabPageUDP_Btn_Send
             // 
-            this.button8.Enabled = false;
-            this.button8.Location = new System.Drawing.Point(612, 256);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(106, 23);
-            this.button8.TabIndex = 2;
-            this.button8.Text = "发送";
-            this.button8.UseVisualStyleBackColor = true;
+            this.TabPageUDP_Btn_Send.Enabled = false;
+            this.TabPageUDP_Btn_Send.Location = new System.Drawing.Point(612, 256);
+            this.TabPageUDP_Btn_Send.Name = "TabPageUDP_Btn_Send";
+            this.TabPageUDP_Btn_Send.Size = new System.Drawing.Size(106, 23);
+            this.TabPageUDP_Btn_Send.TabIndex = 2;
+            this.TabPageUDP_Btn_Send.Text = "发送";
+            this.TabPageUDP_Btn_Send.UseVisualStyleBackColor = true;
             // 
-            // textBox7
+            // TabPageUDP_Tbx_Send
             // 
-            this.textBox7.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox7.Location = new System.Drawing.Point(6, 20);
-            this.textBox7.Multiline = true;
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(712, 230);
-            this.textBox7.TabIndex = 1;
+            this.TabPageUDP_Tbx_Send.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TabPageUDP_Tbx_Send.Location = new System.Drawing.Point(6, 20);
+            this.TabPageUDP_Tbx_Send.Multiline = true;
+            this.TabPageUDP_Tbx_Send.Name = "TabPageUDP_Tbx_Send";
+            this.TabPageUDP_Tbx_Send.Size = new System.Drawing.Size(712, 230);
+            this.TabPageUDP_Tbx_Send.TabIndex = 1;
             // 
-            // groupBox14
+            // TabPageUDP_Gbx_Recv
             // 
-            this.groupBox14.Controls.Add(this.textBox8);
-            this.groupBox14.Location = new System.Drawing.Point(162, 6);
-            this.groupBox14.Name = "groupBox14";
-            this.groupBox14.Size = new System.Drawing.Size(724, 290);
-            this.groupBox14.TabIndex = 7;
-            this.groupBox14.TabStop = false;
-            this.groupBox14.Text = "消息区";
+            this.TabPageUDP_Gbx_Recv.Controls.Add(this.TabPageUDP_Tbx_Recv);
+            this.TabPageUDP_Gbx_Recv.Location = new System.Drawing.Point(162, 6);
+            this.TabPageUDP_Gbx_Recv.Name = "TabPageUDP_Gbx_Recv";
+            this.TabPageUDP_Gbx_Recv.Size = new System.Drawing.Size(724, 290);
+            this.TabPageUDP_Gbx_Recv.TabIndex = 7;
+            this.TabPageUDP_Gbx_Recv.TabStop = false;
+            this.TabPageUDP_Gbx_Recv.Text = "消息区";
             // 
-            // textBox8
+            // TabPageUDP_Tbx_Recv
             // 
-            this.textBox8.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox8.Location = new System.Drawing.Point(6, 20);
-            this.textBox8.Multiline = true;
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(712, 264);
-            this.textBox8.TabIndex = 1;
+            this.TabPageUDP_Tbx_Recv.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TabPageUDP_Tbx_Recv.Location = new System.Drawing.Point(6, 20);
+            this.TabPageUDP_Tbx_Recv.Multiline = true;
+            this.TabPageUDP_Tbx_Recv.Name = "TabPageUDP_Tbx_Recv";
+            this.TabPageUDP_Tbx_Recv.Size = new System.Drawing.Size(712, 264);
+            this.TabPageUDP_Tbx_Recv.TabIndex = 1;
             // 
-            // groupBox9
+            // TabPageUDP_Gbx_NetFunction
             // 
-            this.groupBox9.Controls.Add(this.groupBox10);
-            this.groupBox9.Controls.Add(this.groupBox11);
-            this.groupBox9.Controls.Add(this.groupBox12);
-            this.groupBox9.Location = new System.Drawing.Point(6, 159);
-            this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(150, 240);
-            this.groupBox9.TabIndex = 5;
-            this.groupBox9.TabStop = false;
-            this.groupBox9.Text = "网络辅助";
+            this.TabPageUDP_Gbx_NetFunction.Controls.Add(this.TabPageUDP_Gbx_NetFunc);
+            this.TabPageUDP_Gbx_NetFunction.Controls.Add(this.TabPageUDP_Gbx_NetSend);
+            this.TabPageUDP_Gbx_NetFunction.Controls.Add(this.TabPageUDP_Gbx_NetRecv);
+            this.TabPageUDP_Gbx_NetFunction.Location = new System.Drawing.Point(6, 159);
+            this.TabPageUDP_Gbx_NetFunction.Name = "TabPageUDP_Gbx_NetFunction";
+            this.TabPageUDP_Gbx_NetFunction.Size = new System.Drawing.Size(150, 240);
+            this.TabPageUDP_Gbx_NetFunction.TabIndex = 5;
+            this.TabPageUDP_Gbx_NetFunction.TabStop = false;
+            this.TabPageUDP_Gbx_NetFunction.Text = "网络辅助";
             // 
-            // groupBox10
+            // TabPageUDP_Gbx_NetFunc
             // 
-            this.groupBox10.Controls.Add(this.button6);
-            this.groupBox10.Controls.Add(this.button7);
-            this.groupBox10.Location = new System.Drawing.Point(6, 160);
-            this.groupBox10.Name = "groupBox10";
-            this.groupBox10.Size = new System.Drawing.Size(138, 74);
-            this.groupBox10.TabIndex = 1;
-            this.groupBox10.TabStop = false;
-            this.groupBox10.Text = "功能";
+            this.TabPageUDP_Gbx_NetFunc.Controls.Add(this.TabPageUDP_Btn_NetSendClear);
+            this.TabPageUDP_Gbx_NetFunc.Controls.Add(this.TabPageUDP_Btn_NetRecvClear);
+            this.TabPageUDP_Gbx_NetFunc.Location = new System.Drawing.Point(6, 160);
+            this.TabPageUDP_Gbx_NetFunc.Name = "TabPageUDP_Gbx_NetFunc";
+            this.TabPageUDP_Gbx_NetFunc.Size = new System.Drawing.Size(138, 74);
+            this.TabPageUDP_Gbx_NetFunc.TabIndex = 1;
+            this.TabPageUDP_Gbx_NetFunc.TabStop = false;
+            this.TabPageUDP_Gbx_NetFunc.Text = "功能";
             // 
-            // button6
+            // TabPageUDP_Btn_NetSendClear
             // 
-            this.button6.Location = new System.Drawing.Point(6, 45);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(126, 23);
-            this.button6.TabIndex = 2;
-            this.button6.Text = "清发送区";
-            this.button6.UseVisualStyleBackColor = true;
+            this.TabPageUDP_Btn_NetSendClear.Location = new System.Drawing.Point(6, 45);
+            this.TabPageUDP_Btn_NetSendClear.Name = "TabPageUDP_Btn_NetSendClear";
+            this.TabPageUDP_Btn_NetSendClear.Size = new System.Drawing.Size(126, 23);
+            this.TabPageUDP_Btn_NetSendClear.TabIndex = 2;
+            this.TabPageUDP_Btn_NetSendClear.Text = "清发送区";
+            this.TabPageUDP_Btn_NetSendClear.UseVisualStyleBackColor = true;
             // 
-            // button7
+            // TabPageUDP_Btn_NetRecvClear
             // 
-            this.button7.Location = new System.Drawing.Point(6, 16);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(126, 23);
-            this.button7.TabIndex = 1;
-            this.button7.Text = "清消息区";
-            this.button7.UseVisualStyleBackColor = true;
+            this.TabPageUDP_Btn_NetRecvClear.Location = new System.Drawing.Point(6, 16);
+            this.TabPageUDP_Btn_NetRecvClear.Name = "TabPageUDP_Btn_NetRecvClear";
+            this.TabPageUDP_Btn_NetRecvClear.Size = new System.Drawing.Size(126, 23);
+            this.TabPageUDP_Btn_NetRecvClear.TabIndex = 1;
+            this.TabPageUDP_Btn_NetRecvClear.Text = "清消息区";
+            this.TabPageUDP_Btn_NetRecvClear.UseVisualStyleBackColor = true;
             // 
-            // groupBox11
+            // TabPageUDP_Gbx_NetSend
             // 
-            this.groupBox11.Controls.Add(this.radioButton5);
-            this.groupBox11.Controls.Add(this.radioButton6);
-            this.groupBox11.Location = new System.Drawing.Point(6, 90);
-            this.groupBox11.Name = "groupBox11";
-            this.groupBox11.Size = new System.Drawing.Size(138, 64);
-            this.groupBox11.TabIndex = 1;
-            this.groupBox11.TabStop = false;
-            this.groupBox11.Text = "发码区";
+            this.TabPageUDP_Gbx_NetSend.Controls.Add(this.TabPageUDP_Rad_NetSendHex);
+            this.TabPageUDP_Gbx_NetSend.Controls.Add(this.TabPageUDP_Rad_NetSendString);
+            this.TabPageUDP_Gbx_NetSend.Location = new System.Drawing.Point(6, 90);
+            this.TabPageUDP_Gbx_NetSend.Name = "TabPageUDP_Gbx_NetSend";
+            this.TabPageUDP_Gbx_NetSend.Size = new System.Drawing.Size(138, 64);
+            this.TabPageUDP_Gbx_NetSend.TabIndex = 1;
+            this.TabPageUDP_Gbx_NetSend.TabStop = false;
+            this.TabPageUDP_Gbx_NetSend.Text = "发码区";
             // 
-            // radioButton5
+            // TabPageUDP_Rad_NetSendHex
             // 
-            this.radioButton5.AutoSize = true;
-            this.radioButton5.Location = new System.Drawing.Point(6, 42);
-            this.radioButton5.Name = "radioButton5";
-            this.radioButton5.Size = new System.Drawing.Size(95, 16);
-            this.radioButton5.TabIndex = 2;
-            this.radioButton5.TabStop = true;
-            this.radioButton5.Text = "十六进制发送";
-            this.radioButton5.UseVisualStyleBackColor = true;
+            this.TabPageUDP_Rad_NetSendHex.AutoSize = true;
+            this.TabPageUDP_Rad_NetSendHex.Location = new System.Drawing.Point(6, 42);
+            this.TabPageUDP_Rad_NetSendHex.Name = "TabPageUDP_Rad_NetSendHex";
+            this.TabPageUDP_Rad_NetSendHex.Size = new System.Drawing.Size(95, 16);
+            this.TabPageUDP_Rad_NetSendHex.TabIndex = 2;
+            this.TabPageUDP_Rad_NetSendHex.TabStop = true;
+            this.TabPageUDP_Rad_NetSendHex.Text = "十六进制发送";
+            this.TabPageUDP_Rad_NetSendHex.UseVisualStyleBackColor = true;
             // 
-            // radioButton6
+            // TabPageUDP_Rad_NetSendString
             // 
-            this.radioButton6.AutoSize = true;
-            this.radioButton6.Location = new System.Drawing.Point(6, 20);
-            this.radioButton6.Name = "radioButton6";
-            this.radioButton6.Size = new System.Drawing.Size(83, 16);
-            this.radioButton6.TabIndex = 1;
-            this.radioButton6.TabStop = true;
-            this.radioButton6.Text = "字符串发送";
-            this.radioButton6.UseVisualStyleBackColor = true;
+            this.TabPageUDP_Rad_NetSendString.AutoSize = true;
+            this.TabPageUDP_Rad_NetSendString.Location = new System.Drawing.Point(6, 20);
+            this.TabPageUDP_Rad_NetSendString.Name = "TabPageUDP_Rad_NetSendString";
+            this.TabPageUDP_Rad_NetSendString.Size = new System.Drawing.Size(83, 16);
+            this.TabPageUDP_Rad_NetSendString.TabIndex = 1;
+            this.TabPageUDP_Rad_NetSendString.TabStop = true;
+            this.TabPageUDP_Rad_NetSendString.Text = "字符串发送";
+            this.TabPageUDP_Rad_NetSendString.UseVisualStyleBackColor = true;
             // 
-            // groupBox12
+            // TabPageUDP_Gbx_NetRecv
             // 
-            this.groupBox12.Controls.Add(this.radioButton7);
-            this.groupBox12.Controls.Add(this.radioButton8);
-            this.groupBox12.Location = new System.Drawing.Point(6, 20);
-            this.groupBox12.Name = "groupBox12";
-            this.groupBox12.Size = new System.Drawing.Size(138, 64);
-            this.groupBox12.TabIndex = 1;
-            this.groupBox12.TabStop = false;
-            this.groupBox12.Text = "消息区";
+            this.TabPageUDP_Gbx_NetRecv.Controls.Add(this.TabPageUDP_Rad_NetRecvHex);
+            this.TabPageUDP_Gbx_NetRecv.Controls.Add(this.TabPageUDP_Rad_NetRecvString);
+            this.TabPageUDP_Gbx_NetRecv.Location = new System.Drawing.Point(6, 20);
+            this.TabPageUDP_Gbx_NetRecv.Name = "TabPageUDP_Gbx_NetRecv";
+            this.TabPageUDP_Gbx_NetRecv.Size = new System.Drawing.Size(138, 64);
+            this.TabPageUDP_Gbx_NetRecv.TabIndex = 1;
+            this.TabPageUDP_Gbx_NetRecv.TabStop = false;
+            this.TabPageUDP_Gbx_NetRecv.Text = "消息区";
             // 
-            // radioButton7
+            // TabPageUDP_Rad_NetRecvHex
             // 
-            this.radioButton7.AutoSize = true;
-            this.radioButton7.Location = new System.Drawing.Point(6, 42);
-            this.radioButton7.Name = "radioButton7";
-            this.radioButton7.Size = new System.Drawing.Size(95, 16);
-            this.radioButton7.TabIndex = 1;
-            this.radioButton7.TabStop = true;
-            this.radioButton7.Text = "十六进制显示";
-            this.radioButton7.UseVisualStyleBackColor = true;
+            this.TabPageUDP_Rad_NetRecvHex.AutoSize = true;
+            this.TabPageUDP_Rad_NetRecvHex.Location = new System.Drawing.Point(6, 42);
+            this.TabPageUDP_Rad_NetRecvHex.Name = "TabPageUDP_Rad_NetRecvHex";
+            this.TabPageUDP_Rad_NetRecvHex.Size = new System.Drawing.Size(95, 16);
+            this.TabPageUDP_Rad_NetRecvHex.TabIndex = 1;
+            this.TabPageUDP_Rad_NetRecvHex.TabStop = true;
+            this.TabPageUDP_Rad_NetRecvHex.Text = "十六进制显示";
+            this.TabPageUDP_Rad_NetRecvHex.UseVisualStyleBackColor = true;
             // 
-            // radioButton8
+            // TabPageUDP_Rad_NetRecvString
             // 
-            this.radioButton8.AutoSize = true;
-            this.radioButton8.Location = new System.Drawing.Point(6, 20);
-            this.radioButton8.Name = "radioButton8";
-            this.radioButton8.Size = new System.Drawing.Size(83, 16);
-            this.radioButton8.TabIndex = 0;
-            this.radioButton8.TabStop = true;
-            this.radioButton8.Text = "字符串显示";
-            this.radioButton8.UseVisualStyleBackColor = true;
+            this.TabPageUDP_Rad_NetRecvString.AutoSize = true;
+            this.TabPageUDP_Rad_NetRecvString.Location = new System.Drawing.Point(6, 20);
+            this.TabPageUDP_Rad_NetRecvString.Name = "TabPageUDP_Rad_NetRecvString";
+            this.TabPageUDP_Rad_NetRecvString.Size = new System.Drawing.Size(83, 16);
+            this.TabPageUDP_Rad_NetRecvString.TabIndex = 0;
+            this.TabPageUDP_Rad_NetRecvString.TabStop = true;
+            this.TabPageUDP_Rad_NetRecvString.Text = "字符串显示";
+            this.TabPageUDP_Rad_NetRecvString.UseVisualStyleBackColor = true;
             // 
-            // groupBox8
+            // TabPageUDP_Gbx_NetConfig
             // 
-            this.groupBox8.Controls.Add(this.button5);
-            this.groupBox8.Controls.Add(this.textBox5);
-            this.groupBox8.Controls.Add(this.label1);
-            this.groupBox8.Controls.Add(this.textBox6);
-            this.groupBox8.Controls.Add(this.label4);
-            this.groupBox8.Location = new System.Drawing.Point(6, 6);
-            this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(150, 147);
-            this.groupBox8.TabIndex = 2;
-            this.groupBox8.TabStop = false;
-            this.groupBox8.Text = "网络配置";
+            this.TabPageUDP_Gbx_NetConfig.Controls.Add(this.TabPageUDP_Btn_NetOpen);
+            this.TabPageUDP_Gbx_NetConfig.Controls.Add(this.TabPageUDP_Tbx_NetLocalHostPort);
+            this.TabPageUDP_Gbx_NetConfig.Controls.Add(this.TabPageUDP_Lab_NetLocalHostPort);
+            this.TabPageUDP_Gbx_NetConfig.Controls.Add(this.TabPageUDP_Tbx_NetLocalHostIP);
+            this.TabPageUDP_Gbx_NetConfig.Controls.Add(this.TabPageUDP_Lab_NetLocalHostIP);
+            this.TabPageUDP_Gbx_NetConfig.Location = new System.Drawing.Point(6, 6);
+            this.TabPageUDP_Gbx_NetConfig.Name = "TabPageUDP_Gbx_NetConfig";
+            this.TabPageUDP_Gbx_NetConfig.Size = new System.Drawing.Size(150, 147);
+            this.TabPageUDP_Gbx_NetConfig.TabIndex = 2;
+            this.TabPageUDP_Gbx_NetConfig.TabStop = false;
+            this.TabPageUDP_Gbx_NetConfig.Text = "网络配置";
             // 
-            // button5
+            // TabPageUDP_Btn_NetOpen
             // 
-            this.button5.Location = new System.Drawing.Point(6, 118);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(138, 23);
-            this.button5.TabIndex = 1;
-            this.button5.Text = "打开";
-            this.button5.UseVisualStyleBackColor = true;
+            this.TabPageUDP_Btn_NetOpen.Location = new System.Drawing.Point(6, 118);
+            this.TabPageUDP_Btn_NetOpen.Name = "TabPageUDP_Btn_NetOpen";
+            this.TabPageUDP_Btn_NetOpen.Size = new System.Drawing.Size(138, 23);
+            this.TabPageUDP_Btn_NetOpen.TabIndex = 1;
+            this.TabPageUDP_Btn_NetOpen.Text = "打开";
+            this.TabPageUDP_Btn_NetOpen.UseVisualStyleBackColor = true;
             // 
-            // textBox5
+            // TabPageUDP_Tbx_NetLocalHostPort
             // 
-            this.textBox5.Location = new System.Drawing.Point(6, 81);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(71, 21);
-            this.textBox5.TabIndex = 4;
+            this.TabPageUDP_Tbx_NetLocalHostPort.Location = new System.Drawing.Point(6, 81);
+            this.TabPageUDP_Tbx_NetLocalHostPort.Name = "TabPageUDP_Tbx_NetLocalHostPort";
+            this.TabPageUDP_Tbx_NetLocalHostPort.Size = new System.Drawing.Size(71, 21);
+            this.TabPageUDP_Tbx_NetLocalHostPort.TabIndex = 4;
             // 
-            // label1
+            // TabPageUDP_Lab_NetLocalHostPort
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 66);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(47, 12);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "端口号:";
+            this.TabPageUDP_Lab_NetLocalHostPort.AutoSize = true;
+            this.TabPageUDP_Lab_NetLocalHostPort.Location = new System.Drawing.Point(6, 66);
+            this.TabPageUDP_Lab_NetLocalHostPort.Name = "TabPageUDP_Lab_NetLocalHostPort";
+            this.TabPageUDP_Lab_NetLocalHostPort.Size = new System.Drawing.Size(47, 12);
+            this.TabPageUDP_Lab_NetLocalHostPort.TabIndex = 3;
+            this.TabPageUDP_Lab_NetLocalHostPort.Text = "端口号:";
             // 
-            // textBox6
+            // TabPageUDP_Tbx_NetLocalHostIP
             // 
-            this.textBox6.Location = new System.Drawing.Point(6, 32);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(138, 21);
-            this.textBox6.TabIndex = 2;
+            this.TabPageUDP_Tbx_NetLocalHostIP.Location = new System.Drawing.Point(6, 32);
+            this.TabPageUDP_Tbx_NetLocalHostIP.Name = "TabPageUDP_Tbx_NetLocalHostIP";
+            this.TabPageUDP_Tbx_NetLocalHostIP.Size = new System.Drawing.Size(138, 21);
+            this.TabPageUDP_Tbx_NetLocalHostIP.TabIndex = 2;
             // 
-            // label4
+            // TabPageUDP_Lab_NetLocalHostIP
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 17);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(71, 12);
-            this.label4.TabIndex = 1;
-            this.label4.Text = "本地IP地址:";
+            this.TabPageUDP_Lab_NetLocalHostIP.AutoSize = true;
+            this.TabPageUDP_Lab_NetLocalHostIP.Location = new System.Drawing.Point(6, 17);
+            this.TabPageUDP_Lab_NetLocalHostIP.Name = "TabPageUDP_Lab_NetLocalHostIP";
+            this.TabPageUDP_Lab_NetLocalHostIP.Size = new System.Drawing.Size(71, 12);
+            this.TabPageUDP_Lab_NetLocalHostIP.TabIndex = 1;
+            this.TabPageUDP_Lab_NetLocalHostIP.Text = "本地IP地址:";
             // 
             // TabPageCurve
             // 
@@ -2122,31 +2122,31 @@
             this.TabPageTCPServer_Gbx_NetConfig.ResumeLayout(false);
             this.TabPageTCPServer_Gbx_NetConfig.PerformLayout();
             this.TabPageTCPClient.ResumeLayout(false);
-            this.groupBox7.ResumeLayout(false);
-            this.groupBox7.PerformLayout();
-            this.groupBox6.ResumeLayout(false);
-            this.groupBox6.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox5.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.TabPageTCPClient_Gbx_Send.ResumeLayout(false);
+            this.TabPageTCPClient_Gbx_Send.PerformLayout();
+            this.TabPageTCPClient_Gbx_Recv.ResumeLayout(false);
+            this.TabPageTCPClient_Gbx_Recv.PerformLayout();
+            this.TabPageTCPClient_Gbx_NetFunction.ResumeLayout(false);
+            this.TabPageTCPClient_Gbx_NetFunc.ResumeLayout(false);
+            this.TabPageTCPClient_Gbx_NetSend.ResumeLayout(false);
+            this.TabPageTCPClient_Gbx_NetSend.PerformLayout();
+            this.TabPageTCPClient_Gbx_NetRecv.ResumeLayout(false);
+            this.TabPageTCPClient_Gbx_NetRecv.PerformLayout();
+            this.TabPageTCPClient_Gbx_NetConfig.ResumeLayout(false);
+            this.TabPageTCPClient_Gbx_NetConfig.PerformLayout();
             this.TabPageUDP.ResumeLayout(false);
-            this.groupBox13.ResumeLayout(false);
-            this.groupBox13.PerformLayout();
-            this.groupBox14.ResumeLayout(false);
-            this.groupBox14.PerformLayout();
-            this.groupBox9.ResumeLayout(false);
-            this.groupBox10.ResumeLayout(false);
-            this.groupBox11.ResumeLayout(false);
-            this.groupBox11.PerformLayout();
-            this.groupBox12.ResumeLayout(false);
-            this.groupBox12.PerformLayout();
-            this.groupBox8.ResumeLayout(false);
-            this.groupBox8.PerformLayout();
+            this.TabPageUDP_Gbx_Send.ResumeLayout(false);
+            this.TabPageUDP_Gbx_Send.PerformLayout();
+            this.TabPageUDP_Gbx_Recv.ResumeLayout(false);
+            this.TabPageUDP_Gbx_Recv.PerformLayout();
+            this.TabPageUDP_Gbx_NetFunction.ResumeLayout(false);
+            this.TabPageUDP_Gbx_NetFunc.ResumeLayout(false);
+            this.TabPageUDP_Gbx_NetSend.ResumeLayout(false);
+            this.TabPageUDP_Gbx_NetSend.PerformLayout();
+            this.TabPageUDP_Gbx_NetRecv.ResumeLayout(false);
+            this.TabPageUDP_Gbx_NetRecv.PerformLayout();
+            this.TabPageUDP_Gbx_NetConfig.ResumeLayout(false);
+            this.TabPageUDP_Gbx_NetConfig.PerformLayout();
             this.TabPageCurve.ResumeLayout(false);
             this.TabPageCurve_Gbx_SerialCurve.ResumeLayout(false);
             this.TabPageCurve_Gbx_SerialInfo.ResumeLayout(false);
@@ -2268,7 +2268,7 @@
         private System.Windows.Forms.TabPage TabPageUDP;
         private System.Windows.Forms.GroupBox TabPageTCPServer_Gbx_NetConfig;
         private System.Windows.Forms.Label TabPageTCPServer_Lab_NetLocalHostIP;
-        private System.Windows.Forms.Button TabPageTCPServer_Lab_NetListen;
+        private System.Windows.Forms.Button TabPageTCPServer_Btn_NetListen;
         private System.Windows.Forms.TextBox TabPageTCPServer_Tbx_NetServerMaxListen;
         private System.Windows.Forms.Label TabPageTCPServer_Lab_NetServerMaxListen;
         private System.Windows.Forms.TextBox TabPageTCPServer_Tbx_NetLocalHostPort;
@@ -2276,8 +2276,8 @@
         private System.Windows.Forms.TextBox TabPageTCPServer_Tbx_NetLocalHostIP;
         private System.Windows.Forms.GroupBox TabPageTCPServer_Gbx_NetFunction;
         private System.Windows.Forms.GroupBox TabPageTCPServer_Gbx_NetFunc;
-        private System.Windows.Forms.Button TabPageTCPServer_Rad_NetSendClear;
-        private System.Windows.Forms.Button TabPageTCPServer_Rad_NetRecvClear;
+        private System.Windows.Forms.Button TabPageTCPServer_Btn_NetSendClear;
+        private System.Windows.Forms.Button TabPageTCPServer_Btn_NetRecvClear;
         private System.Windows.Forms.GroupBox TabPageTCPServer_Gbx_NetSend;
         private System.Windows.Forms.RadioButton TabPageTCPServer_Rad_NetSendHex;
         private System.Windows.Forms.RadioButton TabPageTCPServer_Rad_NetSendString;
@@ -2291,52 +2291,52 @@
         private System.Windows.Forms.TextBox TabPageTCPServer_Tbx_Send;
         private System.Windows.Forms.GroupBox TabPageTCPServer_Gbx_Recv;
         private System.Windows.Forms.TextBox TabPageTCPServer_Tbx_Recv;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.GroupBox groupBox7;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.GroupBox groupBox6;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.RadioButton radioButton3;
-        private System.Windows.Forms.RadioButton radioButton4;
-        private System.Windows.Forms.GroupBox groupBox8;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.GroupBox groupBox13;
-        private System.Windows.Forms.TextBox textBox10;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBox9;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button button8;
-        private System.Windows.Forms.TextBox textBox7;
-        private System.Windows.Forms.GroupBox groupBox14;
-        private System.Windows.Forms.TextBox textBox8;
-        private System.Windows.Forms.GroupBox groupBox9;
-        private System.Windows.Forms.GroupBox groupBox10;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.GroupBox groupBox11;
-        private System.Windows.Forms.RadioButton radioButton5;
-        private System.Windows.Forms.RadioButton radioButton6;
-        private System.Windows.Forms.GroupBox groupBox12;
-        private System.Windows.Forms.RadioButton radioButton7;
-        private System.Windows.Forms.RadioButton radioButton8;
+        private System.Windows.Forms.GroupBox TabPageTCPClient_Gbx_NetConfig;
+        private System.Windows.Forms.Button TabPageTCPServer_Btn_NetConnect;
+        private System.Windows.Forms.TextBox TabPageTCPClient_Tbx_NetLocalHostPort;
+        private System.Windows.Forms.Label TabPageTCPClient_Lab_NetLocalHostPort;
+        private System.Windows.Forms.TextBox TabPageTCPClient_Tbx_NetLocalHostIP;
+        private System.Windows.Forms.Label TabPageTCPClient_Lab_NetLocalHostIP;
+        private System.Windows.Forms.GroupBox TabPageTCPClient_Gbx_Send;
+        private System.Windows.Forms.Button TabPageTCPClient_Btn_Send;
+        private System.Windows.Forms.TextBox TabPageTCPClient_Tbx_Send;
+        private System.Windows.Forms.GroupBox TabPageTCPClient_Gbx_Recv;
+        private System.Windows.Forms.TextBox TabPageTCPClient_Tbx_Recv;
+        private System.Windows.Forms.GroupBox TabPageTCPClient_Gbx_NetFunction;
+        private System.Windows.Forms.GroupBox TabPageTCPClient_Gbx_NetFunc;
+        private System.Windows.Forms.Button TabPageTCPClient_Btn_NetSendClear;
+        private System.Windows.Forms.Button TabPageTCPClient_Btn_NetRecvClear;
+        private System.Windows.Forms.GroupBox TabPageTCPClient_Gbx_NetSend;
+        private System.Windows.Forms.RadioButton TabPageTCPClient_Rad_NetSendHex;
+        private System.Windows.Forms.RadioButton TabPageTCPClient_Rad_NetSendString;
+        private System.Windows.Forms.GroupBox TabPageTCPClient_Gbx_NetRecv;
+        private System.Windows.Forms.RadioButton TabPageTCPClient_Rad_NetRecvHex;
+        private System.Windows.Forms.RadioButton TabPageTCPClient_Rad_NetRecvString;
+        private System.Windows.Forms.GroupBox TabPageUDP_Gbx_NetConfig;
+        private System.Windows.Forms.Button TabPageUDP_Btn_NetOpen;
+        private System.Windows.Forms.TextBox TabPageUDP_Tbx_NetLocalHostPort;
+        private System.Windows.Forms.Label TabPageUDP_Lab_NetLocalHostPort;
+        private System.Windows.Forms.TextBox TabPageUDP_Tbx_NetLocalHostIP;
+        private System.Windows.Forms.Label TabPageUDP_Lab_NetLocalHostIP;
+        private System.Windows.Forms.GroupBox TabPageUDP_Gbx_Send;
+        private System.Windows.Forms.TextBox TabPageUDP_Tbx_TargetPort;
+        private System.Windows.Forms.Label TabPageUDP_Lab_TargetPort;
+        private System.Windows.Forms.TextBox TabPageUDP_Tbx_TargetIP;
+        private System.Windows.Forms.Label TabPageUDP_Lab_TargetIP;
+        private System.Windows.Forms.Button TabPageUDP_Btn_Send;
+        private System.Windows.Forms.TextBox TabPageUDP_Tbx_Send;
+        private System.Windows.Forms.GroupBox TabPageUDP_Gbx_Recv;
+        private System.Windows.Forms.TextBox TabPageUDP_Tbx_Recv;
+        private System.Windows.Forms.GroupBox TabPageUDP_Gbx_NetFunction;
+        private System.Windows.Forms.GroupBox TabPageUDP_Gbx_NetFunc;
+        private System.Windows.Forms.Button TabPageUDP_Btn_NetSendClear;
+        private System.Windows.Forms.Button TabPageUDP_Btn_NetRecvClear;
+        private System.Windows.Forms.GroupBox TabPageUDP_Gbx_NetSend;
+        private System.Windows.Forms.RadioButton TabPageUDP_Rad_NetSendHex;
+        private System.Windows.Forms.RadioButton TabPageUDP_Rad_NetSendString;
+        private System.Windows.Forms.GroupBox TabPageUDP_Gbx_NetRecv;
+        private System.Windows.Forms.RadioButton TabPageUDP_Rad_NetRecvHex;
+        private System.Windows.Forms.RadioButton TabPageUDP_Rad_NetRecvString;
     }
 }
 
