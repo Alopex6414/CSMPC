@@ -11,6 +11,8 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.IO;
 using System.IO.Ports;
+using System.Net;
+using System.Net.Sockets;
 using Microsoft.Win32;
 using ZedGraph;
 
@@ -185,6 +187,50 @@ namespace CSMPC
 
             // 关闭串口
             SerialPortDebug.Close();
+
+            #endregion
+
+            #region 网络调试选项卡初始化
+            /*
+             * 网络调试设置
+             */
+            // TCP服务端
+
+            // 本机IP地址设置
+            string strHostName = Dns.GetHostName();
+            IPHostEntry iPHostEntry = Dns.GetHostEntry(strHostName);
+            for(int i = 0; i < iPHostEntry.AddressList.Length; ++i)
+            {
+                if(iPHostEntry.AddressList[i].AddressFamily == AddressFamily.InterNetwork)
+                {
+                    TabPageTCPServer_Tbx_NetLocalHostIP.Text = iPHostEntry.AddressList[i].ToString();
+                }
+            }
+
+            // 本机端口号设置
+            TabPageTCPServer_Tbx_NetLocalHostPort.Text = "6000";
+
+            // 最大连接数设置
+            TabPageTCPServer_Tbx_NetServerMaxListen.Text = "10";
+
+            // 网络辅助设置
+            TabPageTCPServer_Rad_NetRecvString.Checked = true;
+            TabPageTCPServer_Rad_NetRecvHex.Checked = false;
+            TabPageTCPServer_Rad_NetSendString.Checked = true;
+            TabPageTCPServer_Rad_NetSendHex.Checked = false;
+
+            // 消息区设置
+            TabPageTCPServer_Tbx_Recv.ReadOnly = true;
+            TabPageTCPServer_Tbx_Recv.BackColor = Color.White;
+            TabPageTCPServer_Tbx_Recv.ScrollBars = ScrollBars.Vertical;
+
+            // 发送区设置
+            TabPageTCPServer_Tbx_Send.ReadOnly = false;
+            TabPageTCPServer_Tbx_Send.ScrollBars = ScrollBars.Vertical;
+
+            TabPageTCPServer_Cbx_ConnectObject.DropDownStyle = ComboBoxStyle.DropDownList;
+            TabPageTCPServer_Cbx_ConnectObject.Items.Clear();
+            TabPageTCPServer_Cbx_ConnectObject.SelectedIndex = -1;
 
             #endregion
 
