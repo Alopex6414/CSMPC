@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
@@ -66,6 +67,10 @@ namespace CSMPC
         public static volatile PointPairList ZedGraph_List_8 = new PointPairList(); // 曲线8数据
 
         // 网络调试
+        // TCP服务端
+        Socket m_SocketServer;      // TCP服务端监听Socket
+        Socket m_SocketSend;        // TCP服务端通信Socket
+        bool m_bListen = false;     // TCP服务端监听状态
 
         public FormMain()
         {
@@ -248,6 +253,30 @@ namespace CSMPC
             TabPageTCPClient_Tbx_Send.ScrollBars = ScrollBars.Vertical;
 
             // UDP
+
+            // 本地IP地址设置
+            TabPageUDP_Tbx_NetLocalHostIP.Text = GetLocalIP();
+
+            // 本地端口号设置
+            TabPageUDP_Tbx_NetLocalHostPort.Text = "6000";
+
+            // 网络辅助设置
+            TabPageUDP_Rad_NetRecvString.Checked = true;
+            TabPageUDP_Rad_NetRecvHex.Checked = false;
+            TabPageUDP_Rad_NetSendString.Checked = true;
+            TabPageUDP_Rad_NetSendHex.Checked = false;
+
+            // 消息区设置
+            TabPageUDP_Tbx_Recv.ReadOnly = true;
+            TabPageUDP_Tbx_Recv.BackColor = Color.White;
+            TabPageUDP_Tbx_Recv.ScrollBars = ScrollBars.Vertical;
+
+            // 发送区设置
+            TabPageUDP_Tbx_Send.ReadOnly = false;
+            TabPageUDP_Tbx_Send.ScrollBars = ScrollBars.Vertical;
+
+            TabPageUDP_Tbx_TargetIP.Text = GetLocalIP();
+            TabPageUDP_Tbx_TargetPort.Text = "6001";
 
             #endregion
 
@@ -1010,7 +1039,7 @@ namespace CSMPC
         #region 网络调试
 
         #region 获取本地IP地址
-        public static string GetLocalIP()
+        public static string GetLocalIP()   // 获取本地IP地址
         {
             try
             {
@@ -1032,6 +1061,160 @@ namespace CSMPC
                 MessageBox.Show("获取本地IP地址出错!", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return "";
             }
+        }
+        #endregion
+
+        #region 检测IP地址是否合法
+        public bool IsIPAddress(string sIpAddress)  // IP地址是否合法
+        {
+            bool blnTest = false;
+            bool bRet = true;
+
+            Regex regex = new Regex("^[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}$");
+            blnTest = regex.IsMatch(sIpAddress);
+            if (blnTest == true)
+            {
+                string[] strTemp = sIpAddress.Split(new char[] { '.' });
+                int nDotCount = strTemp.Length - 1;
+                if (3 == nDotCount)
+                {
+                    for (int i = 0; i < strTemp.Length; i++)
+                    {
+                        if (Convert.ToInt32(strTemp[i]) > 255)
+                        {
+                            bRet = false;
+                        }
+                    }
+                }
+                else
+                {
+                    bRet = false;
+                }
+            }
+            else
+            {
+                bRet = false;
+            }
+            return bRet;
+        }
+        #endregion
+
+        #region TCP服务端端口号TextBox响应
+        private void TabPageTCPServer_Tbx_NetLocalHostPort_KeyPress(object sender, KeyPressEventArgs e) // TextBox只能输入数字
+        {
+            if ((e.KeyChar <= 48 || e.KeyChar >= 57) && (e.KeyChar != 8))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void TabPageTCPServer_Tbx_NetLocalHostPort_TextChanged(object sender, EventArgs e)  // TextBox限制上下限
+        {
+            string strText = TabPageTCPServer_Tbx_NetLocalHostPort.Text;
+            int nText = 0;
+
+            if(strText != null && strText != "")
+            {
+                nText = int.Parse(strText);
+
+                if(nText < 0)
+                {
+                    nText = 0;
+                }
+
+                if(nText > 65535)
+                {
+                    nText = 65535;
+                }
+
+                TabPageTCPServer_Tbx_NetLocalHostPort.Text = nText.ToString();
+            }
+        }
+        #endregion
+
+        #region TCP服务端最大连接TextBox响应
+        private void TabPageTCPServer_Tbx_NetServerMaxListen_KeyPress(object sender, KeyPressEventArgs e)   // TextBox只能输入数字
+        {
+            if ((e.KeyChar <= 48 || e.KeyChar >= 57) && (e.KeyChar != 8))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void TabPageTCPServer_Tbx_NetServerMaxListen_TextChanged(object sender, EventArgs e)    // TextBox限制上下限
+        {
+            string strText = TabPageTCPServer_Tbx_NetServerMaxListen.Text;
+            int nText = 0;
+
+            if (strText != null && strText != "")
+            {
+                nText = int.Parse(strText);
+
+                if (nText < 0)
+                {
+                    nText = 0;
+                }
+
+                if (nText > 100)
+                {
+                    nText = 100;
+                }
+
+                TabPageTCPServer_Tbx_NetServerMaxListen.Text = nText.ToString();
+            }
+        }
+        #endregion
+
+        #region TCP服务端监听
+        private void TabPageTCPServer_Btn_NetListen_Click(object sender, EventArgs e)
+        {
+            if(!m_bListen) // 开启监听
+            {
+                string strServerIp = string.Empty;
+                string strServerPort = string.Empty;
+                string strMaxConnect = string.Empty;
+
+                strServerIp = TabPageTCPServer_Tbx_NetLocalHostIP.Text;
+                strServerPort = TabPageTCPServer_Tbx_NetLocalHostPort.Text;
+                strMaxConnect = TabPageTCPServer_Tbx_NetServerMaxListen.Text;
+
+                int nServerPort = int.Parse(strServerPort);
+                int nMaxConnect = int.Parse(strMaxConnect);
+
+                if (!IsIPAddress(strServerIp))
+                {
+                    MessageBox.Show("服务器IP地址不合法!", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // 服务端Socket
+                m_SocketServer = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+
+                // 获取本地的IP地址
+                IPAddress iP = IPAddress.Parse(strServerIp);
+
+                // 获取本地的端口号
+                IPEndPoint point = new IPEndPoint(iP, nServerPort);
+
+                // 绑定IP地址和端口号
+                m_SocketServer.Bind(point);
+
+                // 服务端监听
+                m_SocketServer.Listen(nMaxConnect);
+
+                this.TabPageTCPServer_Tbx_Recv.AppendText("The TCP Server is Already Open And Listening...");
+                this.TabPageTCPServer_Tbx_Recv.AppendText("\n");
+
+                m_bListen = true;
+                this.TabPageTCPServer_Btn_NetListen.Text = "停止";
+
+
+            }
+            else // 关闭监听
+            {
+
+            }
+
         }
         #endregion
 
@@ -2207,6 +2390,10 @@ namespace CSMPC
                 }
             }
         }
+
+
+
+
         #endregion
 
         #endregion
@@ -2225,6 +2412,6 @@ namespace CSMPC
         #region 关于
         #endregion
 
-
+        
     }
 }

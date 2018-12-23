@@ -957,14 +957,17 @@
             this.TabPageTCPServer_Btn_NetListen.TabIndex = 1;
             this.TabPageTCPServer_Btn_NetListen.Text = "监听";
             this.TabPageTCPServer_Btn_NetListen.UseVisualStyleBackColor = true;
+            this.TabPageTCPServer_Btn_NetListen.Click += new System.EventHandler(this.TabPageTCPServer_Btn_NetListen_Click);
             // 
             // TabPageTCPServer_Tbx_NetServerMaxListen
             // 
-            this.TabPageTCPServer_Tbx_NetServerMaxListen.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TabPageTCPServer_Tbx_NetServerMaxListen.Font = new System.Drawing.Font("Calibri", 9.75F);
             this.TabPageTCPServer_Tbx_NetServerMaxListen.Location = new System.Drawing.Point(6, 132);
             this.TabPageTCPServer_Tbx_NetServerMaxListen.Name = "TabPageTCPServer_Tbx_NetServerMaxListen";
-            this.TabPageTCPServer_Tbx_NetServerMaxListen.Size = new System.Drawing.Size(71, 21);
+            this.TabPageTCPServer_Tbx_NetServerMaxListen.Size = new System.Drawing.Size(71, 23);
             this.TabPageTCPServer_Tbx_NetServerMaxListen.TabIndex = 6;
+            this.TabPageTCPServer_Tbx_NetServerMaxListen.TextChanged += new System.EventHandler(this.TabPageTCPServer_Tbx_NetServerMaxListen_TextChanged);
+            this.TabPageTCPServer_Tbx_NetServerMaxListen.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TabPageTCPServer_Tbx_NetServerMaxListen_KeyPress);
             // 
             // TabPageTCPServer_Lab_NetServerMaxListen
             // 
@@ -977,11 +980,13 @@
             // 
             // TabPageTCPServer_Tbx_NetLocalHostPort
             // 
-            this.TabPageTCPServer_Tbx_NetLocalHostPort.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TabPageTCPServer_Tbx_NetLocalHostPort.Font = new System.Drawing.Font("Calibri", 9.75F);
             this.TabPageTCPServer_Tbx_NetLocalHostPort.Location = new System.Drawing.Point(6, 81);
             this.TabPageTCPServer_Tbx_NetLocalHostPort.Name = "TabPageTCPServer_Tbx_NetLocalHostPort";
-            this.TabPageTCPServer_Tbx_NetLocalHostPort.Size = new System.Drawing.Size(71, 21);
+            this.TabPageTCPServer_Tbx_NetLocalHostPort.Size = new System.Drawing.Size(71, 23);
             this.TabPageTCPServer_Tbx_NetLocalHostPort.TabIndex = 4;
+            this.TabPageTCPServer_Tbx_NetLocalHostPort.TextChanged += new System.EventHandler(this.TabPageTCPServer_Tbx_NetLocalHostPort_TextChanged);
+            this.TabPageTCPServer_Tbx_NetLocalHostPort.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TabPageTCPServer_Tbx_NetLocalHostPort_KeyPress);
             // 
             // TabPageTCPServer_Lab_NetLocalHostPort
             // 
@@ -994,10 +999,10 @@
             // 
             // TabPageTCPServer_Tbx_NetLocalHostIP
             // 
-            this.TabPageTCPServer_Tbx_NetLocalHostIP.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TabPageTCPServer_Tbx_NetLocalHostIP.Font = new System.Drawing.Font("Calibri", 9.75F);
             this.TabPageTCPServer_Tbx_NetLocalHostIP.Location = new System.Drawing.Point(6, 32);
             this.TabPageTCPServer_Tbx_NetLocalHostIP.Name = "TabPageTCPServer_Tbx_NetLocalHostIP";
-            this.TabPageTCPServer_Tbx_NetLocalHostIP.Size = new System.Drawing.Size(138, 21);
+            this.TabPageTCPServer_Tbx_NetLocalHostIP.Size = new System.Drawing.Size(138, 23);
             this.TabPageTCPServer_Tbx_NetLocalHostIP.TabIndex = 2;
             // 
             // TabPageTCPServer_Lab_NetLocalHostIP
