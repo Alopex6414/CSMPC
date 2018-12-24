@@ -68,9 +68,22 @@ namespace CSMPC
 
         // 网络调试
         // TCP服务端
-        Socket m_SocketServer;      // TCP服务端监听Socket
-        Socket m_SocketSend;        // TCP服务端通信Socket
-        bool m_bListen = false;     // TCP服务端监听状态
+        public Socket m_SocketServer;                                                               // TCP服务端监听Socket
+        public Dictionary<string, Socket> m_dicSocket = new Dictionary<string, Socket>();           // TCP服务端通信存储Socket
+        public bool m_bListen = false;                                                              // TCP服务端监听状态
+        public const int m_nRecvBufSize = 4096;                                                     // TCP服务端接收数组大小
+        public const int m_nSendBufSize = 4096;                                                     // TCP服务端发送数组大小
+
+        Thread m_tSocketAccept;                                                                     // TCP服务端接受线程
+
+        private delegate void TCPSERVERRECVMSGCALLBACK(string strRecv);                             // TCP服务端接受消息委托
+        private delegate void TCPSERVERSETTEXTCALLBACK(string strText);                             // TCP服务端系统消息委托
+        private delegate void TCPSERVERADDOBJECTCALLBACK(string strItem);                           // TCP服务端添加对象委托
+
+        private TCPSERVERRECVMSGCALLBACK TCPServerRecvMsgCallback;
+        private TCPSERVERSETTEXTCALLBACK TCPServerSetTextCallback;
+        private TCPSERVERADDOBJECTCALLBACK TCPServerAddObjectCallback;
+
 
         public FormMain()
         {
@@ -1209,13 +1222,115 @@ namespace CSMPC
                 m_bListen = true;
                 this.TabPageTCPServer_Btn_NetListen.Text = "停止";
 
+                // 服务端委托
+                TCPServerRecvMsgCallback = new TCPSERVERRECVMSGCALLBACK(TCPServerRecvMsg);
+                TCPServerSetTextCallback = new TCPSERVERSETTEXTCALLBACK(TCPServerSetText);
+                TCPServerAddObjectCallback = new TCPSERVERADDOBJECTCALLBACK(TCPServerAddObject);
 
+                // 服务端接受(开启监听线程)
+                m_tSocketAccept = new Thread(new ParameterizedThreadStart(TCPServerStartListenThread));
+                m_tSocketAccept.IsBackground = true;
+                m_tSocketAccept.Start(m_SocketServer);
             }
             else // 关闭监听
             {
 
             }
 
+        }
+        #endregion
+
+        #region TCP服务端Socket监听线程
+        private void TCPServerStartListenThread(object sender)
+        {
+            Socket socket = sender as Socket;
+            while(true)
+            {
+                // 服务端等待客户端连接
+                Socket socketsend = socket.Accept();
+
+                string strIP = socketsend.RemoteEndPoint.ToString();
+                string strMsg = "Remote Client Successfully Established Connect.";
+
+                m_dicSocket.Add(strIP, socketsend);
+                strMsg += "[" + strIP + "] ";
+                strMsg += DateTime.Now.ToLongTimeString().ToString();
+
+                this.TabPageTCPServer_Cbx_ConnectObject.Invoke(TCPServerAddObjectCallback, strIP);
+                this.TabPageTCPServer_Tbx_Recv.Invoke(TCPServerSetTextCallback, strMsg);
+
+                Thread tServerRecv = new Thread(new ParameterizedThreadStart(TCPServerRecvMessage));
+                tServerRecv.IsBackground = true;
+                tServerRecv.Start(socketsend);
+            }
+
+        }
+        #endregion
+
+        #region TCP服务端Socket接受消息线程
+        private void TCPServerRecvMessage(object sender)
+        {
+            Socket socket = sender as Socket;
+            while(true)
+            {
+                byte[] RecvBuf = new byte[m_nRecvBufSize];
+                int nCount = socket.Receive(RecvBuf);
+
+                if(nCount == 0)
+                {
+                    break;
+                }
+                else
+                {
+                    string strIP = socket.RemoteEndPoint.ToString();
+                    string strRecv = "";
+                    string strMsg = "";
+
+                    strMsg += "[" + strIP + "] ";
+                    strMsg += DateTime.Now.ToLongTimeString().ToString();
+                    this.TabPageTCPServer_Tbx_Recv.Invoke(TCPServerSetTextCallback, strMsg);
+
+                    if(this.TabPageTCPServer_Rad_NetRecvString.Checked)
+                    {
+                        strRecv = Encoding.Default.GetString(RecvBuf, 0, nCount);
+                    }
+                    else
+                    {
+                        for (int i = 0; i < nCount; i++)
+                        {
+                            strRecv += (RecvBuf[i].ToString("X2") + " ");
+                        }
+                    }
+
+                    strMsg = strRecv;
+                    this.TabPageTCPServer_Tbx_Recv.Invoke(TCPServerSetTextCallback, strMsg);
+                }
+
+            }
+
+        }
+        #endregion
+
+        #region TCP服务端接收委托
+        private void TCPServerRecvMsg(string strRecv)
+        {
+            this.TabPageTCPServer_Tbx_Recv.AppendText(strRecv);
+            this.TabPageTCPServer_Tbx_Recv.AppendText("\n");
+        }
+        #endregion
+
+        #region TCP服务端系统消息委托
+        private void TCPServerSetText(string strText)
+        {
+            this.TabPageTCPServer_Tbx_Recv.AppendText(strText);
+            this.TabPageTCPServer_Tbx_Recv.AppendText("\n");
+        }
+        #endregion
+
+        #region TCP服务端添加对象委托
+        private void TCPServerAddObject(string strItem)
+        {
+            this.TabPageTCPServer_Cbx_ConnectObject.Items.Add(strItem);
         }
         #endregion
 
