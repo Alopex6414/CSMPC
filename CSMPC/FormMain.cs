@@ -79,11 +79,12 @@ namespace CSMPC
         private delegate void TCPSERVERRECVMSGCALLBACK(string strRecv);                             // TCP服务端接受消息委托
         private delegate void TCPSERVERSETTEXTCALLBACK(string strText);                             // TCP服务端系统消息委托
         private delegate void TCPSERVERADDOBJECTCALLBACK(string strItem);                           // TCP服务端添加对象委托
+        private delegate void TCPSERVERDELOBJECTCALLBACK(string strItem);                           // TCP服务端删除对象委托
 
         private TCPSERVERRECVMSGCALLBACK TCPServerRecvMsgCallback;
         private TCPSERVERSETTEXTCALLBACK TCPServerSetTextCallback;
         private TCPSERVERADDOBJECTCALLBACK TCPServerAddObjectCallback;
-
+        private TCPSERVERDELOBJECTCALLBACK TCPServerDelObjectCallback;
 
         public FormMain()
         {
@@ -1236,6 +1237,7 @@ namespace CSMPC
                 TCPServerRecvMsgCallback = new TCPSERVERRECVMSGCALLBACK(TCPServerRecvMsg);
                 TCPServerSetTextCallback = new TCPSERVERSETTEXTCALLBACK(TCPServerSetText);
                 TCPServerAddObjectCallback = new TCPSERVERADDOBJECTCALLBACK(TCPServerAddObject);
+                TCPServerDelObjectCallback = new TCPSERVERDELOBJECTCALLBACK(TCPServerDelObject);
 
                 // 服务端接受(开启监听线程)
                 m_tSocketAccept = new Thread(new ParameterizedThreadStart(TCPServerStartListenThread));
@@ -1249,10 +1251,7 @@ namespace CSMPC
                 {
                     pair.Value.Close();
 
-                    string strMsg = "Remote Client Successfully Disconnected.";
-
-                    strMsg += "[" + pair.Key + "] ";
-                    strMsg += DateTime.Now.ToLongTimeString().ToString();
+                    string strMsg = "Remote Client(" + pair.Key + ") Successfully Disconnected.";
 
                     this.TabPageTCPServer_Tbx_Recv.Invoke(TCPServerSetTextCallback, strMsg);
                 }
@@ -1305,10 +1304,7 @@ namespace CSMPC
                 }
 
                 string strIP = socketsend.RemoteEndPoint.ToString();
-                string strMsg = "Remote Client Successfully Established Connection.";
-                
-                strMsg += "[" + strIP + "] ";
-                strMsg += DateTime.Now.ToLongTimeString().ToString();
+                string strMsg = "Remote Client(" + strIP + ") Successfully Established Connection.";
 
                 this.TabPageTCPServer_Cbx_ConnectObject.Invoke(TCPServerAddObjectCallback, strIP);
                 this.TabPageTCPServer_Tbx_Recv.Invoke(TCPServerSetTextCallback, strMsg);
@@ -1340,24 +1336,43 @@ namespace CSMPC
                     string strRecv = "";
                     string strMsg = "";
 
-                    strMsg += "[" + strIP + "] ";
-                    strMsg += DateTime.Now.ToLongTimeString().ToString();
-                    this.TabPageTCPServer_Tbx_Recv.Invoke(TCPServerSetTextCallback, strMsg);
+                    if(nCount == 0)
+                    {
+                        // TCP客户端断开连接
+                        socket.Close();     // 关闭Socket
 
-                    if (this.TabPageTCPServer_Rad_NetRecvString.Checked)    // 字符串接收数据
-                    {
-                        strRecv = Encoding.Default.GetString(RecvBuf, 0, nCount);
+                        strMsg = "Remote Client(" + strIP + ") Successfully Disconnected.";
+                        this.TabPageTCPServer_Tbx_Recv.Invoke(TCPServerSetTextCallback, strMsg);
+
+                        m_dicSocket.Remove(strIP);  // 删除TCP客户端信息
+                        m_dicThread.Remove(strIP);
+
+                        this.TabPageTCPServer_Cbx_ConnectObject.Invoke(TCPServerDelObjectCallback, strIP);
+
+                        break;
                     }
-                    else // 16进制接收数据
+                    else
                     {
-                        for (int i = 0; i < nCount; i++)
+                        strMsg += "[" + strIP + "] ";
+                        strMsg += DateTime.Now.ToLongTimeString().ToString();
+                        this.TabPageTCPServer_Tbx_Recv.Invoke(TCPServerSetTextCallback, strMsg);
+
+                        if (this.TabPageTCPServer_Rad_NetRecvString.Checked)    // 字符串接收数据
                         {
-                            strRecv += (RecvBuf[i].ToString("X2") + " ");
+                            strRecv = Encoding.Default.GetString(RecvBuf, 0, nCount);
                         }
-                    }
+                        else // 16进制接收数据
+                        {
+                            for (int i = 0; i < nCount; i++)
+                            {
+                                strRecv += (RecvBuf[i].ToString("X2") + " ");
+                            }
+                        }
 
-                    strMsg = strRecv;
-                    this.TabPageTCPServer_Tbx_Recv.Invoke(TCPServerSetTextCallback, strMsg);
+                        strMsg = strRecv;
+                        this.TabPageTCPServer_Tbx_Recv.Invoke(TCPServerSetTextCallback, strMsg);
+                    }
+                    
                 }
                 catch(Exception)
                 {
@@ -1465,6 +1480,13 @@ namespace CSMPC
         private void TCPServerAddObject(string strItem)
         {
             this.TabPageTCPServer_Cbx_ConnectObject.Items.Add(strItem);
+        }
+        #endregion
+
+        #region TCP服务端删除对象委托
+        private void TCPServerDelObject(string strItem)
+        {
+            this.TabPageTCPServer_Cbx_ConnectObject.Items.Remove(strItem);
         }
         #endregion
 
