@@ -1211,7 +1211,16 @@ namespace CSMPC
                 IPEndPoint point = new IPEndPoint(iP, nServerPort);
 
                 // 绑定IP地址和端口号
-                m_SocketServer.Bind(point);
+                try
+                {
+                    m_SocketServer.Bind(point);
+                }
+                catch (Exception)
+                {
+                    this.TabPageTCPServer_Tbx_Recv.AppendText("The TCP Server is Already Occupied!");
+                    this.TabPageTCPServer_Tbx_Recv.AppendText("\n");
+                    return;
+                }
 
                 // 服务端监听
                 m_SocketServer.Listen(nMaxConnect);
