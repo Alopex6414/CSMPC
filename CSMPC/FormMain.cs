@@ -1452,9 +1452,9 @@ namespace CSMPC
                 strMsg = Encoding.Default.GetString(SendBuf);
                 this.TabPageTCPServer_Tbx_Recv.Invoke(TCPServerSetTextCallback, strMsg);
             }
-            catch(Exception)
+            catch(Exception ex)
             {
-
+                MessageBox.Show("发送消息发生错误! 错误:" + ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }
@@ -1487,6 +1487,7 @@ namespace CSMPC
         private void TCPServerDelObject(string strItem)
         {
             this.TabPageTCPServer_Cbx_ConnectObject.Items.Remove(strItem);
+            this.TabPageTCPServer_Cbx_ConnectObject.SelectedIndex = 0;
         }
         #endregion
 
