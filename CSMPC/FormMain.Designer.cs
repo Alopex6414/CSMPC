@@ -789,6 +789,7 @@
             this.TabPageTCPServer_Btn_Send.TabIndex = 2;
             this.TabPageTCPServer_Btn_Send.Text = "发送";
             this.TabPageTCPServer_Btn_Send.UseVisualStyleBackColor = true;
+            this.TabPageTCPServer_Btn_Send.Click += new System.EventHandler(this.TabPageTCPServer_Btn_Send_Click);
             // 
             // TabPageTCPServer_Cbx_ConnectObject
             // 
@@ -806,6 +807,7 @@
             this.TabPageTCPServer_Tbx_Send.Name = "TabPageTCPServer_Tbx_Send";
             this.TabPageTCPServer_Tbx_Send.Size = new System.Drawing.Size(712, 230);
             this.TabPageTCPServer_Tbx_Send.TabIndex = 1;
+            this.TabPageTCPServer_Tbx_Send.TextChanged += new System.EventHandler(this.TabPageTCPServer_Tbx_Send_TextChanged);
             // 
             // TabPageTCPServer_Gbx_Recv
             // 
@@ -825,6 +827,7 @@
             this.TabPageTCPServer_Tbx_Recv.Name = "TabPageTCPServer_Tbx_Recv";
             this.TabPageTCPServer_Tbx_Recv.Size = new System.Drawing.Size(712, 264);
             this.TabPageTCPServer_Tbx_Recv.TabIndex = 1;
+            this.TabPageTCPServer_Tbx_Recv.TextChanged += new System.EventHandler(this.TabPageTCPServer_Tbx_Recv_TextChanged);
             // 
             // TabPageTCPServer_Gbx_NetFunction
             // 
@@ -857,6 +860,7 @@
             this.TabPageTCPServer_Btn_NetSendClear.TabIndex = 2;
             this.TabPageTCPServer_Btn_NetSendClear.Text = "清发送区";
             this.TabPageTCPServer_Btn_NetSendClear.UseVisualStyleBackColor = true;
+            this.TabPageTCPServer_Btn_NetSendClear.Click += new System.EventHandler(this.TabPageTCPServer_Btn_NetSendClear_Click);
             // 
             // TabPageTCPServer_Btn_NetRecvClear
             // 
@@ -866,6 +870,7 @@
             this.TabPageTCPServer_Btn_NetRecvClear.TabIndex = 1;
             this.TabPageTCPServer_Btn_NetRecvClear.Text = "清消息区";
             this.TabPageTCPServer_Btn_NetRecvClear.UseVisualStyleBackColor = true;
+            this.TabPageTCPServer_Btn_NetRecvClear.Click += new System.EventHandler(this.TabPageTCPServer_Btn_NetRecvClear_Click);
             // 
             // TabPageTCPServer_Gbx_NetSend
             // 
@@ -1020,10 +1025,10 @@
             this.TabPageTCPClient.Controls.Add(this.TabPageTCPClient_Gbx_Recv);
             this.TabPageTCPClient.Controls.Add(this.TabPageTCPClient_Gbx_NetFunction);
             this.TabPageTCPClient.Controls.Add(this.TabPageTCPClient_Gbx_NetConfig);
-            this.TabPageTCPClient.Location = new System.Drawing.Point(4, 24);
+            this.TabPageTCPClient.Location = new System.Drawing.Point(4, 22);
             this.TabPageTCPClient.Name = "TabPageTCPClient";
             this.TabPageTCPClient.Padding = new System.Windows.Forms.Padding(3);
-            this.TabPageTCPClient.Size = new System.Drawing.Size(892, 591);
+            this.TabPageTCPClient.Size = new System.Drawing.Size(892, 593);
             this.TabPageTCPClient.TabIndex = 1;
             this.TabPageTCPClient.Text = "TCP客户端";
             this.TabPageTCPClient.UseVisualStyleBackColor = true;

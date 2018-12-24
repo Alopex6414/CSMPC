@@ -1221,6 +1221,7 @@ namespace CSMPC
 
                 m_bListen = true;
                 this.TabPageTCPServer_Btn_NetListen.Text = "停止";
+                this.TabPageTCPServer_Btn_Send.Enabled = true;
 
                 // 服务端委托
                 TCPServerRecvMsgCallback = new TCPSERVERRECVMSGCALLBACK(TCPServerRecvMsg);
@@ -1269,6 +1270,7 @@ namespace CSMPC
 
                 m_bListen = false;
                 this.TabPageTCPServer_Btn_NetListen.Text = "监听";
+                this.TabPageTCPServer_Btn_Send.Enabled = false;
 
             }
 
@@ -1358,6 +1360,82 @@ namespace CSMPC
         }
         #endregion
 
+        #region TCP服务端Socket发送消息
+        private void TabPageTCPServer_Btn_Send_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string strSend = this.TabPageTCPServer_Tbx_Send.Text.Trim();
+                byte[] SendBuf = null;
+
+                if (this.TabPageTCPServer_Rad_NetSendString.Checked)    // 字符串发送数据
+                {
+                    SendBuf = Encoding.Default.GetBytes(strSend);
+                }
+                else // 16进制发送数据
+                {
+                    string[] strArr = strSend.Split(' ');
+                    List<byte> SendList = new List<byte>();
+
+                    foreach (string str in strArr)
+                    {
+                        byte[] StrBuf = Encoding.Default.GetBytes(str);
+                        
+                        for(int i = 0; (i < StrBuf.Length) && ((i + 1) < StrBuf.Length); i += 2)
+                        {
+                            byte[] ShotBuf = new byte[] { StrBuf[i], StrBuf[i + 1] };
+                            string ShotStr = Encoding.Default.GetString(ShotBuf);
+                            byte StrValue = Convert.ToByte(ShotStr, 16);
+                            SendList.Add(StrValue);
+                        }
+
+                    }
+
+                    SendBuf = SendList.ToArray();
+                }
+
+                // 选择发送对象
+                string strObj = this.TabPageTCPServer_Cbx_ConnectObject.SelectedItem.ToString();
+
+                if(strObj == "广播")
+                {
+                    foreach(KeyValuePair<string, Socket> pair in m_dicSocket)
+                    {
+                        pair.Value.Send(SendBuf);
+                    }
+
+                }
+                else
+                {
+                    foreach (KeyValuePair<string, Socket> pair in m_dicSocket)
+                    {
+                        if(pair.Key == strObj)
+                        {
+                            pair.Value.Send(SendBuf);
+                        }
+                    }
+
+                }
+
+                // 消息区显示发送信息
+                string strIP = m_SocketServer.LocalEndPoint.ToString();
+                string strMsg = "";
+
+                strMsg += "[" + strIP + "] ";
+                strMsg += DateTime.Now.ToLongTimeString().ToString();
+                this.TabPageTCPServer_Tbx_Recv.Invoke(TCPServerSetTextCallback, strMsg);
+
+                strMsg = Encoding.Default.GetString(SendBuf);
+                this.TabPageTCPServer_Tbx_Recv.Invoke(TCPServerSetTextCallback, strMsg);
+            }
+            catch(Exception)
+            {
+
+            }
+
+        }
+        #endregion
+
         #region TCP服务端接收委托
         private void TCPServerRecvMsg(string strRecv)
         {
@@ -1378,6 +1456,38 @@ namespace CSMPC
         private void TCPServerAddObject(string strItem)
         {
             this.TabPageTCPServer_Cbx_ConnectObject.Items.Add(strItem);
+        }
+        #endregion
+
+        #region TCP服务端清除消息区
+        private void TabPageTCPServer_Btn_NetRecvClear_Click(object sender, EventArgs e)
+        {
+            this.TabPageTCPServer_Tbx_Recv.Clear();
+        }
+        #endregion
+
+        #region TCP服务端清除发送区
+        private void TabPageTCPServer_Btn_NetSendClear_Click(object sender, EventArgs e)
+        {
+            this.TabPageTCPServer_Tbx_Send.Clear();
+        }
+        #endregion
+
+        #region TCP服务端消息区滚动
+        private void TabPageTCPServer_Tbx_Recv_TextChanged(object sender, EventArgs e)
+        {
+            this.TabPageTCPServer_Tbx_Recv.SelectionStart = this.TabPageTCPServer_Tbx_Recv.Text.Length;
+            this.TabPageTCPServer_Tbx_Recv.SelectionLength = 0;
+            this.TabPageTCPServer_Tbx_Recv.ScrollToCaret();
+        }
+        #endregion
+
+        #region TCP服务端发送区滚动
+        private void TabPageTCPServer_Tbx_Send_TextChanged(object sender, EventArgs e)
+        {
+            this.TabPageTCPServer_Tbx_Send.SelectionStart = this.TabPageTCPServer_Tbx_Send.Text.Length;
+            this.TabPageTCPServer_Tbx_Send.SelectionLength = 0;
+            this.TabPageTCPServer_Tbx_Send.ScrollToCaret();
         }
         #endregion
 
@@ -2557,6 +2667,8 @@ namespace CSMPC
 
 
 
+
+
         #endregion
 
         #endregion
@@ -2575,6 +2687,5 @@ namespace CSMPC
         #region 关于
         #endregion
 
-        
     }
 }
