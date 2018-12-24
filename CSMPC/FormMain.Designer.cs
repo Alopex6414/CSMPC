@@ -1020,10 +1020,10 @@
             this.TabPageTCPClient.Controls.Add(this.TabPageTCPClient_Gbx_Recv);
             this.TabPageTCPClient.Controls.Add(this.TabPageTCPClient_Gbx_NetFunction);
             this.TabPageTCPClient.Controls.Add(this.TabPageTCPClient_Gbx_NetConfig);
-            this.TabPageTCPClient.Location = new System.Drawing.Point(4, 22);
+            this.TabPageTCPClient.Location = new System.Drawing.Point(4, 24);
             this.TabPageTCPClient.Name = "TabPageTCPClient";
             this.TabPageTCPClient.Padding = new System.Windows.Forms.Padding(3);
-            this.TabPageTCPClient.Size = new System.Drawing.Size(892, 593);
+            this.TabPageTCPClient.Size = new System.Drawing.Size(892, 591);
             this.TabPageTCPClient.TabIndex = 1;
             this.TabPageTCPClient.Text = "TCP客户端";
             this.TabPageTCPClient.UseVisualStyleBackColor = true;
@@ -1209,9 +1209,10 @@
             // 
             // TabPageTCPClient_Tbx_NetLocalHostPort
             // 
+            this.TabPageTCPClient_Tbx_NetLocalHostPort.Font = new System.Drawing.Font("Calibri", 9.75F);
             this.TabPageTCPClient_Tbx_NetLocalHostPort.Location = new System.Drawing.Point(6, 81);
             this.TabPageTCPClient_Tbx_NetLocalHostPort.Name = "TabPageTCPClient_Tbx_NetLocalHostPort";
-            this.TabPageTCPClient_Tbx_NetLocalHostPort.Size = new System.Drawing.Size(71, 21);
+            this.TabPageTCPClient_Tbx_NetLocalHostPort.Size = new System.Drawing.Size(71, 23);
             this.TabPageTCPClient_Tbx_NetLocalHostPort.TabIndex = 4;
             // 
             // TabPageTCPClient_Lab_NetLocalHostPort
@@ -1225,9 +1226,10 @@
             // 
             // TabPageTCPClient_Tbx_NetLocalHostIP
             // 
+            this.TabPageTCPClient_Tbx_NetLocalHostIP.Font = new System.Drawing.Font("Calibri", 9.75F);
             this.TabPageTCPClient_Tbx_NetLocalHostIP.Location = new System.Drawing.Point(6, 32);
             this.TabPageTCPClient_Tbx_NetLocalHostIP.Name = "TabPageTCPClient_Tbx_NetLocalHostIP";
-            this.TabPageTCPClient_Tbx_NetLocalHostIP.Size = new System.Drawing.Size(138, 21);
+            this.TabPageTCPClient_Tbx_NetLocalHostIP.Size = new System.Drawing.Size(138, 23);
             this.TabPageTCPClient_Tbx_NetLocalHostIP.TabIndex = 2;
             // 
             // TabPageTCPClient_Lab_NetLocalHostIP
@@ -1470,9 +1472,10 @@
             // 
             // TabPageUDP_Tbx_NetLocalHostPort
             // 
+            this.TabPageUDP_Tbx_NetLocalHostPort.Font = new System.Drawing.Font("Calibri", 9.75F);
             this.TabPageUDP_Tbx_NetLocalHostPort.Location = new System.Drawing.Point(6, 81);
             this.TabPageUDP_Tbx_NetLocalHostPort.Name = "TabPageUDP_Tbx_NetLocalHostPort";
-            this.TabPageUDP_Tbx_NetLocalHostPort.Size = new System.Drawing.Size(71, 21);
+            this.TabPageUDP_Tbx_NetLocalHostPort.Size = new System.Drawing.Size(71, 23);
             this.TabPageUDP_Tbx_NetLocalHostPort.TabIndex = 4;
             // 
             // TabPageUDP_Lab_NetLocalHostPort
@@ -1486,9 +1489,10 @@
             // 
             // TabPageUDP_Tbx_NetLocalHostIP
             // 
+            this.TabPageUDP_Tbx_NetLocalHostIP.Font = new System.Drawing.Font("Calibri", 9.75F);
             this.TabPageUDP_Tbx_NetLocalHostIP.Location = new System.Drawing.Point(6, 32);
             this.TabPageUDP_Tbx_NetLocalHostIP.Name = "TabPageUDP_Tbx_NetLocalHostIP";
-            this.TabPageUDP_Tbx_NetLocalHostIP.Size = new System.Drawing.Size(138, 21);
+            this.TabPageUDP_Tbx_NetLocalHostIP.Size = new System.Drawing.Size(138, 23);
             this.TabPageUDP_Tbx_NetLocalHostIP.TabIndex = 2;
             // 
             // TabPageUDP_Lab_NetLocalHostIP

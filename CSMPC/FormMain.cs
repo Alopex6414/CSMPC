@@ -227,7 +227,8 @@ namespace CSMPC
 
             TabPageTCPServer_Cbx_ConnectObject.DropDownStyle = ComboBoxStyle.DropDownList;
             TabPageTCPServer_Cbx_ConnectObject.Items.Clear();
-            TabPageTCPServer_Cbx_ConnectObject.SelectedIndex = -1;
+            TabPageTCPServer_Cbx_ConnectObject.Items.Add("广播");
+            TabPageTCPServer_Cbx_ConnectObject.SelectedIndex = 0;
 
             // TCP客户端
 
