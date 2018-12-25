@@ -92,8 +92,10 @@ namespace CSMPC
         public bool m_bConnect = false;                                                             // TCP客户端连接状态
 
         private delegate void TCPCLIENTSETTEXTCALLBACK(string strText);                             // TCP客户端系统消息委托
+        private delegate void TCPCLIENTSTOPLISTENCALLBACK();                                        // TCP客户端响应服务端停止监听委托
 
         private TCPCLIENTSETTEXTCALLBACK TCPClientSetTextCallback;
+        private TCPCLIENTSTOPLISTENCALLBACK TCPClientStopListenCallback;
 
         public FormMain()
         {
@@ -1383,8 +1385,46 @@ namespace CSMPC
                     }
                     
                 }
-                catch(Exception)
+                catch(Exception ex)
                 {
+                    var e = ex as Win32Exception;
+
+                    if (e == null)
+                    {
+                        e = ex.InnerException as Win32Exception;
+                    }
+
+                    if (e != null)
+                    {
+                        if (e.ErrorCode == 10054)    // Socket远程主机关闭
+                        {
+                            string strIP = socket.RemoteEndPoint.ToString();
+
+                            // 服务端删除通信Socket
+                            foreach (KeyValuePair<string, Socket> pair in m_dicSocket)
+                            {
+                                if(pair.Key == strIP)
+                                {
+                                    m_dicSocket.Remove(pair.Key);   // 删除通信Socket
+                                    m_dicThread.Remove(pair.Key);   // 删除通信Thread
+                                    socket.Close();                 // 关闭通信Socket
+                                    break;
+                                }
+                            }
+
+                            // 清除Socket连接对象
+                            this.TabPageTCPServer_Cbx_ConnectObject.Invoke(TCPServerDelObjectCallback, strIP);
+
+                            string strMsg = "";
+                            strMsg = "Remote Client(" + strIP + ") has been Disconnected.";
+                            this.TabPageTCPServer_Tbx_Recv.Invoke(TCPServerSetTextCallback, strMsg);
+                        }
+                        else if (e.ErrorCode == 10053)   // Socket本地主机关闭
+                        {
+
+                        }
+                    }
+
                     break;
                 }
 
@@ -1579,6 +1619,7 @@ namespace CSMPC
 
                 // 客户端委托
                 TCPClientSetTextCallback = new TCPCLIENTSETTEXTCALLBACK(TCPClientSetText);
+                TCPClientStopListenCallback = new TCPCLIENTSTOPLISTENCALLBACK(TCPClientStopListen);
 
                 // 客户端接受(开启监听线程)
                 m_tSocketConnect = new Thread(new ParameterizedThreadStart(TCPClientRecvMessage));
@@ -1609,6 +1650,15 @@ namespace CSMPC
         {
             this.TabPageTCPClient_Tbx_Recv.AppendText(strText);
             this.TabPageTCPClient_Tbx_Recv.AppendText("\n");
+        }
+        #endregion
+
+        #region TCP客户端响应服务端停止监听委托
+        private void TCPClientStopListen()
+        {
+            m_bConnect = false;
+            this.TabPageTCPClient_Btn_NetConnect.Text = "连接";
+            this.TabPageTCPClient_Btn_Send.Enabled = false;
         }
         #endregion
 
@@ -1661,8 +1711,35 @@ namespace CSMPC
                     }
 
                 }
-                catch(Exception)
+                catch(Exception ex)
                 {
+                    var e = ex as Win32Exception;
+
+                    if(e == null)
+                    {
+                        e = ex.InnerException as Win32Exception;
+                    }
+
+                    if(e != null)
+                    {
+                        if(e.ErrorCode == 10054)    // Socket远程主机关闭
+                        {
+                            // TCP服务端已停止监听
+                            socket.Close();     // 关闭Socket
+
+                            string strMsg = "";
+                            strMsg = "Remote Server has Stopped Listen!";
+                            this.TabPageTCPClient_Tbx_Recv.Invoke(TCPClientSetTextCallback, strMsg);
+
+                            // 响应服务端停止监听委托
+                            this.Invoke(TCPClientStopListenCallback);
+                        }
+                        else if(e.ErrorCode == 10053)   // Socket本地主机关闭
+                        {
+
+                        }
+                    }
+
                     break;
                 }
 
