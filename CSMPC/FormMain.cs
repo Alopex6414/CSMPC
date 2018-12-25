@@ -86,6 +86,15 @@ namespace CSMPC
         private TCPSERVERADDOBJECTCALLBACK TCPServerAddObjectCallback;
         private TCPSERVERDELOBJECTCALLBACK TCPServerDelObjectCallback;
 
+        // TCP客户端
+        public Socket m_SocketClient;                                                               // TCP客户端连接Socket
+        public Thread m_tSocketConnect;                                                             // TCP客户端连接线程
+        public bool m_bConnect = false;                                                             // TCP客户端连接状态
+
+        private delegate void TCPCLIENTSETTEXTCALLBACK(string strText);                             // TCP客户端系统消息委托
+
+        private TCPCLIENTSETTEXTCALLBACK TCPClientSetTextCallback;
+
         public FormMain()
         {
             InitializeComponent();
@@ -1198,7 +1207,7 @@ namespace CSMPC
 
                 if (!IsIPAddress(strServerIp))
                 {
-                    MessageBox.Show("服务器IP地址不合法!", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("本地IP地址不合法!", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -1520,6 +1529,233 @@ namespace CSMPC
             this.TabPageTCPServer_Tbx_Send.SelectionStart = this.TabPageTCPServer_Tbx_Send.Text.Length;
             this.TabPageTCPServer_Tbx_Send.SelectionLength = 0;
             this.TabPageTCPServer_Tbx_Send.ScrollToCaret();
+        }
+        #endregion
+
+        #region TCP客户端连接
+        private void TabPageTCPServer_Btn_NetConnect_Click(object sender, EventArgs e)
+        {
+            if(!m_bConnect) // 开始连接
+            {
+                string strClientIp = string.Empty;
+                string strClientPort = string.Empty;
+
+                strClientIp = TabPageTCPClient_Tbx_NetLocalHostIP.Text;
+                strClientPort = TabPageTCPClient_Tbx_NetLocalHostPort.Text;
+
+                int nClientPort = int.Parse(strClientPort);
+
+                if (!IsIPAddress(strClientIp))
+                {
+                    MessageBox.Show("服务器IP地址不合法!", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // 客户端Socket
+                m_SocketClient = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+
+                // 获取服务器的IP地址
+                IPAddress iP = IPAddress.Parse(strClientIp);
+
+                // Socket连接服务器
+                try
+                {
+                    m_SocketClient.Connect(iP, nClientPort);
+                }
+                catch(Exception)
+                {
+                    this.TabPageTCPClient_Tbx_Recv.AppendText("Unable to Connect to Remote Server!");
+                    this.TabPageTCPClient_Tbx_Recv.AppendText("\n");
+                    return;
+                }
+
+                // 客户端消息提示
+                this.TabPageTCPClient_Tbx_Recv.AppendText("Successfully Connected to Remote Server...");
+                this.TabPageTCPClient_Tbx_Recv.AppendText("\n");
+
+                m_bConnect = true;
+                this.TabPageTCPClient_Btn_NetConnect.Text = "断开";
+                this.TabPageTCPClient_Btn_Send.Enabled = true;
+
+                // 客户端委托
+                TCPClientSetTextCallback = new TCPCLIENTSETTEXTCALLBACK(TCPClientSetText);
+
+                // 客户端接受(开启监听线程)
+                m_tSocketConnect = new Thread(new ParameterizedThreadStart(TCPClientRecvMessage));
+                m_tSocketConnect.IsBackground = true;
+                m_tSocketConnect.Start(m_SocketClient);
+            }
+            else // 断开连接
+            {
+                // 客户端关闭Socket
+                m_SocketClient.Close();
+
+                this.TabPageTCPClient_Tbx_Recv.AppendText("Disconnected From The Remote Server.");
+                this.TabPageTCPClient_Tbx_Recv.AppendText("\n");
+
+                // 客户端关闭接收线程Thread
+                m_tSocketConnect.Abort();
+
+                m_bConnect = false;
+                this.TabPageTCPClient_Btn_NetConnect.Text = "连接";
+                this.TabPageTCPClient_Btn_Send.Enabled = false;
+            }
+
+        }
+        #endregion
+
+        #region TCP客户端系统消息委托
+        private void TCPClientSetText(string strText)
+        {
+            this.TabPageTCPClient_Tbx_Recv.AppendText(strText);
+            this.TabPageTCPClient_Tbx_Recv.AppendText("\n");
+        }
+        #endregion
+
+        #region TCP客户端接收消息线程
+        private void TCPClientRecvMessage(object sender)
+        {
+            Socket socket = sender as Socket;
+            while(true)
+            {
+                // 客户端消息接收线程
+                byte[] RecvBuf = new byte[m_nRecvBufSize];  // TCP客户端消息接收缓冲数组(默认4096Byte)
+
+                try
+                {
+                    int nCount = socket.Receive(RecvBuf);                   // TCP客户端消息接收数据长度
+                    string strIP = socket.RemoteEndPoint.ToString();        // TCP服务端IP地址和端口号
+                    string strRecv = "";
+                    string strMsg = "";
+
+                    if(nCount == 0)
+                    {
+                        // TCP服务端断开连接
+                        socket.Close();     // 关闭Socket
+
+                        strMsg = "Remote Server has Stopped Listen!";
+                        this.TabPageTCPClient_Tbx_Recv.Invoke(TCPClientSetTextCallback, strMsg);
+
+                        break;
+                    }
+                    else
+                    {
+                        strMsg += "[" + strIP + "] ";
+                        strMsg += DateTime.Now.ToLongTimeString().ToString();
+                        this.TabPageTCPClient_Tbx_Recv.Invoke(TCPClientSetTextCallback, strMsg);
+
+                        if (this.TabPageTCPClient_Rad_NetRecvString.Checked)    // 字符串接收数据
+                        {
+                            strRecv = Encoding.Default.GetString(RecvBuf, 0, nCount);
+                        }
+                        else // 16进制接收数据
+                        {
+                            for (int i = 0; i < nCount; i++)
+                            {
+                                strRecv += (RecvBuf[i].ToString("X2") + " ");
+                            }
+                        }
+
+                        strMsg = strRecv;
+                        this.TabPageTCPClient_Tbx_Recv.Invoke(TCPClientSetTextCallback, strMsg);
+                    }
+
+                }
+                catch(Exception)
+                {
+                    break;
+                }
+
+            }
+
+        }
+        #endregion
+
+        #region TCP客户端消息区滚动
+        private void TabPageTCPClient_Tbx_Recv_TextChanged(object sender, EventArgs e)
+        {
+            this.TabPageTCPClient_Tbx_Recv.SelectionStart = this.TabPageTCPClient_Tbx_Recv.Text.Length;
+            this.TabPageTCPClient_Tbx_Recv.SelectionLength = 0;
+            this.TabPageTCPClient_Tbx_Recv.ScrollToCaret();
+        }
+        #endregion
+
+        #region TCP客户都接收区滚动
+        private void TabPageTCPClient_Tbx_Send_TextChanged(object sender, EventArgs e)
+        {
+            this.TabPageTCPClient_Tbx_Send.SelectionStart = this.TabPageTCPClient_Tbx_Send.Text.Length;
+            this.TabPageTCPClient_Tbx_Send.SelectionLength = 0;
+            this.TabPageTCPClient_Tbx_Send.ScrollToCaret();
+        }
+        #endregion
+
+        #region TCP客户端清除消息区
+        private void TabPageTCPClient_Btn_NetRecvClear_Click(object sender, EventArgs e)
+        {
+            this.TabPageTCPClient_Tbx_Recv.Clear();
+        }
+        #endregion
+
+        #region TCP客户端清除发送区
+        private void TabPageTCPClient_Btn_NetSendClear_Click(object sender, EventArgs e)
+        {
+            this.TabPageTCPClient_Tbx_Send.Clear();
+        }
+        #endregion
+
+        #region TCP客户端Socket发送消息
+        private void TabPageTCPClient_Btn_Send_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string strSend = this.TabPageTCPClient_Tbx_Send.Text.Trim();
+                byte[] SendBuf = null;
+
+                if (this.TabPageTCPClient_Rad_NetSendString.Checked)    // 字符串发送数据
+                {
+                    SendBuf = Encoding.Default.GetBytes(strSend);
+                }
+                else // 16进制发送数据
+                {
+                    string[] strArr = strSend.Split(' ');
+                    List<byte> SendList = new List<byte>();
+
+                    foreach (string str in strArr)
+                    {
+                        byte[] StrBuf = Encoding.Default.GetBytes(str);
+
+                        for (int i = 0; (i < StrBuf.Length) && ((i + 1) < StrBuf.Length); i += 2)
+                        {
+                            byte[] ShotBuf = new byte[] { StrBuf[i], StrBuf[i + 1] };
+                            string ShotStr = Encoding.Default.GetString(ShotBuf);
+                            byte StrValue = Convert.ToByte(ShotStr, 16);
+                            SendList.Add(StrValue);
+                        }
+
+                    }
+
+                    SendBuf = SendList.ToArray();
+                }
+
+                // Socket发送消息
+                m_SocketClient.Send(SendBuf);
+
+                // 消息区显示发送信息
+                string strIP = m_SocketClient.LocalEndPoint.ToString();
+                string strMsg = "";
+
+                strMsg += "[" + strIP + "] ";
+                strMsg += DateTime.Now.ToLongTimeString().ToString();
+                this.TabPageTCPClient_Tbx_Recv.Invoke(TCPClientSetTextCallback, strMsg);
+
+                strMsg = Encoding.Default.GetString(SendBuf);
+                this.TabPageTCPClient_Tbx_Recv.Invoke(TCPClientSetTextCallback, strMsg);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("发送消息发生错误! 错误:" + ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
         #endregion
 
@@ -2701,6 +2937,7 @@ namespace CSMPC
 
 
 
+
         #endregion
 
         #endregion
@@ -2719,5 +2956,6 @@ namespace CSMPC
         #region 关于
         #endregion
 
+        
     }
 }

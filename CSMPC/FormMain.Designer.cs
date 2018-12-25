@@ -119,7 +119,7 @@
             this.TabPageTCPClient_Rad_NetRecvHex = new System.Windows.Forms.RadioButton();
             this.TabPageTCPClient_Rad_NetRecvString = new System.Windows.Forms.RadioButton();
             this.TabPageTCPClient_Gbx_NetConfig = new System.Windows.Forms.GroupBox();
-            this.TabPageTCPServer_Btn_NetConnect = new System.Windows.Forms.Button();
+            this.TabPageTCPClient_Btn_NetConnect = new System.Windows.Forms.Button();
             this.TabPageTCPClient_Tbx_NetLocalHostPort = new System.Windows.Forms.TextBox();
             this.TabPageTCPClient_Lab_NetLocalHostPort = new System.Windows.Forms.Label();
             this.TabPageTCPClient_Tbx_NetLocalHostIP = new System.Windows.Forms.TextBox();
@@ -1053,6 +1053,7 @@
             this.TabPageTCPClient_Btn_Send.TabIndex = 2;
             this.TabPageTCPClient_Btn_Send.Text = "发送";
             this.TabPageTCPClient_Btn_Send.UseVisualStyleBackColor = true;
+            this.TabPageTCPClient_Btn_Send.Click += new System.EventHandler(this.TabPageTCPClient_Btn_Send_Click);
             // 
             // TabPageTCPClient_Tbx_Send
             // 
@@ -1062,6 +1063,7 @@
             this.TabPageTCPClient_Tbx_Send.Name = "TabPageTCPClient_Tbx_Send";
             this.TabPageTCPClient_Tbx_Send.Size = new System.Drawing.Size(712, 230);
             this.TabPageTCPClient_Tbx_Send.TabIndex = 1;
+            this.TabPageTCPClient_Tbx_Send.TextChanged += new System.EventHandler(this.TabPageTCPClient_Tbx_Send_TextChanged);
             // 
             // TabPageTCPClient_Gbx_Recv
             // 
@@ -1081,6 +1083,7 @@
             this.TabPageTCPClient_Tbx_Recv.Name = "TabPageTCPClient_Tbx_Recv";
             this.TabPageTCPClient_Tbx_Recv.Size = new System.Drawing.Size(712, 264);
             this.TabPageTCPClient_Tbx_Recv.TabIndex = 1;
+            this.TabPageTCPClient_Tbx_Recv.TextChanged += new System.EventHandler(this.TabPageTCPClient_Tbx_Recv_TextChanged);
             // 
             // TabPageTCPClient_Gbx_NetFunction
             // 
@@ -1113,6 +1116,7 @@
             this.TabPageTCPClient_Btn_NetSendClear.TabIndex = 2;
             this.TabPageTCPClient_Btn_NetSendClear.Text = "清发送区";
             this.TabPageTCPClient_Btn_NetSendClear.UseVisualStyleBackColor = true;
+            this.TabPageTCPClient_Btn_NetSendClear.Click += new System.EventHandler(this.TabPageTCPClient_Btn_NetSendClear_Click);
             // 
             // TabPageTCPClient_Btn_NetRecvClear
             // 
@@ -1122,6 +1126,7 @@
             this.TabPageTCPClient_Btn_NetRecvClear.TabIndex = 1;
             this.TabPageTCPClient_Btn_NetRecvClear.Text = "清消息区";
             this.TabPageTCPClient_Btn_NetRecvClear.UseVisualStyleBackColor = true;
+            this.TabPageTCPClient_Btn_NetRecvClear.Click += new System.EventHandler(this.TabPageTCPClient_Btn_NetRecvClear_Click);
             // 
             // TabPageTCPClient_Gbx_NetSend
             // 
@@ -1191,7 +1196,7 @@
             // 
             // TabPageTCPClient_Gbx_NetConfig
             // 
-            this.TabPageTCPClient_Gbx_NetConfig.Controls.Add(this.TabPageTCPServer_Btn_NetConnect);
+            this.TabPageTCPClient_Gbx_NetConfig.Controls.Add(this.TabPageTCPClient_Btn_NetConnect);
             this.TabPageTCPClient_Gbx_NetConfig.Controls.Add(this.TabPageTCPClient_Tbx_NetLocalHostPort);
             this.TabPageTCPClient_Gbx_NetConfig.Controls.Add(this.TabPageTCPClient_Lab_NetLocalHostPort);
             this.TabPageTCPClient_Gbx_NetConfig.Controls.Add(this.TabPageTCPClient_Tbx_NetLocalHostIP);
@@ -1203,14 +1208,15 @@
             this.TabPageTCPClient_Gbx_NetConfig.TabStop = false;
             this.TabPageTCPClient_Gbx_NetConfig.Text = "网络配置";
             // 
-            // TabPageTCPServer_Btn_NetConnect
+            // TabPageTCPClient_Btn_NetConnect
             // 
-            this.TabPageTCPServer_Btn_NetConnect.Location = new System.Drawing.Point(6, 118);
-            this.TabPageTCPServer_Btn_NetConnect.Name = "TabPageTCPServer_Btn_NetConnect";
-            this.TabPageTCPServer_Btn_NetConnect.Size = new System.Drawing.Size(138, 23);
-            this.TabPageTCPServer_Btn_NetConnect.TabIndex = 1;
-            this.TabPageTCPServer_Btn_NetConnect.Text = "连接";
-            this.TabPageTCPServer_Btn_NetConnect.UseVisualStyleBackColor = true;
+            this.TabPageTCPClient_Btn_NetConnect.Location = new System.Drawing.Point(6, 118);
+            this.TabPageTCPClient_Btn_NetConnect.Name = "TabPageTCPClient_Btn_NetConnect";
+            this.TabPageTCPClient_Btn_NetConnect.Size = new System.Drawing.Size(138, 23);
+            this.TabPageTCPClient_Btn_NetConnect.TabIndex = 1;
+            this.TabPageTCPClient_Btn_NetConnect.Text = "连接";
+            this.TabPageTCPClient_Btn_NetConnect.UseVisualStyleBackColor = true;
+            this.TabPageTCPClient_Btn_NetConnect.Click += new System.EventHandler(this.TabPageTCPServer_Btn_NetConnect_Click);
             // 
             // TabPageTCPClient_Tbx_NetLocalHostPort
             // 
@@ -2306,7 +2312,7 @@
         private System.Windows.Forms.GroupBox TabPageTCPServer_Gbx_Recv;
         private System.Windows.Forms.TextBox TabPageTCPServer_Tbx_Recv;
         private System.Windows.Forms.GroupBox TabPageTCPClient_Gbx_NetConfig;
-        private System.Windows.Forms.Button TabPageTCPServer_Btn_NetConnect;
+        private System.Windows.Forms.Button TabPageTCPClient_Btn_NetConnect;
         private System.Windows.Forms.TextBox TabPageTCPClient_Tbx_NetLocalHostPort;
         private System.Windows.Forms.Label TabPageTCPClient_Lab_NetLocalHostPort;
         private System.Windows.Forms.TextBox TabPageTCPClient_Tbx_NetLocalHostIP;
