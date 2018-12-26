@@ -97,6 +97,15 @@ namespace CSMPC
         private TCPCLIENTSETTEXTCALLBACK TCPClientSetTextCallback;
         private TCPCLIENTSTOPLISTENCALLBACK TCPClientStopListenCallback;
 
+        // UDP
+        public Socket m_SocketUDP;                                                                  // UDP通信连接Socket
+        public Thread m_tSocketUDP;                                                                 // UDP通信连接线程
+        public bool m_bUDP = false;                                                                 // UDP通信打开关闭状态(true:开启/false:关闭)
+
+        private delegate void UDPSETTEXTCALLBACK(string strText);                                   // UDP通信系统消息委托
+
+        private UDPSETTEXTCALLBACK UDPSetTextCallback;
+
         public FormMain()
         {
             InitializeComponent();
@@ -1064,6 +1073,8 @@ namespace CSMPC
 
         #region 网络调试
 
+        #region TCP服务端
+
         #region 获取本地IP地址
         public static string GetLocalIP()   // 获取本地IP地址
         {
@@ -1572,6 +1583,10 @@ namespace CSMPC
         }
         #endregion
 
+        #endregion
+
+        #region TCP客户端
+
         #region TCP客户端连接
         private void TabPageTCPServer_Btn_NetConnect_Click(object sender, EventArgs e)
         {
@@ -1757,7 +1772,7 @@ namespace CSMPC
         }
         #endregion
 
-        #region TCP客户都接收区滚动
+        #region TCP客户端接收区滚动
         private void TabPageTCPClient_Tbx_Send_TextChanged(object sender, EventArgs e)
         {
             this.TabPageTCPClient_Tbx_Send.SelectionStart = this.TabPageTCPClient_Tbx_Send.Text.Length;
@@ -1834,6 +1849,263 @@ namespace CSMPC
             }
 
         }
+        #endregion
+
+        #endregion
+
+        #region UDP
+
+        #region UDP打开关闭连接
+        private void TabPageUDP_Btn_NetOpen_Click(object sender, EventArgs e)
+        {
+            if(!m_bUDP) // 打开
+            {
+                string strUDPIp = string.Empty;
+                string strUDPPort = string.Empty;
+
+                strUDPIp = TabPageUDP_Tbx_NetLocalHostIP.Text;
+                strUDPPort = TabPageUDP_Tbx_NetLocalHostPort.Text;
+
+                int nUDPPort = int.Parse(strUDPPort);
+
+                if (!IsIPAddress(strUDPIp))
+                {
+                    MessageBox.Show("本地IP地址不合法!", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // UDP通信Socket
+                m_SocketUDP = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+
+                // 获取本地的IP地址
+                IPAddress iP = IPAddress.Parse(strUDPIp);
+
+                // 获取本地的端口号
+                IPEndPoint point = new IPEndPoint(iP, nUDPPort);
+
+                // UDP通信绑定网络地址
+                try
+                {
+                    m_SocketUDP.Bind(point);
+                }
+                catch(Exception)
+                {
+                    this.TabPageUDP_Tbx_Recv.AppendText("The UDP Port is Already Occupied!");
+                    this.TabPageUDP_Tbx_Recv.AppendText("\n");
+                    return;
+                }
+
+                // UDP通信消息提示
+                this.TabPageUDP_Tbx_Recv.AppendText("Successfully Open UDP Port...");
+                this.TabPageUDP_Tbx_Recv.AppendText("\n");
+
+                m_bUDP = true;
+                this.TabPageUDP_Btn_NetOpen.Text = "断开";
+                this.TabPageUDP_Btn_Send.Enabled = true;
+
+                // UDP通信委托
+                UDPSetTextCallback = new UDPSETTEXTCALLBACK(UDPSetText);
+
+                // UDP通信接受(开启监听线程)
+                m_tSocketUDP = new Thread(new ParameterizedThreadStart(UDPRecvMessage));
+                m_tSocketUDP.IsBackground = true;
+                m_tSocketUDP.Start(m_SocketUDP);
+            }
+            else // 关闭
+            {
+                // UDP通信关闭Socket
+                m_SocketUDP.Close();
+
+                this.TabPageUDP_Tbx_Recv.AppendText("Successfully Close UDP Port...");
+                this.TabPageUDP_Tbx_Recv.AppendText("\n");
+
+                // UDP通信关闭接收线程Thread
+                m_tSocketUDP.Abort();
+
+                m_bUDP = false;
+                this.TabPageUDP_Btn_NetOpen.Text = "打开";
+                this.TabPageUDP_Btn_Send.Enabled = false;
+            }
+
+        }
+        #endregion
+
+        #region UDP消息区系统消息委托
+        private void UDPSetText(string strText)
+        {
+            this.TabPageUDP_Tbx_Recv.AppendText(strText);
+            this.TabPageUDP_Tbx_Recv.AppendText("\n");
+        }
+        #endregion
+
+        #region UDP消息区滚动
+        private void TabPageUDP_Tbx_Recv_TextChanged(object sender, EventArgs e)
+        {
+            this.TabPageUDP_Tbx_Recv.SelectionStart = this.TabPageUDP_Tbx_Recv.Text.Length;
+            this.TabPageUDP_Tbx_Recv.SelectionLength = 0;
+            this.TabPageUDP_Tbx_Recv.ScrollToCaret();
+        }
+        #endregion
+
+        #region UDP发送区滚动
+        private void TabPageUDP_Tbx_Send_TextChanged(object sender, EventArgs e)
+        {
+            this.TabPageUDP_Tbx_Send.SelectionStart = this.TabPageUDP_Tbx_Send.Text.Length;
+            this.TabPageUDP_Tbx_Send.SelectionLength = 0;
+            this.TabPageUDP_Tbx_Send.ScrollToCaret();
+        }
+        #endregion
+
+        #region UDP清除消息区
+        private void TabPageUDP_Btn_NetRecvClear_Click(object sender, EventArgs e)
+        {
+            this.TabPageUDP_Tbx_Recv.Clear();
+        }
+        #endregion
+
+        #region UDP清除发送区
+        private void TabPageUDP_Btn_NetSendClear_Click(object sender, EventArgs e)
+        {
+            this.TabPageUDP_Tbx_Send.Clear();
+        }
+        #endregion
+
+        #region UDP通信接收消息线程
+        private void UDPRecvMessage(object sender)
+        {
+            Socket socket = sender as Socket;
+            while(true)
+            {
+                // UDP消息接收线程
+                byte[] RecvBuf = new byte[m_nRecvBufSize];  // UDP消息接收缓冲数组(默认4096Byte)
+
+                try
+                {
+                    EndPoint point = new IPEndPoint(IPAddress.Any, 0);
+                    int nCount = socket.ReceiveFrom(RecvBuf, ref point);
+                    string strIP = point.ToString();        // UDP通信IP地址和端口号
+                    string strRecv = "";
+                    string strMsg = "";
+
+                    if (nCount == 0)
+                    {
+                        // UDP通信断开连接
+                        socket.Close();     // 关闭Socket
+
+                        strMsg = "Remote UDP is Disconnected!";
+                        this.TabPageUDP_Tbx_Recv.Invoke(UDPSetTextCallback, strMsg);
+
+                        break;
+                    }
+                    else
+                    {
+                        strMsg += "[" + strIP + "] ";
+                        strMsg += DateTime.Now.ToLongTimeString().ToString();
+                        this.TabPageUDP_Tbx_Recv.Invoke(UDPSetTextCallback, strMsg);
+
+                        if (this.TabPageUDP_Rad_NetRecvString.Checked)    // 字符串接收数据
+                        {
+                            strRecv = Encoding.Default.GetString(RecvBuf, 0, nCount);
+                        }
+                        else // 16进制接收数据
+                        {
+                            for (int i = 0; i < nCount; i++)
+                            {
+                                strRecv += (RecvBuf[i].ToString("X2") + " ");
+                            }
+                        }
+
+                        strMsg = strRecv;
+                        this.TabPageUDP_Tbx_Recv.Invoke(UDPSetTextCallback, strMsg);
+                    }
+
+                }
+                catch(Exception ex)
+                {
+
+                }
+
+            }
+
+        }
+        #endregion
+
+        #region UDP通信Socket发送消息
+        private void TabPageUDP_Btn_Send_Click(object sender, EventArgs e)
+        {
+            string strUDPIp = string.Empty;
+            string strUDPPort = string.Empty;
+
+            strUDPIp = this.TabPageUDP_Tbx_TargetIP.Text;
+            strUDPPort = this.TabPageUDP_Tbx_TargetPort.Text;
+
+            int nUDPPort = int.Parse(strUDPPort);
+
+            if (!IsIPAddress(strUDPIp))
+            {
+                MessageBox.Show("远程IP地址不合法!", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // 获取本地的IP地址
+            IPAddress iP = IPAddress.Parse(strUDPIp);
+
+            // 获取本地的端口号
+            EndPoint point = new IPEndPoint(iP, nUDPPort);
+
+            try
+            {
+                string strSend = this.TabPageUDP_Tbx_Send.Text.Trim();
+                byte[] SendBuf = null;
+
+                if (this.TabPageUDP_Rad_NetSendString.Checked)    // 字符串发送数据
+                {
+                    SendBuf = Encoding.Default.GetBytes(strSend);
+                }
+                else // 16进制发送数据
+                {
+                    string[] strArr = strSend.Split(' ');
+                    List<byte> SendList = new List<byte>();
+
+                    foreach (string str in strArr)
+                    {
+                        byte[] StrBuf = Encoding.Default.GetBytes(str);
+
+                        for (int i = 0; (i < StrBuf.Length) && ((i + 1) < StrBuf.Length); i += 2)
+                        {
+                            byte[] ShotBuf = new byte[] { StrBuf[i], StrBuf[i + 1] };
+                            string ShotStr = Encoding.Default.GetString(ShotBuf);
+                            byte StrValue = Convert.ToByte(ShotStr, 16);
+                            SendList.Add(StrValue);
+                        }
+
+                    }
+
+                    SendBuf = SendList.ToArray();
+                }
+
+                // Socket发送消息
+                m_SocketUDP.SendTo(SendBuf, SocketFlags.None, point);
+
+                // 消息区显示发送信息
+                string strIP = m_SocketUDP.LocalEndPoint.ToString();
+                string strMsg = "";
+
+                strMsg += "[" + strIP + "] ";
+                strMsg += DateTime.Now.ToLongTimeString().ToString();
+                this.TabPageUDP_Tbx_Recv.Invoke(UDPSetTextCallback, strMsg);
+
+                strMsg = Encoding.Default.GetString(SendBuf);
+                this.TabPageUDP_Tbx_Recv.Invoke(UDPSetTextCallback, strMsg);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("发送消息发生错误! 错误:" + ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
+        #endregion
+
         #endregion
 
         #endregion
@@ -3008,6 +3280,7 @@ namespace CSMPC
                 }
             }
         }
+
 
 
 

@@ -1283,9 +1283,10 @@
             // 
             // TabPageUDP_Tbx_TargetPort
             // 
+            this.TabPageUDP_Tbx_TargetPort.Font = new System.Drawing.Font("Calibri", 9.75F);
             this.TabPageUDP_Tbx_TargetPort.Location = new System.Drawing.Point(292, 258);
             this.TabPageUDP_Tbx_TargetPort.Name = "TabPageUDP_Tbx_TargetPort";
-            this.TabPageUDP_Tbx_TargetPort.Size = new System.Drawing.Size(71, 21);
+            this.TabPageUDP_Tbx_TargetPort.Size = new System.Drawing.Size(71, 23);
             this.TabPageUDP_Tbx_TargetPort.TabIndex = 5;
             // 
             // TabPageUDP_Lab_TargetPort
@@ -1299,9 +1300,10 @@
             // 
             // TabPageUDP_Tbx_TargetIP
             // 
+            this.TabPageUDP_Tbx_TargetIP.Font = new System.Drawing.Font("Calibri", 9.75F);
             this.TabPageUDP_Tbx_TargetIP.Location = new System.Drawing.Point(83, 258);
             this.TabPageUDP_Tbx_TargetIP.Name = "TabPageUDP_Tbx_TargetIP";
-            this.TabPageUDP_Tbx_TargetIP.Size = new System.Drawing.Size(138, 21);
+            this.TabPageUDP_Tbx_TargetIP.Size = new System.Drawing.Size(138, 23);
             this.TabPageUDP_Tbx_TargetIP.TabIndex = 5;
             // 
             // TabPageUDP_Lab_TargetIP
@@ -1322,6 +1324,7 @@
             this.TabPageUDP_Btn_Send.TabIndex = 2;
             this.TabPageUDP_Btn_Send.Text = "发送";
             this.TabPageUDP_Btn_Send.UseVisualStyleBackColor = true;
+            this.TabPageUDP_Btn_Send.Click += new System.EventHandler(this.TabPageUDP_Btn_Send_Click);
             // 
             // TabPageUDP_Tbx_Send
             // 
@@ -1331,6 +1334,7 @@
             this.TabPageUDP_Tbx_Send.Name = "TabPageUDP_Tbx_Send";
             this.TabPageUDP_Tbx_Send.Size = new System.Drawing.Size(712, 230);
             this.TabPageUDP_Tbx_Send.TabIndex = 1;
+            this.TabPageUDP_Tbx_Send.TextChanged += new System.EventHandler(this.TabPageUDP_Tbx_Send_TextChanged);
             // 
             // TabPageUDP_Gbx_Recv
             // 
@@ -1350,6 +1354,7 @@
             this.TabPageUDP_Tbx_Recv.Name = "TabPageUDP_Tbx_Recv";
             this.TabPageUDP_Tbx_Recv.Size = new System.Drawing.Size(712, 264);
             this.TabPageUDP_Tbx_Recv.TabIndex = 1;
+            this.TabPageUDP_Tbx_Recv.TextChanged += new System.EventHandler(this.TabPageUDP_Tbx_Recv_TextChanged);
             // 
             // TabPageUDP_Gbx_NetFunction
             // 
@@ -1382,6 +1387,7 @@
             this.TabPageUDP_Btn_NetSendClear.TabIndex = 2;
             this.TabPageUDP_Btn_NetSendClear.Text = "清发送区";
             this.TabPageUDP_Btn_NetSendClear.UseVisualStyleBackColor = true;
+            this.TabPageUDP_Btn_NetSendClear.Click += new System.EventHandler(this.TabPageUDP_Btn_NetSendClear_Click);
             // 
             // TabPageUDP_Btn_NetRecvClear
             // 
@@ -1391,6 +1397,7 @@
             this.TabPageUDP_Btn_NetRecvClear.TabIndex = 1;
             this.TabPageUDP_Btn_NetRecvClear.Text = "清消息区";
             this.TabPageUDP_Btn_NetRecvClear.UseVisualStyleBackColor = true;
+            this.TabPageUDP_Btn_NetRecvClear.Click += new System.EventHandler(this.TabPageUDP_Btn_NetRecvClear_Click);
             // 
             // TabPageUDP_Gbx_NetSend
             // 
@@ -1480,6 +1487,7 @@
             this.TabPageUDP_Btn_NetOpen.TabIndex = 1;
             this.TabPageUDP_Btn_NetOpen.Text = "打开";
             this.TabPageUDP_Btn_NetOpen.UseVisualStyleBackColor = true;
+            this.TabPageUDP_Btn_NetOpen.Click += new System.EventHandler(this.TabPageUDP_Btn_NetOpen_Click);
             // 
             // TabPageUDP_Tbx_NetLocalHostPort
             // 
