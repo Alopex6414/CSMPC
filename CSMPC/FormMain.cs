@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -12,6 +13,7 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.IO;
 using System.IO.Ports;
+using System.Management;
 using System.Net;
 using System.Net.Sockets;
 using Microsoft.Win32;
@@ -439,6 +441,10 @@ namespace CSMPC
             // 关闭串口
             SerialPortCurve.Close();
 
+            #endregion
+
+            #region 数据分析选项卡初始化
+            
             #endregion
 
         }
@@ -2022,7 +2028,7 @@ namespace CSMPC
                 }
                 catch(Exception ex)
                 {
-
+                    
                 }
 
             }
@@ -3306,6 +3312,7 @@ namespace CSMPC
         #region 关于
         #endregion
 
-        
+
     }
+
 }
