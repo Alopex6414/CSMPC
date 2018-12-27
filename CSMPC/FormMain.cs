@@ -3431,6 +3431,16 @@ namespace CSMPC
             ZedGraph_Process_7 = this.TabPageProcess_Zed_Graph.GraphPane.AddCurve("进程7", ZedGraph_ProcessList_7, Color.RoyalBlue, SymbolType.None);
             ZedGraph_Process_8 = this.TabPageProcess_Zed_Graph.GraphPane.AddCurve("进程8", ZedGraph_ProcessList_8, Color.BlueViolet, SymbolType.None);
 
+            // ZedGraph曲线可见
+            ZedGraph_Process_1.IsVisible = false;
+            ZedGraph_Process_2.IsVisible = false;
+            ZedGraph_Process_3.IsVisible = false;
+            ZedGraph_Process_4.IsVisible = false;
+            ZedGraph_Process_5.IsVisible = false;
+            ZedGraph_Process_6.IsVisible = false;
+            ZedGraph_Process_7.IsVisible = false;
+            ZedGraph_Process_8.IsVisible = false;
+
             // ZedGraph曲线样式设置
             ZedGraph_Process_1.Line.Width = 2;
             ZedGraph_Process_2.Line.Width = 2;
@@ -3508,7 +3518,7 @@ namespace CSMPC
             TabAnalysisProcessPage_Tbx_PID.ReadOnly = true;
             TabAnalysisProcessPage_Btn_Find.Enabled = false;
             TabAnalysisProcessPage_Btn_Add.Enabled = true;
-            TabAnalysisProcessPage_Btn_Start.Enabled = false;
+            TabAnalysisProcessPage_Btn_Del.Enabled = false;
         }
 
         #endregion
@@ -3549,7 +3559,7 @@ namespace CSMPC
 
                 this.TabAnalysisProcessPage_Btn_Find.Enabled = true;
                 this.TabAnalysisProcessPage_Btn_Add.Enabled = false;
-                this.TabAnalysisProcessPage_Btn_Start.Enabled = true;
+                this.TabAnalysisProcessPage_Btn_Del.Enabled = true;
             }
             
         }
@@ -3597,6 +3607,9 @@ namespace CSMPC
                 this.TabAnalysisProcessPage_LV_Process.Items.Add(item);
             }
             this.TabAnalysisProcessPage_LV_Process.EndUpdate();
+
+            // 进程曲线CheckBox变化
+            AnalysisProcess_UpdateList_CheckedChanged(m_dicProcessHandle.Count);
 
             // 恢复进程PID查找
             TabAnalysisProcessPage_Tbx_PID.ReadOnly = false;
@@ -3656,6 +3669,9 @@ namespace CSMPC
                 this.TabAnalysisProcessPage_LV_Process.Items.Add(item);
             }
             this.TabAnalysisProcessPage_LV_Process.EndUpdate();
+
+            // 进程曲线CheckBox变化
+            AnalysisProcess_UpdateList_CheckedChanged(m_dicProcessHandle.Count);
 
         }
         #endregion
@@ -3726,14 +3742,14 @@ namespace CSMPC
                 // 刷新UI界面
                 this.Invoke((EventHandler)(delegate
                 {
-                    this.TabAnalysisProcessPage_Lab_P1.Text = "数值:" + m_dProcessCurveValue[0].ToString();   // 曲线1数值显示
-                    this.TabAnalysisProcessPage_Lab_P2.Text = "数值:" + m_dProcessCurveValue[1].ToString();   // 曲线2数值显示
-                    this.TabAnalysisProcessPage_Lab_P3.Text = "数值:" + m_dProcessCurveValue[2].ToString();   // 曲线3数值显示
-                    this.TabAnalysisProcessPage_Lab_P4.Text = "数值:" + m_dProcessCurveValue[3].ToString();   // 曲线4数值显示
-                    this.TabAnalysisProcessPage_Lab_P5.Text = "数值:" + m_dProcessCurveValue[4].ToString();   // 曲线5数值显示
-                    this.TabAnalysisProcessPage_Lab_P6.Text = "数值:" + m_dProcessCurveValue[5].ToString();   // 曲线6数值显示
-                    this.TabAnalysisProcessPage_Lab_P7.Text = "数值:" + m_dProcessCurveValue[6].ToString();   // 曲线7数值显示
-                    this.TabAnalysisProcessPage_Lab_P8.Text = "数值:" + m_dProcessCurveValue[7].ToString();   // 曲线8数值显示
+                    this.TabAnalysisProcessPage_Lab_P1.Text = "数值:" + m_dProcessCurveValue[0].ToString();   // 进程1数值显示
+                    this.TabAnalysisProcessPage_Lab_P2.Text = "数值:" + m_dProcessCurveValue[1].ToString();   // 进程2数值显示
+                    this.TabAnalysisProcessPage_Lab_P3.Text = "数值:" + m_dProcessCurveValue[2].ToString();   // 进程3数值显示
+                    this.TabAnalysisProcessPage_Lab_P4.Text = "数值:" + m_dProcessCurveValue[3].ToString();   // 进程4数值显示
+                    this.TabAnalysisProcessPage_Lab_P5.Text = "数值:" + m_dProcessCurveValue[4].ToString();   // 进程5数值显示
+                    this.TabAnalysisProcessPage_Lab_P6.Text = "数值:" + m_dProcessCurveValue[5].ToString();   // 进程6数值显示
+                    this.TabAnalysisProcessPage_Lab_P7.Text = "数值:" + m_dProcessCurveValue[6].ToString();   // 进程7数值显示
+                    this.TabAnalysisProcessPage_Lab_P8.Text = "数值:" + m_dProcessCurveValue[7].ToString();   // 进程8数值显示
 
                     // 坐标点数多余300后保持坐标中存在300点
                     if (ZedGraph_ProcessList_1.Count >= 300)
@@ -3785,7 +3801,230 @@ namespace CSMPC
                 m_bPMFinish = false;  // 等待拆分数据
             }
         }
+        #endregion
 
+        #region 进程监视复选框Checked变化
+        private void TabAnalysisProcessPage_Cbx_P1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.TabAnalysisProcessPage_Cbx_P1.Checked)
+            {
+                ZedGraph_Process_1.IsVisible = true;
+            }
+            else
+            {
+                ZedGraph_Process_1.IsVisible = false;
+            }
+        }
+
+        private void TabAnalysisProcessPage_Cbx_P2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.TabAnalysisProcessPage_Cbx_P2.Checked)
+            {
+                ZedGraph_Process_2.IsVisible = true;
+            }
+            else
+            {
+                ZedGraph_Process_2.IsVisible = false;
+            }
+        }
+
+        private void TabAnalysisProcessPage_Cbx_P3_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.TabAnalysisProcessPage_Cbx_P3.Checked)
+            {
+                ZedGraph_Process_3.IsVisible = true;
+            }
+            else
+            {
+                ZedGraph_Process_3.IsVisible = false;
+            }
+        }
+
+        private void TabAnalysisProcessPage_Cbx_P4_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.TabAnalysisProcessPage_Cbx_P4.Checked)
+            {
+                ZedGraph_Process_4.IsVisible = true;
+            }
+            else
+            {
+                ZedGraph_Process_4.IsVisible = false;
+            }
+        }
+
+        private void TabAnalysisProcessPage_Cbx_P5_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.TabAnalysisProcessPage_Cbx_P5.Checked)
+            {
+                ZedGraph_Process_5.IsVisible = true;
+            }
+            else
+            {
+                ZedGraph_Process_5.IsVisible = false;
+            }
+        }
+
+        private void TabAnalysisProcessPage_Cbx_P6_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.TabAnalysisProcessPage_Cbx_P6.Checked)
+            {
+                ZedGraph_Process_6.IsVisible = true;
+            }
+            else
+            {
+                ZedGraph_Process_6.IsVisible = false;
+            }
+        }
+
+        private void TabAnalysisProcessPage_Cbx_P7_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.TabAnalysisProcessPage_Cbx_P7.Checked)
+            {
+                ZedGraph_Process_7.IsVisible = true;
+            }
+            else
+            {
+                ZedGraph_Process_7.IsVisible = false;
+            }
+        }
+
+        private void TabAnalysisProcessPage_Cbx_P8_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.TabAnalysisProcessPage_Cbx_P8.Checked)
+            {
+                ZedGraph_Process_8.IsVisible = true;
+            }
+            else
+            {
+                ZedGraph_Process_8.IsVisible = false;
+            }
+        }
+        #endregion
+
+        #region 进程监视清除所有曲线
+        private void TabAnalysisProcessPage_Btn_Clear_Click(object sender, EventArgs e)
+        {
+            // 清除绘图曲线
+            ZedGraph_ProcessList_1.RemoveRange(0, ZedGraph_ProcessList_1.Count);  // 清除曲线1数据
+            ZedGraph_ProcessList_2.RemoveRange(0, ZedGraph_ProcessList_2.Count);  // 清除曲线2数据
+            ZedGraph_ProcessList_3.RemoveRange(0, ZedGraph_ProcessList_3.Count);  // 清除曲线3数据
+            ZedGraph_ProcessList_4.RemoveRange(0, ZedGraph_ProcessList_4.Count);  // 清除曲线4数据
+            ZedGraph_ProcessList_5.RemoveRange(0, ZedGraph_ProcessList_5.Count);  // 清除曲线5数据
+            ZedGraph_ProcessList_6.RemoveRange(0, ZedGraph_ProcessList_6.Count);  // 清除曲线6数据
+            ZedGraph_ProcessList_7.RemoveRange(0, ZedGraph_ProcessList_7.Count);  // 清除曲线7数据
+            ZedGraph_ProcessList_8.RemoveRange(0, ZedGraph_ProcessList_8.Count);  // 清除曲线8数据
+
+            ZedGraph_Process_1.Clear();   // 清除曲线1数据
+            ZedGraph_Process_2.Clear();   // 清除曲线2数据
+            ZedGraph_Process_3.Clear();   // 清除曲线3数据
+            ZedGraph_Process_4.Clear();   // 清除曲线4数据
+            ZedGraph_Process_5.Clear();   // 清除曲线5数据
+            ZedGraph_Process_6.Clear();   // 清除曲线6数据
+            ZedGraph_Process_7.Clear();   // 清除曲线7数据
+            ZedGraph_Process_8.Clear();   // 清除曲线8数据
+
+            this.TabPageProcess_Zed_Graph.Refresh();  // ZedGraph刷新
+        }
+        #endregion
+
+        #region 进程监视当前显示曲线响应
+        private void AnalysisProcess_UpdateList_CheckedChanged(int nCount)  // 曲线选中项改变
+        {
+            switch(nCount)
+            {
+                case 0:
+                    this.TabAnalysisProcessPage_Cbx_P1.Checked = false;
+                    this.TabAnalysisProcessPage_Cbx_P2.Checked = false;
+                    this.TabAnalysisProcessPage_Cbx_P3.Checked = false;
+                    this.TabAnalysisProcessPage_Cbx_P4.Checked = false;
+                    this.TabAnalysisProcessPage_Cbx_P5.Checked = false;
+                    this.TabAnalysisProcessPage_Cbx_P6.Checked = false;
+                    this.TabAnalysisProcessPage_Cbx_P7.Checked = false;
+                    this.TabAnalysisProcessPage_Cbx_P8.Checked = false;
+                    break;
+                case 1:
+                    this.TabAnalysisProcessPage_Cbx_P1.Checked = true;
+                    this.TabAnalysisProcessPage_Cbx_P2.Checked = false;
+                    this.TabAnalysisProcessPage_Cbx_P3.Checked = false;
+                    this.TabAnalysisProcessPage_Cbx_P4.Checked = false;
+                    this.TabAnalysisProcessPage_Cbx_P5.Checked = false;
+                    this.TabAnalysisProcessPage_Cbx_P6.Checked = false;
+                    this.TabAnalysisProcessPage_Cbx_P7.Checked = false;
+                    this.TabAnalysisProcessPage_Cbx_P8.Checked = false;
+                    break;
+                case 2:
+                    this.TabAnalysisProcessPage_Cbx_P1.Checked = true;
+                    this.TabAnalysisProcessPage_Cbx_P2.Checked = true;
+                    this.TabAnalysisProcessPage_Cbx_P3.Checked = false;
+                    this.TabAnalysisProcessPage_Cbx_P4.Checked = false;
+                    this.TabAnalysisProcessPage_Cbx_P5.Checked = false;
+                    this.TabAnalysisProcessPage_Cbx_P6.Checked = false;
+                    this.TabAnalysisProcessPage_Cbx_P7.Checked = false;
+                    this.TabAnalysisProcessPage_Cbx_P8.Checked = false;
+                    break;
+                case 3:
+                    this.TabAnalysisProcessPage_Cbx_P1.Checked = true;
+                    this.TabAnalysisProcessPage_Cbx_P2.Checked = true;
+                    this.TabAnalysisProcessPage_Cbx_P3.Checked = true;
+                    this.TabAnalysisProcessPage_Cbx_P4.Checked = false;
+                    this.TabAnalysisProcessPage_Cbx_P5.Checked = false;
+                    this.TabAnalysisProcessPage_Cbx_P6.Checked = false;
+                    this.TabAnalysisProcessPage_Cbx_P7.Checked = false;
+                    this.TabAnalysisProcessPage_Cbx_P8.Checked = false;
+                    break;
+                case 4:
+                    this.TabAnalysisProcessPage_Cbx_P1.Checked = true;
+                    this.TabAnalysisProcessPage_Cbx_P2.Checked = true;
+                    this.TabAnalysisProcessPage_Cbx_P3.Checked = true;
+                    this.TabAnalysisProcessPage_Cbx_P4.Checked = true;
+                    this.TabAnalysisProcessPage_Cbx_P5.Checked = false;
+                    this.TabAnalysisProcessPage_Cbx_P6.Checked = false;
+                    this.TabAnalysisProcessPage_Cbx_P7.Checked = false;
+                    this.TabAnalysisProcessPage_Cbx_P8.Checked = false;
+                    break;
+                case 5:
+                    this.TabAnalysisProcessPage_Cbx_P1.Checked = true;
+                    this.TabAnalysisProcessPage_Cbx_P2.Checked = true;
+                    this.TabAnalysisProcessPage_Cbx_P3.Checked = true;
+                    this.TabAnalysisProcessPage_Cbx_P4.Checked = true;
+                    this.TabAnalysisProcessPage_Cbx_P5.Checked = true;
+                    this.TabAnalysisProcessPage_Cbx_P6.Checked = false;
+                    this.TabAnalysisProcessPage_Cbx_P7.Checked = false;
+                    this.TabAnalysisProcessPage_Cbx_P8.Checked = false;
+                    break;
+                case 6:
+                    this.TabAnalysisProcessPage_Cbx_P1.Checked = true;
+                    this.TabAnalysisProcessPage_Cbx_P2.Checked = true;
+                    this.TabAnalysisProcessPage_Cbx_P3.Checked = true;
+                    this.TabAnalysisProcessPage_Cbx_P4.Checked = true;
+                    this.TabAnalysisProcessPage_Cbx_P5.Checked = true;
+                    this.TabAnalysisProcessPage_Cbx_P6.Checked = true;
+                    this.TabAnalysisProcessPage_Cbx_P7.Checked = false;
+                    this.TabAnalysisProcessPage_Cbx_P8.Checked = false;
+                    break;
+                case 7:
+                    this.TabAnalysisProcessPage_Cbx_P1.Checked = true;
+                    this.TabAnalysisProcessPage_Cbx_P2.Checked = true;
+                    this.TabAnalysisProcessPage_Cbx_P3.Checked = true;
+                    this.TabAnalysisProcessPage_Cbx_P4.Checked = true;
+                    this.TabAnalysisProcessPage_Cbx_P5.Checked = true;
+                    this.TabAnalysisProcessPage_Cbx_P6.Checked = true;
+                    this.TabAnalysisProcessPage_Cbx_P7.Checked = true;
+                    this.TabAnalysisProcessPage_Cbx_P8.Checked = false;
+                    break;
+                case 8:
+                    this.TabAnalysisProcessPage_Cbx_P1.Checked = true;
+                    this.TabAnalysisProcessPage_Cbx_P2.Checked = true;
+                    this.TabAnalysisProcessPage_Cbx_P3.Checked = true;
+                    this.TabAnalysisProcessPage_Cbx_P4.Checked = true;
+                    this.TabAnalysisProcessPage_Cbx_P5.Checked = true;
+                    this.TabAnalysisProcessPage_Cbx_P6.Checked = true;
+                    this.TabAnalysisProcessPage_Cbx_P7.Checked = true;
+                    this.TabAnalysisProcessPage_Cbx_P8.Checked = true;
+                    break;
+            }
+
+        }
         #endregion
 
         #endregion
@@ -3800,6 +4039,7 @@ namespace CSMPC
 
         #region 关于
         #endregion
+
 
     }
 

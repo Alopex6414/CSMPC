@@ -2182,6 +2182,7 @@
             this.TabAnalysisProcessPage_Btn_Clear.TabIndex = 4;
             this.TabAnalysisProcessPage_Btn_Clear.Text = "清除";
             this.TabAnalysisProcessPage_Btn_Clear.UseVisualStyleBackColor = true;
+            this.TabAnalysisProcessPage_Btn_Clear.Click += new System.EventHandler(this.TabAnalysisProcessPage_Btn_Clear_Click);
             // 
             // TabAnalysisProcessPage_Lab_P8
             // 
@@ -2273,6 +2274,7 @@
             this.TabAnalysisProcessPage_Cbx_P8.TabIndex = 6;
             this.TabAnalysisProcessPage_Cbx_P8.Text = "进程8";
             this.TabAnalysisProcessPage_Cbx_P8.UseVisualStyleBackColor = false;
+            this.TabAnalysisProcessPage_Cbx_P8.CheckedChanged += new System.EventHandler(this.TabAnalysisProcessPage_Cbx_P8_CheckedChanged);
             // 
             // TabAnalysisProcessPage_Cbx_P7
             // 
@@ -2284,6 +2286,7 @@
             this.TabAnalysisProcessPage_Cbx_P7.TabIndex = 1;
             this.TabAnalysisProcessPage_Cbx_P7.Text = "进程7";
             this.TabAnalysisProcessPage_Cbx_P7.UseVisualStyleBackColor = false;
+            this.TabAnalysisProcessPage_Cbx_P7.CheckedChanged += new System.EventHandler(this.TabAnalysisProcessPage_Cbx_P7_CheckedChanged);
             // 
             // TabAnalysisProcessPage_Cbx_P6
             // 
@@ -2295,6 +2298,7 @@
             this.TabAnalysisProcessPage_Cbx_P6.TabIndex = 5;
             this.TabAnalysisProcessPage_Cbx_P6.Text = "进程6";
             this.TabAnalysisProcessPage_Cbx_P6.UseVisualStyleBackColor = false;
+            this.TabAnalysisProcessPage_Cbx_P6.CheckedChanged += new System.EventHandler(this.TabAnalysisProcessPage_Cbx_P6_CheckedChanged);
             // 
             // TabAnalysisProcessPage_Cbx_P5
             // 
@@ -2306,6 +2310,7 @@
             this.TabAnalysisProcessPage_Cbx_P5.TabIndex = 4;
             this.TabAnalysisProcessPage_Cbx_P5.Text = "进程5";
             this.TabAnalysisProcessPage_Cbx_P5.UseVisualStyleBackColor = false;
+            this.TabAnalysisProcessPage_Cbx_P5.CheckedChanged += new System.EventHandler(this.TabAnalysisProcessPage_Cbx_P5_CheckedChanged);
             // 
             // TabAnalysisProcessPage_Cbx_P4
             // 
@@ -2317,6 +2322,7 @@
             this.TabAnalysisProcessPage_Cbx_P4.TabIndex = 3;
             this.TabAnalysisProcessPage_Cbx_P4.Text = "进程4";
             this.TabAnalysisProcessPage_Cbx_P4.UseVisualStyleBackColor = false;
+            this.TabAnalysisProcessPage_Cbx_P4.CheckedChanged += new System.EventHandler(this.TabAnalysisProcessPage_Cbx_P4_CheckedChanged);
             // 
             // TabAnalysisProcessPage_Cbx_P3
             // 
@@ -2328,6 +2334,7 @@
             this.TabAnalysisProcessPage_Cbx_P3.TabIndex = 2;
             this.TabAnalysisProcessPage_Cbx_P3.Text = "进程3";
             this.TabAnalysisProcessPage_Cbx_P3.UseVisualStyleBackColor = false;
+            this.TabAnalysisProcessPage_Cbx_P3.CheckedChanged += new System.EventHandler(this.TabAnalysisProcessPage_Cbx_P3_CheckedChanged);
             // 
             // TabAnalysisProcessPage_Cbx_P2
             // 
@@ -2339,6 +2346,7 @@
             this.TabAnalysisProcessPage_Cbx_P2.TabIndex = 1;
             this.TabAnalysisProcessPage_Cbx_P2.Text = "进程2";
             this.TabAnalysisProcessPage_Cbx_P2.UseVisualStyleBackColor = false;
+            this.TabAnalysisProcessPage_Cbx_P2.CheckedChanged += new System.EventHandler(this.TabAnalysisProcessPage_Cbx_P2_CheckedChanged);
             // 
             // TabAnalysisProcessPage_Cbx_P1
             // 
@@ -2350,6 +2358,7 @@
             this.TabAnalysisProcessPage_Cbx_P1.TabIndex = 0;
             this.TabAnalysisProcessPage_Cbx_P1.Text = "进程1";
             this.TabAnalysisProcessPage_Cbx_P1.UseVisualStyleBackColor = false;
+            this.TabAnalysisProcessPage_Cbx_P1.CheckedChanged += new System.EventHandler(this.TabAnalysisProcessPage_Cbx_P1_CheckedChanged);
             // 
             // TabAnalysisProcessPage_Gbx_List
             // 
