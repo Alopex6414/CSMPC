@@ -199,7 +199,7 @@
             this.TabAnalysis = new System.Windows.Forms.TabControl();
             this.TabAnalysisProcessPage = new System.Windows.Forms.TabPage();
             this.TabAnalysisProcessPage_Gbx_Memory = new System.Windows.Forms.GroupBox();
-            this.zedGraphControl1 = new ZedGraph.ZedGraphControl();
+            this.TabPageProcess_Zed_Graph = new ZedGraph.ZedGraphControl();
             this.TabAnalysisProcessPage_Gbx_Function = new System.Windows.Forms.GroupBox();
             this.TabAnalysisProcessPage_Gbx_Curve = new System.Windows.Forms.GroupBox();
             this.TabAnalysisProcessPage_Btn_Clear = new System.Windows.Forms.Button();
@@ -239,6 +239,8 @@
             this.SerialTimerRefresh = new System.Windows.Forms.Timer(this.components);
             this.SerialPortCurve = new System.IO.Ports.SerialPort(this.components);
             this.CurveRefresh = new System.Windows.Forms.Timer(this.components);
+            this.ProcessRefresh = new System.Windows.Forms.Timer(this.components);
+            this.ProcessGet = new System.Windows.Forms.Timer(this.components);
             this.TabMain.SuspendLayout();
             this.TabPageSerial.SuspendLayout();
             this.TabPageSerial_Gbx_SerialSend.SuspendLayout();
@@ -2114,7 +2116,7 @@
             // 
             // TabAnalysisProcessPage_Gbx_Memory
             // 
-            this.TabAnalysisProcessPage_Gbx_Memory.Controls.Add(this.zedGraphControl1);
+            this.TabAnalysisProcessPage_Gbx_Memory.Controls.Add(this.TabPageProcess_Zed_Graph);
             this.TabAnalysisProcessPage_Gbx_Memory.Location = new System.Drawing.Point(162, 6);
             this.TabAnalysisProcessPage_Gbx_Memory.Name = "TabAnalysisProcessPage_Gbx_Memory";
             this.TabAnalysisProcessPage_Gbx_Memory.Size = new System.Drawing.Size(724, 525);
@@ -2122,20 +2124,20 @@
             this.TabAnalysisProcessPage_Gbx_Memory.TabStop = false;
             this.TabAnalysisProcessPage_Gbx_Memory.Text = "进程内存";
             // 
-            // zedGraphControl1
+            // TabPageProcess_Zed_Graph
             // 
-            this.zedGraphControl1.BackColor = System.Drawing.Color.Transparent;
-            this.zedGraphControl1.Location = new System.Drawing.Point(6, 20);
-            this.zedGraphControl1.Name = "zedGraphControl1";
-            this.zedGraphControl1.ScrollGrace = 0D;
-            this.zedGraphControl1.ScrollMaxX = 0D;
-            this.zedGraphControl1.ScrollMaxY = 0D;
-            this.zedGraphControl1.ScrollMaxY2 = 0D;
-            this.zedGraphControl1.ScrollMinX = 0D;
-            this.zedGraphControl1.ScrollMinY = 0D;
-            this.zedGraphControl1.ScrollMinY2 = 0D;
-            this.zedGraphControl1.Size = new System.Drawing.Size(712, 499);
-            this.zedGraphControl1.TabIndex = 2;
+            this.TabPageProcess_Zed_Graph.BackColor = System.Drawing.Color.Transparent;
+            this.TabPageProcess_Zed_Graph.Location = new System.Drawing.Point(6, 20);
+            this.TabPageProcess_Zed_Graph.Name = "TabPageProcess_Zed_Graph";
+            this.TabPageProcess_Zed_Graph.ScrollGrace = 0D;
+            this.TabPageProcess_Zed_Graph.ScrollMaxX = 0D;
+            this.TabPageProcess_Zed_Graph.ScrollMaxY = 0D;
+            this.TabPageProcess_Zed_Graph.ScrollMaxY2 = 0D;
+            this.TabPageProcess_Zed_Graph.ScrollMinX = 0D;
+            this.TabPageProcess_Zed_Graph.ScrollMinY = 0D;
+            this.TabPageProcess_Zed_Graph.ScrollMinY2 = 0D;
+            this.TabPageProcess_Zed_Graph.Size = new System.Drawing.Size(712, 499);
+            this.TabPageProcess_Zed_Graph.TabIndex = 2;
             // 
             // TabAnalysisProcessPage_Gbx_Function
             // 
@@ -2383,6 +2385,8 @@
             // 
             // TabAnalysisProcessPage_LV_Process
             // 
+            this.TabAnalysisProcessPage_LV_Process.CheckBoxes = true;
+            this.TabAnalysisProcessPage_LV_Process.GridLines = true;
             this.TabAnalysisProcessPage_LV_Process.Location = new System.Drawing.Point(6, 20);
             this.TabAnalysisProcessPage_LV_Process.Name = "TabAnalysisProcessPage_LV_Process";
             this.TabAnalysisProcessPage_LV_Process.Size = new System.Drawing.Size(138, 145);
@@ -2515,6 +2519,15 @@
             // 
             this.CurveRefresh.Interval = 1;
             this.CurveRefresh.Tick += new System.EventHandler(this.CurveRefresh_Tick);
+            // 
+            // ProcessRefresh
+            // 
+            this.ProcessRefresh.Interval = 1;
+            this.ProcessRefresh.Tick += new System.EventHandler(this.ProcessRefresh_Tick);
+            // 
+            // ProcessGet
+            // 
+            this.ProcessGet.Tick += new System.EventHandler(this.ProcessGet_Tick);
             // 
             // FormMain
             // 
@@ -2819,8 +2832,10 @@
         private System.Windows.Forms.Button TabAnalysisProcessPage_Btn_Del;
         private System.Windows.Forms.Button TabAnalysisProcessPage_Btn_Add;
         private System.Windows.Forms.GroupBox TabAnalysisProcessPage_Gbx_Memory;
-        private ZedGraph.ZedGraphControl zedGraphControl1;
+        private ZedGraph.ZedGraphControl TabPageProcess_Zed_Graph;
         private System.Windows.Forms.GroupBox TabAnalysisProcessPage_Gbx_Function;
+        private System.Windows.Forms.Timer ProcessRefresh;
+        private System.Windows.Forms.Timer ProcessGet;
     }
 }
 

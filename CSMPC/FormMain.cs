@@ -110,7 +110,43 @@ namespace CSMPC
 
         // 数据分析
         // 进程监视
-        public Dictionary<string, IntPtr> m_dicProcessHandle;                                       // 进程PID存储进程句柄
+        public Dictionary<string, IntPtr> m_dicProcessHandle = new Dictionary<string, IntPtr>();    // 进程PID存储进程句柄
+        public bool m_bPMStart = false;                                                             // 进程监视监测状态(true:开启/false:关闭)
+        public bool m_bPMFinish = false;                                                            // 进程监视转换完成
+        public static volatile double[] m_dProcessCurveValue = new double[8];                       // 进程监视曲线当前值
+
+        // ZedGraph
+        public static LineItem ZedGraph_Process_1;    // 进程1
+        public static LineItem ZedGraph_Process_2;    // 进程2
+        public static LineItem ZedGraph_Process_3;    // 进程3
+        public static LineItem ZedGraph_Process_4;    // 进程4
+        public static LineItem ZedGraph_Process_5;    // 进程5
+        public static LineItem ZedGraph_Process_6;    // 进程6
+        public static LineItem ZedGraph_Process_7;    // 进程7
+        public static LineItem ZedGraph_Process_8;    // 进程8
+
+        public static volatile PointPairList ZedGraph_ProcessList_1 = new PointPairList();  // 曲线1数据
+        public static volatile PointPairList ZedGraph_ProcessList_2 = new PointPairList();  // 曲线2数据
+        public static volatile PointPairList ZedGraph_ProcessList_3 = new PointPairList();  // 曲线3数据
+        public static volatile PointPairList ZedGraph_ProcessList_4 = new PointPairList();  // 曲线4数据
+        public static volatile PointPairList ZedGraph_ProcessList_5 = new PointPairList();  // 曲线5数据
+        public static volatile PointPairList ZedGraph_ProcessList_6 = new PointPairList();  // 曲线6数据
+        public static volatile PointPairList ZedGraph_ProcessList_7 = new PointPairList();  // 曲线7数据
+        public static volatile PointPairList ZedGraph_ProcessList_8 = new PointPairList();  // 曲线8数据
+
+        struct PROCESS_MEMORY_COUNTERS
+        {
+            public UInt32 cb;
+            public UInt32 PageFaultCount;
+            public UInt32 PeakWorkingSetSize;
+            public UInt32 WorkingSetSize;
+            public UInt32 QuotaPeakPagedPoolUsage;
+            public UInt32 QuotaPagedPoolUsage;
+            public UInt32 QuotaPeakNonPagedPoolUsage;
+            public UInt32 QuotaNonPagedPoolUsage;
+            public UInt32 PagefileUsage;
+            public UInt32 PeakPagefileUsage;
+        };
 
         #region 导入动态链接库函数
         [DllImport("Kernel32.dll", EntryPoint = "OpenProcess", CallingConvention = CallingConvention.StdCall)]
@@ -118,6 +154,9 @@ namespace CSMPC
 
         [DllImport("Kernel32.dll", EntryPoint = "CloseHandle", CallingConvention = CallingConvention.StdCall)]
         public static extern UInt32 CloseHandle(IntPtr hObject);
+
+        [DllImport("Psapi.dll", EntryPoint = "GetProcessMemoryInfo", CallingConvention = CallingConvention.StdCall)]
+        public static extern UInt32 GetProcessMemoryInfo(IntPtr hProcess, IntPtr ppsmemCounters, UInt32 cb);
 
         #endregion
 
@@ -462,17 +501,20 @@ namespace CSMPC
              */
              // 监视配置设置
             TabAnalysisProcessPage_Tbx_PID.ReadOnly = false;
+            TabAnalysisProcessPage_Tbx_PID.BackColor = Color.White;
             TabAnalysisProcessPage_Tbx_Handle.ReadOnly = true;
             TabAnalysisProcessPage_Tbx_Handle.BackColor = Color.White;
-            TabAnalysisProcessPage_Tbx_Handle.Enabled = true;
+            TabAnalysisProcessPage_Btn_Find.Enabled = true;
 
             // 监视列表设置
-            TabAnalysisProcessPage_LV_Process.Columns.Add("", 0, HorizontalAlignment.Center);
-            TabAnalysisProcessPage_LV_Process.Columns.Add("序号", 38, HorizontalAlignment.Center);
-            TabAnalysisProcessPage_LV_Process.Columns.Add("句柄", 100, HorizontalAlignment.Center);
+            TabAnalysisProcessPage_LV_Process.Columns.Add("PID", 69, HorizontalAlignment.Center);
+            TabAnalysisProcessPage_LV_Process.Columns.Add("句柄", 69, HorizontalAlignment.Center);
 
             TabAnalysisProcessPage_Btn_Add.Enabled = false;
-            TabAnalysisProcessPage_Btn_Del.Enabled = false;
+            TabAnalysisProcessPage_Btn_Del.Enabled = true;
+
+            // 进程监视ZedGraph初始化
+            AnalysisProcess_ZedGraphInit();
 
             // 进程内存设置
 
@@ -3353,6 +3395,57 @@ namespace CSMPC
 
         #region 进程监视
 
+        #region 进程监视曲线初始化
+        private void AnalysisProcess_ZedGraphInit()
+        {
+            // ZedGraph坐标轴标题标签初始化
+            this.TabPageProcess_Zed_Graph.GraphPane.Title.Text = "进程监视";
+            this.TabPageProcess_Zed_Graph.GraphPane.XAxis.Title.Text = "时间";
+            this.TabPageProcess_Zed_Graph.GraphPane.YAxis.Title.Text = "数值";
+            //this.TabPageProcess_Zed_Graph.GraphPane.XAxis.MajorGrid.IsVisible = true;   // X轴虚线
+            this.TabPageProcess_Zed_Graph.GraphPane.YAxis.MajorGrid.IsVisible = true; // Y轴虚线
+            //this.TabPageProcess_Zed_Graph.GraphPane.Chart.Border.IsVisible = false;
+
+            // ZedGraph坐标轴值设置初始化
+            this.TabPageProcess_Zed_Graph.GraphPane.XAxis.Scale.Min = 1;  // X轴坐标最小值
+            this.TabPageProcess_Zed_Graph.GraphPane.XAxis.Scale.Max = 2;  // X轴坐标最大值
+            this.TabPageProcess_Zed_Graph.GraphPane.YAxis.Scale.Min = 0;  // Y轴坐标最小值
+            this.TabPageProcess_Zed_Graph.GraphPane.YAxis.Scale.Max = 1;  // Y轴坐标最大值
+
+            this.TabPageProcess_Zed_Graph.GraphPane.XAxis.Scale.MinAuto = true;
+            this.TabPageProcess_Zed_Graph.GraphPane.XAxis.Scale.MaxAuto = true;
+            this.TabPageProcess_Zed_Graph.GraphPane.YAxis.Scale.MinAuto = true;
+            this.TabPageProcess_Zed_Graph.GraphPane.YAxis.Scale.MaxAuto = true;
+
+            this.TabPageProcess_Zed_Graph.GraphPane.XAxis.Type = ZedGraph.AxisType.Ordinal;
+
+            this.TabPageProcess_Zed_Graph.GraphPane.CurveList.Clear();    // 清空曲线
+
+            // ZedGraph创建曲线
+            ZedGraph_Process_1 = this.TabPageProcess_Zed_Graph.GraphPane.AddCurve("进程1", ZedGraph_ProcessList_1, Color.LightCoral, SymbolType.None);
+            ZedGraph_Process_2 = this.TabPageProcess_Zed_Graph.GraphPane.AddCurve("进程2", ZedGraph_ProcessList_2, Color.Teal, SymbolType.None);
+            ZedGraph_Process_3 = this.TabPageProcess_Zed_Graph.GraphPane.AddCurve("进程3", ZedGraph_ProcessList_3, Color.Orange, SymbolType.None);
+            ZedGraph_Process_4 = this.TabPageProcess_Zed_Graph.GraphPane.AddCurve("进程4", ZedGraph_ProcessList_4, Color.LawnGreen, SymbolType.None);
+            ZedGraph_Process_5 = this.TabPageProcess_Zed_Graph.GraphPane.AddCurve("进程5", ZedGraph_ProcessList_5, Color.LightSeaGreen, SymbolType.None);
+            ZedGraph_Process_6 = this.TabPageProcess_Zed_Graph.GraphPane.AddCurve("进程6", ZedGraph_ProcessList_6, Color.LightSkyBlue, SymbolType.None);
+            ZedGraph_Process_7 = this.TabPageProcess_Zed_Graph.GraphPane.AddCurve("进程7", ZedGraph_ProcessList_7, Color.RoyalBlue, SymbolType.None);
+            ZedGraph_Process_8 = this.TabPageProcess_Zed_Graph.GraphPane.AddCurve("进程8", ZedGraph_ProcessList_8, Color.BlueViolet, SymbolType.None);
+
+            // ZedGraph曲线样式设置
+            ZedGraph_Process_1.Line.Width = 2;
+            ZedGraph_Process_2.Line.Width = 2;
+            ZedGraph_Process_3.Line.Width = 2;
+            ZedGraph_Process_4.Line.Width = 2;
+            ZedGraph_Process_5.Line.Width = 2;
+            ZedGraph_Process_6.Line.Width = 2;
+            ZedGraph_Process_7.Line.Width = 2;
+            ZedGraph_Process_8.Line.Width = 2;
+
+            this.TabPageProcess_Zed_Graph.Refresh();  // 刷新曲线
+
+        }
+        #endregion
+
         #region 进程PID文本框控件响应
         private void TabAnalysisProcessPage_Tbx_PID_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -3390,6 +3483,13 @@ namespace CSMPC
         private void TabAnalysisProcessPage_Btn_Find_Click(object sender, EventArgs e)
         {
             string strProcessID = this.TabAnalysisProcessPage_Tbx_PID.Text;
+
+            if(strProcessID == "")
+            {
+                MessageBox.Show("进程PID不能为空!", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             UInt32 dwProcessID = UInt32.Parse(strProcessID);
             IntPtr hProcess = IntPtr.Zero;
 
@@ -3405,26 +3505,288 @@ namespace CSMPC
             string strhProcess = hProcess.ToString();
             TabAnalysisProcessPage_Tbx_Handle.Text = strhProcess;
 
-            TabAnalysisProcessPage_Tbx_Handle.Enabled = false;
+            TabAnalysisProcessPage_Tbx_PID.ReadOnly = true;
+            TabAnalysisProcessPage_Btn_Find.Enabled = false;
             TabAnalysisProcessPage_Btn_Add.Enabled = true;
+            TabAnalysisProcessPage_Btn_Start.Enabled = false;
         }
 
         #endregion
 
+        #region 进程监视开启关闭
         private void TabAnalysisProcessPage_Btn_Start_Click(object sender, EventArgs e)
         {
+            if(!m_bPMStart) // 开始监视
+            {
+                int nCount = this.TabAnalysisProcessPage_LV_Process.Items.Count;
+                if (nCount == 0)
+                {
+                    MessageBox.Show("请至少添加一个监视进程!", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
 
+                ProcessGet.Enabled = true;
+                ProcessGet.Start();
+                ProcessRefresh.Enabled = true;
+                ProcessRefresh.Start();
+
+                m_bPMStart = true;
+                this.TabAnalysisProcessPage_Btn_Start.Text = "关闭";
+
+                this.TabAnalysisProcessPage_Btn_Find.Enabled = false;
+                this.TabAnalysisProcessPage_Btn_Add.Enabled = false;
+                this.TabAnalysisProcessPage_Btn_Del.Enabled = false;
+            }
+            else // 停止监视
+            {
+                ProcessRefresh.Stop();
+                ProcessRefresh.Enabled = false;
+                ProcessGet.Stop();
+                ProcessGet.Enabled = false;
+
+                m_bPMStart = false;
+                this.TabAnalysisProcessPage_Btn_Start.Text = "开启";
+
+                this.TabAnalysisProcessPage_Btn_Find.Enabled = true;
+                this.TabAnalysisProcessPage_Btn_Add.Enabled = false;
+                this.TabAnalysisProcessPage_Btn_Start.Enabled = true;
+            }
+            
         }
+        #endregion
 
+        #region 进程监视添加进程句柄
         private void TabAnalysisProcessPage_Btn_Add_Click(object sender, EventArgs e)
         {
+            string strPID = this.TabAnalysisProcessPage_Tbx_PID.Text;
+            string strProcess = this.TabAnalysisProcessPage_Tbx_Handle.Text;
+            IntPtr hProcess = (IntPtr)(Convert.ToInt32(strProcess));
 
+            // 进程监视存储迭代器
+            foreach (KeyValuePair<string, IntPtr> pair in m_dicProcessHandle)
+            {
+                if (strPID == pair.Key)
+                {
+                    CloseHandle(pair.Value);
+                    m_dicProcessHandle.Remove(pair.Key);
+                    break;
+                }
+
+            }
+
+            if (m_dicProcessHandle.Count < 8)
+            {
+                m_dicProcessHandle.Add(strPID, hProcess);
+            }
+            else
+            {
+                MessageBox.Show("进程监视队列已满!请先删除...", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // 添加进程监视句柄
+            this.TabAnalysisProcessPage_LV_Process.Items.Clear();
+
+            this.TabAnalysisProcessPage_LV_Process.BeginUpdate();
+            foreach(KeyValuePair<string, IntPtr> pair in m_dicProcessHandle)
+            {
+                ListViewItem item = new ListViewItem();
+
+                item.Text = pair.Key;
+                item.SubItems.Add(pair.Value.ToString());
+                this.TabAnalysisProcessPage_LV_Process.Items.Add(item);
+            }
+            this.TabAnalysisProcessPage_LV_Process.EndUpdate();
+
+            // 恢复进程PID查找
+            TabAnalysisProcessPage_Tbx_PID.ReadOnly = false;
+            TabAnalysisProcessPage_Btn_Find.Enabled = true;
+            TabAnalysisProcessPage_Btn_Add.Enabled = false;
+            TabAnalysisProcessPage_Btn_Start.Enabled = true;
         }
+        #endregion
 
+        #region 进程监视删除进程句柄
         private void TabAnalysisProcessPage_Btn_Del_Click(object sender, EventArgs e)
         {
+            int nDelCount = this.TabAnalysisProcessPage_LV_Process.CheckedItems.Count;
+
+            if(nDelCount == 0)
+            {
+                MessageBox.Show("未选中任何监视进程!", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            List<string> listDel = new List<string>();
+
+            for(int i = 0; i < nDelCount; ++i)
+            {
+                string strProcessID = this.TabAnalysisProcessPage_LV_Process.CheckedItems[i].Text;
+                listDel.Add(strProcessID);
+            }
+
+            // 进程监视存储迭代器
+            Dictionary<string, IntPtr> dicCopy = new Dictionary<string, IntPtr>(m_dicProcessHandle);
+
+            foreach (KeyValuePair<string, IntPtr> pair in dicCopy)
+            {
+                foreach(string it in listDel)
+                {
+                    if(it == pair.Key)
+                    {
+                        CloseHandle(pair.Value);
+                        m_dicProcessHandle.Remove(pair.Key);
+                        continue;
+                    }
+
+                }
+
+            }
+
+            // 刷新进程监视句柄
+            this.TabAnalysisProcessPage_LV_Process.Items.Clear();
+
+            this.TabAnalysisProcessPage_LV_Process.BeginUpdate();
+            foreach (KeyValuePair<string, IntPtr> pair in m_dicProcessHandle)
+            {
+                ListViewItem item = new ListViewItem();
+
+                item.Text = pair.Key;
+                item.SubItems.Add(pair.Value.ToString());
+                this.TabAnalysisProcessPage_LV_Process.Items.Add(item);
+            }
+            this.TabAnalysisProcessPage_LV_Process.EndUpdate();
 
         }
+        #endregion
+
+        #region 进程监视获取内存信息定时器响应
+        private void ProcessGet_Tick(object sender, EventArgs e)
+        {
+            if(!m_bPMFinish)
+            {
+                List<double> lstCurve = new List<double>();
+
+                lstCurve.Clear();
+
+                foreach (KeyValuePair<string, IntPtr> pair in m_dicProcessHandle)
+                {
+                    UInt32 bRet = 0;
+                    PROCESS_MEMORY_COUNTERS sProcessInfo = new PROCESS_MEMORY_COUNTERS();
+                    IntPtr hProcessInfo = IntPtr.Zero;
+
+                    int nSize = Marshal.SizeOf(sProcessInfo);
+                    IntPtr lpProcessInfo = Marshal.AllocHGlobal(nSize);
+                    Marshal.StructureToPtr(sProcessInfo, lpProcessInfo, true);
+
+                    bRet = GetProcessMemoryInfo(pair.Value, lpProcessInfo, (UInt32)nSize);
+                    if (bRet == 0)
+                    {
+                        ProcessRefresh.Stop();
+                        ProcessRefresh.Enabled = false;
+                        this.ProcessGet.Stop();
+                        this.ProcessGet.Enabled = false;
+
+                        m_bPMStart = false;
+                        this.TabAnalysisProcessPage_Btn_Start.Text = "开启";
+
+                        this.TabAnalysisProcessPage_Btn_Find.Enabled = true;
+                        this.TabAnalysisProcessPage_Btn_Add.Enabled = false;
+                        this.TabAnalysisProcessPage_Btn_Start.Enabled = true;
+                        return;
+                    }
+
+                    PROCESS_MEMORY_COUNTERS sGetInfo = (PROCESS_MEMORY_COUNTERS)Marshal.PtrToStructure(lpProcessInfo, typeof(PROCESS_MEMORY_COUNTERS));
+                    double dProcessValue = sGetInfo.WorkingSetSize * 1.0f / 1024.0f / 1024.0f;
+
+                    lstCurve.Add(dProcessValue);
+                }
+
+                for (int i = 0; i < 8; ++i)
+                {
+                    m_dProcessCurveValue[i] = 0.00;
+                }
+
+                for (int i = 0; i < lstCurve.Count; ++i)
+                {
+                    m_dProcessCurveValue[i] = lstCurve[i];
+                }
+
+                m_bPMFinish = true;
+            }
+            
+        }
+        #endregion
+
+        #region 进程监视曲线刷新定时器响应
+        private void ProcessRefresh_Tick(object sender, EventArgs e)
+        {
+            if (m_bPMFinish)  // 数据拆分完成
+            {
+                // 刷新UI界面
+                this.Invoke((EventHandler)(delegate
+                {
+                    this.TabAnalysisProcessPage_Lab_P1.Text = "数值:" + m_dProcessCurveValue[0].ToString();   // 曲线1数值显示
+                    this.TabAnalysisProcessPage_Lab_P2.Text = "数值:" + m_dProcessCurveValue[1].ToString();   // 曲线2数值显示
+                    this.TabAnalysisProcessPage_Lab_P3.Text = "数值:" + m_dProcessCurveValue[2].ToString();   // 曲线3数值显示
+                    this.TabAnalysisProcessPage_Lab_P4.Text = "数值:" + m_dProcessCurveValue[3].ToString();   // 曲线4数值显示
+                    this.TabAnalysisProcessPage_Lab_P5.Text = "数值:" + m_dProcessCurveValue[4].ToString();   // 曲线5数值显示
+                    this.TabAnalysisProcessPage_Lab_P6.Text = "数值:" + m_dProcessCurveValue[5].ToString();   // 曲线6数值显示
+                    this.TabAnalysisProcessPage_Lab_P7.Text = "数值:" + m_dProcessCurveValue[6].ToString();   // 曲线7数值显示
+                    this.TabAnalysisProcessPage_Lab_P8.Text = "数值:" + m_dProcessCurveValue[7].ToString();   // 曲线8数值显示
+
+                    // 坐标点数多余300后保持坐标中存在300点
+                    if (ZedGraph_ProcessList_1.Count >= 300)
+                    {
+                        ZedGraph_ProcessList_1.RemoveAt(0);
+                    }
+                    if (ZedGraph_ProcessList_2.Count >= 300)
+                    {
+                        ZedGraph_ProcessList_2.RemoveAt(0);
+                    }
+                    if (ZedGraph_ProcessList_3.Count >= 300)
+                    {
+                        ZedGraph_ProcessList_3.RemoveAt(0);
+                    }
+                    if (ZedGraph_ProcessList_4.Count >= 300)
+                    {
+                        ZedGraph_ProcessList_4.RemoveAt(0);
+                    }
+                    if (ZedGraph_ProcessList_5.Count >= 300)
+                    {
+                        ZedGraph_ProcessList_5.RemoveAt(0);
+                    }
+                    if (ZedGraph_ProcessList_6.Count >= 300)
+                    {
+                        ZedGraph_ProcessList_6.RemoveAt(0);
+                    }
+                    if (ZedGraph_ProcessList_7.Count >= 300)
+                    {
+                        ZedGraph_ProcessList_7.RemoveAt(0);
+                    }
+                    if (ZedGraph_ProcessList_8.Count >= 300)
+                    {
+                        ZedGraph_ProcessList_8.RemoveAt(0);
+                    }
+
+                    ZedGraph_ProcessList_1.Add(0, m_dProcessCurveValue[0]);  // ZedGraph_List_1添加数据
+                    ZedGraph_ProcessList_2.Add(0, m_dProcessCurveValue[1]);  // ZedGraph_List_2添加数据
+                    ZedGraph_ProcessList_3.Add(0, m_dProcessCurveValue[2]);  // ZedGraph_List_3添加数据
+                    ZedGraph_ProcessList_4.Add(0, m_dProcessCurveValue[3]);  // ZedGraph_List_4添加数据
+                    ZedGraph_ProcessList_5.Add(0, m_dProcessCurveValue[4]);  // ZedGraph_List_5添加数据
+                    ZedGraph_ProcessList_6.Add(0, m_dProcessCurveValue[5]);  // ZedGraph_List_6添加数据
+                    ZedGraph_ProcessList_7.Add(0, m_dProcessCurveValue[6]);  // ZedGraph_List_7添加数据
+                    ZedGraph_ProcessList_8.Add(0, m_dProcessCurveValue[7]);  // ZedGraph_List_8添加数据
+
+                    this.TabPageProcess_Zed_Graph.AxisChange();       // 坐标轴自动适应
+                    this.TabPageProcess_Zed_Graph.Invalidate();       // 重绘控件
+                }
+                    ));
+                m_bPMFinish = false;  // 等待拆分数据
+            }
+        }
+
+        #endregion
 
         #endregion
 
