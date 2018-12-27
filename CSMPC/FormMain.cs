@@ -108,6 +108,19 @@ namespace CSMPC
 
         private UDPSETTEXTCALLBACK UDPSetTextCallback;
 
+        // 数据分析
+        // 进程监视
+        public Dictionary<string, IntPtr> m_dicProcessHandle;                                       // 进程PID存储进程句柄
+
+        #region 导入动态链接库函数
+        [DllImport("Kernel32.dll", EntryPoint = "OpenProcess", CallingConvention = CallingConvention.StdCall)]
+        public static extern IntPtr OpenProcess(UInt32 dwDesiredAccess, UInt32 bInheritHandle, UInt32 dwProcessId);
+
+        [DllImport("Kernel32.dll", EntryPoint = "CloseHandle", CallingConvention = CallingConvention.StdCall)]
+        public static extern UInt32 CloseHandle(IntPtr hObject);
+
+        #endregion
+
         public FormMain()
         {
             InitializeComponent();
@@ -444,7 +457,26 @@ namespace CSMPC
             #endregion
 
             #region 数据分析选项卡初始化
-            
+            /*
+             * 进程监测设置
+             */
+             // 监视配置设置
+            TabAnalysisProcessPage_Tbx_PID.ReadOnly = false;
+            TabAnalysisProcessPage_Tbx_Handle.ReadOnly = true;
+            TabAnalysisProcessPage_Tbx_Handle.BackColor = Color.White;
+            TabAnalysisProcessPage_Tbx_Handle.Enabled = true;
+
+            // 监视列表设置
+            TabAnalysisProcessPage_LV_Process.Columns.Add("", 0, HorizontalAlignment.Center);
+            TabAnalysisProcessPage_LV_Process.Columns.Add("序号", 38, HorizontalAlignment.Center);
+            TabAnalysisProcessPage_LV_Process.Columns.Add("句柄", 100, HorizontalAlignment.Center);
+
+            TabAnalysisProcessPage_Btn_Add.Enabled = false;
+            TabAnalysisProcessPage_Btn_Del.Enabled = false;
+
+            // 进程内存设置
+
+
             #endregion
 
         }
@@ -1145,7 +1177,7 @@ namespace CSMPC
         #region TCP服务端端口号TextBox响应
         private void TabPageTCPServer_Tbx_NetLocalHostPort_KeyPress(object sender, KeyPressEventArgs e) // TextBox只能输入数字
         {
-            if ((e.KeyChar <= 48 || e.KeyChar >= 57) && (e.KeyChar != 8))
+            if ((e.KeyChar < 48 || e.KeyChar > 57) && (e.KeyChar != 8))
             {
                 e.Handled = true;
             }
@@ -1178,7 +1210,7 @@ namespace CSMPC
         #region TCP服务端最大连接TextBox响应
         private void TabPageTCPServer_Tbx_NetServerMaxListen_KeyPress(object sender, KeyPressEventArgs e)   // TextBox只能输入数字
         {
-            if ((e.KeyChar <= 48 || e.KeyChar >= 57) && (e.KeyChar != 8))
+            if ((e.KeyChar < 48 || e.KeyChar > 57) && (e.KeyChar != 8))
             {
                 e.Handled = true;
             }
@@ -1221,14 +1253,26 @@ namespace CSMPC
                 strServerPort = TabPageTCPServer_Tbx_NetLocalHostPort.Text;
                 strMaxConnect = TabPageTCPServer_Tbx_NetServerMaxListen.Text;
 
-                int nServerPort = int.Parse(strServerPort);
-                int nMaxConnect = int.Parse(strMaxConnect);
-
                 if (!IsIPAddress(strServerIp))
                 {
                     MessageBox.Show("本地IP地址不合法!", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
+
+                if (strServerPort == "")
+                {
+                    MessageBox.Show("本地端口号不能为空!", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (strMaxConnect == "")
+                {
+                    MessageBox.Show("最大连接数不能为空!", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                int nServerPort = int.Parse(strServerPort);
+                int nMaxConnect = int.Parse(strMaxConnect);
 
                 // 服务端Socket
                 m_SocketServer = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
@@ -1604,13 +1648,19 @@ namespace CSMPC
                 strClientIp = TabPageTCPClient_Tbx_NetLocalHostIP.Text;
                 strClientPort = TabPageTCPClient_Tbx_NetLocalHostPort.Text;
 
-                int nClientPort = int.Parse(strClientPort);
-
                 if (!IsIPAddress(strClientIp))
                 {
                     MessageBox.Show("服务器IP地址不合法!", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
+
+                if(strClientPort == "")
+                {
+                    MessageBox.Show("服务器端口号不能为空!", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                int nClientPort = int.Parse(strClientPort);
 
                 // 客户端Socket
                 m_SocketClient = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
@@ -1872,13 +1922,19 @@ namespace CSMPC
                 strUDPIp = TabPageUDP_Tbx_NetLocalHostIP.Text;
                 strUDPPort = TabPageUDP_Tbx_NetLocalHostPort.Text;
 
-                int nUDPPort = int.Parse(strUDPPort);
-
                 if (!IsIPAddress(strUDPIp))
                 {
                     MessageBox.Show("本地IP地址不合法!", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
+
+                if(strUDPPort == "")
+                {
+                    MessageBox.Show("本地端口号不能为空!", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                int nUDPPort = int.Parse(strUDPPort);
 
                 // UDP通信Socket
                 m_SocketUDP = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
@@ -3287,13 +3343,6 @@ namespace CSMPC
             }
         }
 
-
-
-
-
-
-
-
         #endregion
 
         #endregion
@@ -3301,6 +3350,84 @@ namespace CSMPC
         #endregion
 
         #region 数据分析
+
+        #region 进程监视
+
+        #region 进程PID文本框控件响应
+        private void TabAnalysisProcessPage_Tbx_PID_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar < 48 || e.KeyChar > 57) && (e.KeyChar != 8))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void TabAnalysisProcessPage_Tbx_PID_TextChanged(object sender, EventArgs e)
+        {
+            string strText = TabAnalysisProcessPage_Tbx_PID.Text;
+            int nText = 0;
+
+            if (strText != null && strText != "")
+            {
+                nText = int.Parse(strText);
+
+                if (nText < 0)
+                {
+                    nText = 0;
+                }
+
+                if (nText > 65535)
+                {
+                    nText = 65535;
+                }
+
+                TabAnalysisProcessPage_Tbx_PID.Text = nText.ToString();
+            }
+        }
+        #endregion
+
+        #region 进程PID查找进程句柄
+        private void TabAnalysisProcessPage_Btn_Find_Click(object sender, EventArgs e)
+        {
+            string strProcessID = this.TabAnalysisProcessPage_Tbx_PID.Text;
+            UInt32 dwProcessID = UInt32.Parse(strProcessID);
+            IntPtr hProcess = IntPtr.Zero;
+
+            // 进程PID查找进程句柄
+            UInt32 dwDesiredAccess = (UInt32)(0x000F0000L | 0x00100000L | 0x0000FFFF);
+            hProcess = OpenProcess(dwDesiredAccess, 0, dwProcessID);
+            if(hProcess == IntPtr.Zero)
+            {
+                MessageBox.Show("未查找到进程PID对应的进程句柄!", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            string strhProcess = hProcess.ToString();
+            TabAnalysisProcessPage_Tbx_Handle.Text = strhProcess;
+
+            TabAnalysisProcessPage_Tbx_Handle.Enabled = false;
+            TabAnalysisProcessPage_Btn_Add.Enabled = true;
+        }
+
+        #endregion
+
+        private void TabAnalysisProcessPage_Btn_Start_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TabAnalysisProcessPage_Btn_Add_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TabAnalysisProcessPage_Btn_Del_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        #endregion
+
         #endregion
 
         #region 控制台
@@ -3311,7 +3438,6 @@ namespace CSMPC
 
         #region 关于
         #endregion
-
 
     }
 
