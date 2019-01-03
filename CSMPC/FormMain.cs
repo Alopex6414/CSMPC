@@ -4025,6 +4025,7 @@ namespace CSMPC
             }
 
         }
+
         #endregion
 
         #endregion
@@ -4038,8 +4039,15 @@ namespace CSMPC
         #endregion
 
         #region 关于
+
+        #region 关于页面重绘
+        private void TabPageAbout_Paint(object sender, PaintEventArgs e)    // 关于页面重绘
+        {
+
+        }
         #endregion
 
+        #endregion
 
     }
 

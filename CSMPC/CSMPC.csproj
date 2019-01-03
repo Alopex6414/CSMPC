@@ -116,6 +116,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="electronics.ico" />
+    <None Include="Resources\electronics_128px.png" />
+    <None Include="Resources\logo.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">

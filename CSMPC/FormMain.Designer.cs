@@ -241,6 +241,8 @@
             this.CurveRefresh = new System.Windows.Forms.Timer(this.components);
             this.ProcessRefresh = new System.Windows.Forms.Timer(this.components);
             this.ProcessGet = new System.Windows.Forms.Timer(this.components);
+            this.TabPageAbout_Pan_Info = new System.Windows.Forms.Panel();
+            this.TabPageAbout_Pan_Logo = new System.Windows.Forms.Panel();
             this.TabMain.SuspendLayout();
             this.TabPageSerial.SuspendLayout();
             this.TabPageSerial_Gbx_SerialSend.SuspendLayout();
@@ -291,6 +293,7 @@
             this.TabAnalysisProcessPage_Gbx_Curve.SuspendLayout();
             this.TabAnalysisProcessPage_Gbx_List.SuspendLayout();
             this.TabAnalysisProcessPage_Gbx_Config.SuspendLayout();
+            this.TabPageAbout.SuspendLayout();
             this.SuspendLayout();
             // 
             // TabMain
@@ -2494,6 +2497,8 @@
             // 
             // TabPageAbout
             // 
+            this.TabPageAbout.Controls.Add(this.TabPageAbout_Pan_Logo);
+            this.TabPageAbout.Controls.Add(this.TabPageAbout_Pan_Info);
             this.TabPageAbout.Location = new System.Drawing.Point(4, 22);
             this.TabPageAbout.Name = "TabPageAbout";
             this.TabPageAbout.Padding = new System.Windows.Forms.Padding(3);
@@ -2501,6 +2506,7 @@
             this.TabPageAbout.TabIndex = 6;
             this.TabPageAbout.Text = "关于";
             this.TabPageAbout.UseVisualStyleBackColor = true;
+            this.TabPageAbout.Paint += new System.Windows.Forms.PaintEventHandler(this.TabPageAbout_Paint);
             // 
             // SerialPortDebug
             // 
@@ -2537,6 +2543,22 @@
             // ProcessGet
             // 
             this.ProcessGet.Tick += new System.EventHandler(this.ProcessGet_Tick);
+            // 
+            // TabPageAbout_Pan_Info
+            // 
+            this.TabPageAbout_Pan_Info.BackgroundImage = global::CSMPC.Properties.Resources.logo;
+            this.TabPageAbout_Pan_Info.Location = new System.Drawing.Point(136, 50);
+            this.TabPageAbout_Pan_Info.Name = "TabPageAbout_Pan_Info";
+            this.TabPageAbout_Pan_Info.Size = new System.Drawing.Size(640, 480);
+            this.TabPageAbout_Pan_Info.TabIndex = 0;
+            // 
+            // TabPageAbout_Pan_Logo
+            // 
+            this.TabPageAbout_Pan_Logo.BackgroundImage = global::CSMPC.Properties.Resources.electronics_128px;
+            this.TabPageAbout_Pan_Logo.Location = new System.Drawing.Point(778, 497);
+            this.TabPageAbout_Pan_Logo.Name = "TabPageAbout_Pan_Logo";
+            this.TabPageAbout_Pan_Logo.Size = new System.Drawing.Size(128, 128);
+            this.TabPageAbout_Pan_Logo.TabIndex = 0;
             // 
             // FormMain
             // 
@@ -2628,6 +2650,7 @@
             this.TabAnalysisProcessPage_Gbx_List.ResumeLayout(false);
             this.TabAnalysisProcessPage_Gbx_Config.ResumeLayout(false);
             this.TabAnalysisProcessPage_Gbx_Config.PerformLayout();
+            this.TabPageAbout.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -2845,6 +2868,8 @@
         private System.Windows.Forms.GroupBox TabAnalysisProcessPage_Gbx_Function;
         private System.Windows.Forms.Timer ProcessRefresh;
         private System.Windows.Forms.Timer ProcessGet;
+        private System.Windows.Forms.Panel TabPageAbout_Pan_Info;
+        private System.Windows.Forms.Panel TabPageAbout_Pan_Logo;
     }
 }
 
