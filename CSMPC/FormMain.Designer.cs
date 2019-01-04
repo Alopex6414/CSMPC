@@ -233,6 +233,8 @@
             this.TabPageConsole = new System.Windows.Forms.TabPage();
             this.TabPageHelp = new System.Windows.Forms.TabPage();
             this.TabPageAbout = new System.Windows.Forms.TabPage();
+            this.TabPageAbout_Pan_Logo = new System.Windows.Forms.Panel();
+            this.TabPageAbout_Pan_Info = new System.Windows.Forms.Panel();
             this.SerialPortDebug = new System.IO.Ports.SerialPort(this.components);
             this.SerialTimerSend = new System.Windows.Forms.Timer(this.components);
             this.SerialTimerRecvSpeed = new System.Windows.Forms.Timer(this.components);
@@ -241,8 +243,16 @@
             this.CurveRefresh = new System.Windows.Forms.Timer(this.components);
             this.ProcessRefresh = new System.Windows.Forms.Timer(this.components);
             this.ProcessGet = new System.Windows.Forms.Timer(this.components);
-            this.TabPageAbout_Pan_Info = new System.Windows.Forms.Panel();
-            this.TabPageAbout_Pan_Logo = new System.Windows.Forms.Panel();
+            this.TabPageHelp_Gbx_Func = new System.Windows.Forms.GroupBox();
+            this.TabPageHelp_Gbx_Text = new System.Windows.Forms.GroupBox();
+            this.TabPageHelp_Lab_HelpItem = new System.Windows.Forms.Label();
+            this.TabPageHelp_Cbx_HelpItem = new System.Windows.Forms.ComboBox();
+            this.TabPageHelp_Cbx_HelpSubItem = new System.Windows.Forms.ComboBox();
+            this.TabPageHelp_Lab_HelpSubItem = new System.Windows.Forms.Label();
+            this.TabPageHelp_Cbx_HelpSubText = new System.Windows.Forms.ComboBox();
+            this.TabPageHelp_Lab_HelpSubText = new System.Windows.Forms.Label();
+            this.TabPageHelp_Btn_Help = new System.Windows.Forms.Button();
+            this.TabPageHelp_Tbx_Help = new System.Windows.Forms.TextBox();
             this.TabMain.SuspendLayout();
             this.TabPageSerial.SuspendLayout();
             this.TabPageSerial_Gbx_SerialSend.SuspendLayout();
@@ -293,7 +303,10 @@
             this.TabAnalysisProcessPage_Gbx_Curve.SuspendLayout();
             this.TabAnalysisProcessPage_Gbx_List.SuspendLayout();
             this.TabAnalysisProcessPage_Gbx_Config.SuspendLayout();
+            this.TabPageHelp.SuspendLayout();
             this.TabPageAbout.SuspendLayout();
+            this.TabPageHelp_Gbx_Func.SuspendLayout();
+            this.TabPageHelp_Gbx_Text.SuspendLayout();
             this.SuspendLayout();
             // 
             // TabMain
@@ -2487,6 +2500,8 @@
             // 
             // TabPageHelp
             // 
+            this.TabPageHelp.Controls.Add(this.TabPageHelp_Gbx_Text);
+            this.TabPageHelp.Controls.Add(this.TabPageHelp_Gbx_Func);
             this.TabPageHelp.Location = new System.Drawing.Point(4, 22);
             this.TabPageHelp.Name = "TabPageHelp";
             this.TabPageHelp.Padding = new System.Windows.Forms.Padding(3);
@@ -2507,6 +2522,22 @@
             this.TabPageAbout.Text = "关于";
             this.TabPageAbout.UseVisualStyleBackColor = true;
             this.TabPageAbout.Paint += new System.Windows.Forms.PaintEventHandler(this.TabPageAbout_Paint);
+            // 
+            // TabPageAbout_Pan_Logo
+            // 
+            this.TabPageAbout_Pan_Logo.BackgroundImage = global::CSMPC.Properties.Resources.electronics_128px;
+            this.TabPageAbout_Pan_Logo.Location = new System.Drawing.Point(778, 497);
+            this.TabPageAbout_Pan_Logo.Name = "TabPageAbout_Pan_Logo";
+            this.TabPageAbout_Pan_Logo.Size = new System.Drawing.Size(128, 128);
+            this.TabPageAbout_Pan_Logo.TabIndex = 0;
+            // 
+            // TabPageAbout_Pan_Info
+            // 
+            this.TabPageAbout_Pan_Info.BackgroundImage = global::CSMPC.Properties.Resources.logo;
+            this.TabPageAbout_Pan_Info.Location = new System.Drawing.Point(136, 50);
+            this.TabPageAbout_Pan_Info.Name = "TabPageAbout_Pan_Info";
+            this.TabPageAbout_Pan_Info.Size = new System.Drawing.Size(640, 480);
+            this.TabPageAbout_Pan_Info.TabIndex = 0;
             // 
             // SerialPortDebug
             // 
@@ -2544,21 +2575,100 @@
             // 
             this.ProcessGet.Tick += new System.EventHandler(this.ProcessGet_Tick);
             // 
-            // TabPageAbout_Pan_Info
+            // TabPageHelp_Gbx_Func
             // 
-            this.TabPageAbout_Pan_Info.BackgroundImage = global::CSMPC.Properties.Resources.logo;
-            this.TabPageAbout_Pan_Info.Location = new System.Drawing.Point(136, 50);
-            this.TabPageAbout_Pan_Info.Name = "TabPageAbout_Pan_Info";
-            this.TabPageAbout_Pan_Info.Size = new System.Drawing.Size(640, 480);
-            this.TabPageAbout_Pan_Info.TabIndex = 0;
+            this.TabPageHelp_Gbx_Func.Controls.Add(this.TabPageHelp_Btn_Help);
+            this.TabPageHelp_Gbx_Func.Controls.Add(this.TabPageHelp_Cbx_HelpSubText);
+            this.TabPageHelp_Gbx_Func.Controls.Add(this.TabPageHelp_Lab_HelpSubText);
+            this.TabPageHelp_Gbx_Func.Controls.Add(this.TabPageHelp_Cbx_HelpSubItem);
+            this.TabPageHelp_Gbx_Func.Controls.Add(this.TabPageHelp_Lab_HelpSubItem);
+            this.TabPageHelp_Gbx_Func.Controls.Add(this.TabPageHelp_Cbx_HelpItem);
+            this.TabPageHelp_Gbx_Func.Controls.Add(this.TabPageHelp_Lab_HelpItem);
+            this.TabPageHelp_Gbx_Func.Location = new System.Drawing.Point(6, 6);
+            this.TabPageHelp_Gbx_Func.Name = "TabPageHelp_Gbx_Func";
+            this.TabPageHelp_Gbx_Func.Size = new System.Drawing.Size(900, 100);
+            this.TabPageHelp_Gbx_Func.TabIndex = 0;
+            this.TabPageHelp_Gbx_Func.TabStop = false;
+            this.TabPageHelp_Gbx_Func.Text = "帮助选项";
             // 
-            // TabPageAbout_Pan_Logo
+            // TabPageHelp_Gbx_Text
             // 
-            this.TabPageAbout_Pan_Logo.BackgroundImage = global::CSMPC.Properties.Resources.electronics_128px;
-            this.TabPageAbout_Pan_Logo.Location = new System.Drawing.Point(778, 497);
-            this.TabPageAbout_Pan_Logo.Name = "TabPageAbout_Pan_Logo";
-            this.TabPageAbout_Pan_Logo.Size = new System.Drawing.Size(128, 128);
-            this.TabPageAbout_Pan_Logo.TabIndex = 0;
+            this.TabPageHelp_Gbx_Text.Controls.Add(this.TabPageHelp_Tbx_Help);
+            this.TabPageHelp_Gbx_Text.Location = new System.Drawing.Point(6, 112);
+            this.TabPageHelp_Gbx_Text.Name = "TabPageHelp_Gbx_Text";
+            this.TabPageHelp_Gbx_Text.Size = new System.Drawing.Size(900, 513);
+            this.TabPageHelp_Gbx_Text.TabIndex = 1;
+            this.TabPageHelp_Gbx_Text.TabStop = false;
+            this.TabPageHelp_Gbx_Text.Text = "帮助文本";
+            // 
+            // TabPageHelp_Lab_HelpItem
+            // 
+            this.TabPageHelp_Lab_HelpItem.AutoSize = true;
+            this.TabPageHelp_Lab_HelpItem.Location = new System.Drawing.Point(6, 47);
+            this.TabPageHelp_Lab_HelpItem.Name = "TabPageHelp_Lab_HelpItem";
+            this.TabPageHelp_Lab_HelpItem.Size = new System.Drawing.Size(47, 12);
+            this.TabPageHelp_Lab_HelpItem.TabIndex = 0;
+            this.TabPageHelp_Lab_HelpItem.Text = "帮助项:";
+            // 
+            // TabPageHelp_Cbx_HelpItem
+            // 
+            this.TabPageHelp_Cbx_HelpItem.FormattingEnabled = true;
+            this.TabPageHelp_Cbx_HelpItem.Location = new System.Drawing.Point(59, 44);
+            this.TabPageHelp_Cbx_HelpItem.Name = "TabPageHelp_Cbx_HelpItem";
+            this.TabPageHelp_Cbx_HelpItem.Size = new System.Drawing.Size(121, 20);
+            this.TabPageHelp_Cbx_HelpItem.TabIndex = 1;
+            // 
+            // TabPageHelp_Cbx_HelpSubItem
+            // 
+            this.TabPageHelp_Cbx_HelpSubItem.FormattingEnabled = true;
+            this.TabPageHelp_Cbx_HelpSubItem.Location = new System.Drawing.Point(271, 44);
+            this.TabPageHelp_Cbx_HelpSubItem.Name = "TabPageHelp_Cbx_HelpSubItem";
+            this.TabPageHelp_Cbx_HelpSubItem.Size = new System.Drawing.Size(121, 20);
+            this.TabPageHelp_Cbx_HelpSubItem.TabIndex = 3;
+            // 
+            // TabPageHelp_Lab_HelpSubItem
+            // 
+            this.TabPageHelp_Lab_HelpSubItem.AutoSize = true;
+            this.TabPageHelp_Lab_HelpSubItem.Location = new System.Drawing.Point(206, 47);
+            this.TabPageHelp_Lab_HelpSubItem.Name = "TabPageHelp_Lab_HelpSubItem";
+            this.TabPageHelp_Lab_HelpSubItem.Size = new System.Drawing.Size(59, 12);
+            this.TabPageHelp_Lab_HelpSubItem.TabIndex = 2;
+            this.TabPageHelp_Lab_HelpSubItem.Text = "帮助子项:";
+            // 
+            // TabPageHelp_Cbx_HelpSubText
+            // 
+            this.TabPageHelp_Cbx_HelpSubText.FormattingEnabled = true;
+            this.TabPageHelp_Cbx_HelpSubText.Location = new System.Drawing.Point(488, 44);
+            this.TabPageHelp_Cbx_HelpSubText.Name = "TabPageHelp_Cbx_HelpSubText";
+            this.TabPageHelp_Cbx_HelpSubText.Size = new System.Drawing.Size(121, 20);
+            this.TabPageHelp_Cbx_HelpSubText.TabIndex = 5;
+            // 
+            // TabPageHelp_Lab_HelpSubText
+            // 
+            this.TabPageHelp_Lab_HelpSubText.AutoSize = true;
+            this.TabPageHelp_Lab_HelpSubText.Location = new System.Drawing.Point(423, 47);
+            this.TabPageHelp_Lab_HelpSubText.Name = "TabPageHelp_Lab_HelpSubText";
+            this.TabPageHelp_Lab_HelpSubText.Size = new System.Drawing.Size(59, 12);
+            this.TabPageHelp_Lab_HelpSubText.TabIndex = 4;
+            this.TabPageHelp_Lab_HelpSubText.Text = "帮助内容:";
+            // 
+            // TabPageHelp_Btn_Help
+            // 
+            this.TabPageHelp_Btn_Help.Location = new System.Drawing.Point(640, 42);
+            this.TabPageHelp_Btn_Help.Name = "TabPageHelp_Btn_Help";
+            this.TabPageHelp_Btn_Help.Size = new System.Drawing.Size(75, 23);
+            this.TabPageHelp_Btn_Help.TabIndex = 6;
+            this.TabPageHelp_Btn_Help.Text = "查找帮助";
+            this.TabPageHelp_Btn_Help.UseVisualStyleBackColor = true;
+            // 
+            // TabPageHelp_Tbx_Help
+            // 
+            this.TabPageHelp_Tbx_Help.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TabPageHelp_Tbx_Help.Location = new System.Drawing.Point(6, 20);
+            this.TabPageHelp_Tbx_Help.Multiline = true;
+            this.TabPageHelp_Tbx_Help.Name = "TabPageHelp_Tbx_Help";
+            this.TabPageHelp_Tbx_Help.Size = new System.Drawing.Size(888, 487);
+            this.TabPageHelp_Tbx_Help.TabIndex = 2;
             // 
             // FormMain
             // 
@@ -2650,7 +2760,12 @@
             this.TabAnalysisProcessPage_Gbx_List.ResumeLayout(false);
             this.TabAnalysisProcessPage_Gbx_Config.ResumeLayout(false);
             this.TabAnalysisProcessPage_Gbx_Config.PerformLayout();
+            this.TabPageHelp.ResumeLayout(false);
             this.TabPageAbout.ResumeLayout(false);
+            this.TabPageHelp_Gbx_Func.ResumeLayout(false);
+            this.TabPageHelp_Gbx_Func.PerformLayout();
+            this.TabPageHelp_Gbx_Text.ResumeLayout(false);
+            this.TabPageHelp_Gbx_Text.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -2870,6 +2985,16 @@
         private System.Windows.Forms.Timer ProcessGet;
         private System.Windows.Forms.Panel TabPageAbout_Pan_Info;
         private System.Windows.Forms.Panel TabPageAbout_Pan_Logo;
+        private System.Windows.Forms.GroupBox TabPageHelp_Gbx_Text;
+        private System.Windows.Forms.GroupBox TabPageHelp_Gbx_Func;
+        private System.Windows.Forms.Button TabPageHelp_Btn_Help;
+        private System.Windows.Forms.ComboBox TabPageHelp_Cbx_HelpSubText;
+        private System.Windows.Forms.Label TabPageHelp_Lab_HelpSubText;
+        private System.Windows.Forms.ComboBox TabPageHelp_Cbx_HelpSubItem;
+        private System.Windows.Forms.Label TabPageHelp_Lab_HelpSubItem;
+        private System.Windows.Forms.ComboBox TabPageHelp_Cbx_HelpItem;
+        private System.Windows.Forms.Label TabPageHelp_Lab_HelpItem;
+        private System.Windows.Forms.TextBox TabPageHelp_Tbx_Help;
     }
 }
 
