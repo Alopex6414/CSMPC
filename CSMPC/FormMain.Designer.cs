@@ -2623,6 +2623,7 @@
             this.TabPageHelp_Cbx_HelpItem.Name = "TabPageHelp_Cbx_HelpItem";
             this.TabPageHelp_Cbx_HelpItem.Size = new System.Drawing.Size(121, 20);
             this.TabPageHelp_Cbx_HelpItem.TabIndex = 1;
+            this.TabPageHelp_Cbx_HelpItem.SelectedIndexChanged += new System.EventHandler(this.TabPageHelp_Cbx_HelpItem_SelectedIndexChanged);
             // 
             // TabPageHelp_Cbx_HelpSubItem
             // 
@@ -2631,6 +2632,7 @@
             this.TabPageHelp_Cbx_HelpSubItem.Name = "TabPageHelp_Cbx_HelpSubItem";
             this.TabPageHelp_Cbx_HelpSubItem.Size = new System.Drawing.Size(121, 20);
             this.TabPageHelp_Cbx_HelpSubItem.TabIndex = 3;
+            this.TabPageHelp_Cbx_HelpSubItem.SelectedIndexChanged += new System.EventHandler(this.TabPageHelp_Cbx_HelpSubItem_SelectedIndexChanged);
             // 
             // TabPageHelp_Lab_HelpSubItem
             // 
@@ -2648,6 +2650,7 @@
             this.TabPageHelp_Cbx_HelpSubText.Name = "TabPageHelp_Cbx_HelpSubText";
             this.TabPageHelp_Cbx_HelpSubText.Size = new System.Drawing.Size(121, 20);
             this.TabPageHelp_Cbx_HelpSubText.TabIndex = 5;
+            this.TabPageHelp_Cbx_HelpSubText.SelectedIndexChanged += new System.EventHandler(this.TabPageHelp_Cbx_HelpSubText_SelectedIndexChanged);
             // 
             // TabPageHelp_Lab_HelpSubText
             // 
@@ -2666,6 +2669,7 @@
             this.TabPageHelp_Btn_Help.TabIndex = 6;
             this.TabPageHelp_Btn_Help.Text = "查找帮助";
             this.TabPageHelp_Btn_Help.UseVisualStyleBackColor = true;
+            this.TabPageHelp_Btn_Help.Click += new System.EventHandler(this.TabPageHelp_Btn_Help_Click);
             // 
             // TabPageHelp_Tbx_Help
             // 

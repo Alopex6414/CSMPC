@@ -521,6 +521,53 @@ namespace CSMPC
 
             #endregion
 
+            #region 控制台选项卡初始化
+            /*
+             * 控制台设置
+             */
+            // 控制台文本设置
+            TabPageConsole_Tbx_Console.ReadOnly = true;
+            TabPageConsole_Tbx_Console.BackColor = Color.White;
+            TabPageConsole_Tbx_Console.ScrollBars = ScrollBars.Vertical;
+
+            #endregion
+
+            #region 帮助选项卡初始化
+            /*
+             * 帮助设置
+             */
+            // 帮助选项设置
+            TabPageHelp_Cbx_HelpItem.DropDownStyle = ComboBoxStyle.DropDownList;
+            TabPageHelp_Cbx_HelpSubItem.DropDownStyle = ComboBoxStyle.DropDownList;
+            TabPageHelp_Cbx_HelpSubText.DropDownStyle = ComboBoxStyle.DropDownList;
+
+            // 帮助项配置
+            TabPageHelp_Cbx_HelpItem.Items.Clear();
+            TabPageHelp_Cbx_HelpItem.Items.Add("串口调试");
+            TabPageHelp_Cbx_HelpItem.Items.Add("网络调试");
+            TabPageHelp_Cbx_HelpItem.Items.Add("实时曲线");
+            TabPageHelp_Cbx_HelpItem.Items.Add("数据分析");
+            TabPageHelp_Cbx_HelpItem.Items.Add("控制台");
+            TabPageHelp_Cbx_HelpItem.SelectedIndex = 0;
+
+            // 帮助子项配置
+            TabPageHelp_Cbx_HelpSubItem.Items.Clear();
+            TabPageHelp_Cbx_HelpSubItem.Items.Add("串口调试");
+            TabPageHelp_Cbx_HelpSubItem.SelectedIndex = 0;
+
+            // 帮助内容配置
+            TabPageHelp_Cbx_HelpSubText.Items.Clear();
+            TabPageHelp_Cbx_HelpSubText.Items.Add("应用");
+            TabPageHelp_Cbx_HelpSubText.Items.Add("代码");
+            TabPageHelp_Cbx_HelpSubText.SelectedIndex = 0;
+
+            // 帮助文本设置
+            TabPageHelp_Tbx_Help.ReadOnly = true;
+            TabPageHelp_Tbx_Help.BackColor = Color.White;
+            TabPageHelp_Tbx_Help.ScrollBars = ScrollBars.Vertical;
+
+            #endregion
+
         }
         #endregion
 
@@ -4036,6 +4083,311 @@ namespace CSMPC
         #endregion
 
         #region 帮助
+
+        #region 帮助项文本改变响应
+        private void TabPageHelp_Cbx_HelpItem_SelectedIndexChanged(object sender, EventArgs e)  // 帮助项文本改变
+        {
+            ComboBox CbxHelpItem = sender as ComboBox;
+            switch(CbxHelpItem.SelectedIndex)
+            {
+                case 0: // 串口调试
+                    TabPageHelp_Cbx_HelpSubItem.Items.Clear();
+                    TabPageHelp_Cbx_HelpSubItem.Items.Add("串口调试");
+                    TabPageHelp_Cbx_HelpSubItem.SelectedIndex = 0;
+                    break;
+                case 1: // 网络调试
+                    TabPageHelp_Cbx_HelpSubItem.Items.Clear();
+                    TabPageHelp_Cbx_HelpSubItem.Items.Add("TCP服务端");
+                    TabPageHelp_Cbx_HelpSubItem.Items.Add("TCP客户端");
+                    TabPageHelp_Cbx_HelpSubItem.Items.Add("UDP");
+                    TabPageHelp_Cbx_HelpSubItem.SelectedIndex = 0;
+                    break;
+                case 2: // 实时曲线
+                    TabPageHelp_Cbx_HelpSubItem.Items.Clear();
+                    TabPageHelp_Cbx_HelpSubItem.Items.Add("实时曲线");
+                    TabPageHelp_Cbx_HelpSubItem.SelectedIndex = 0;
+                    break;
+                case 3: // 数据分析
+                    TabPageHelp_Cbx_HelpSubItem.Items.Clear();
+                    TabPageHelp_Cbx_HelpSubItem.Items.Add("进程监测");
+                    TabPageHelp_Cbx_HelpSubItem.SelectedIndex = 0;
+                    break;
+                case 4: // 控制台
+                    TabPageHelp_Cbx_HelpSubItem.Items.Clear();
+                    TabPageHelp_Cbx_HelpSubItem.Items.Add("控制台");
+                    TabPageHelp_Cbx_HelpSubItem.SelectedIndex = 0;
+                    break;
+                default:
+                    MessageBox.Show("帮助项文本选择错误!", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+            }
+
+        }
+        #endregion
+
+        #region 帮助子项文本改变响应
+        private void TabPageHelp_Cbx_HelpSubItem_SelectedIndexChanged(object sender, EventArgs e)   // 帮助子项文本改变
+        {
+
+        }
+        #endregion
+
+        #region 帮助内容文本改变响应
+        private void TabPageHelp_Cbx_HelpSubText_SelectedIndexChanged(object sender, EventArgs e)   // 帮助内容文本改变
+        {
+
+        }
+        #endregion
+
+        #region 帮助查询按钮点击响应
+        private void TabPageHelp_Btn_Help_Click(object sender, EventArgs e)
+        {
+            int nIndexItem = 0;
+            int nIndexSubItem = 0;
+            int nIndexSubHelp = 0;
+
+            nIndexItem = TabPageHelp_Cbx_HelpItem.SelectedIndex;            // 帮助项
+            nIndexSubItem = TabPageHelp_Cbx_HelpSubItem.SelectedIndex;      // 帮助子项
+            nIndexSubHelp = TabPageHelp_Cbx_HelpSubText.SelectedIndex;      // 帮助内容
+
+            switch(nIndexItem)
+            {
+                case 0: // 串口调试
+                    switch(nIndexSubItem)
+                    {
+                        case 0: // 串口调试
+                            switch(nIndexSubHelp)
+                            {
+                                case 0: // 应用
+                                    TabPageHelp_Tbx_Help.Clear();
+                                    TabPageHelp_Tbx_Help.Text = "串口调试帮助:\r\n" +
+                                                                "串口调试模块主要用于调试从控制器发送的串口数据, 支持多种协议, 支持多种传输方式.\r\n" +
+                                                                "\r\n" +
+                                                                "控制器支持:MCU、DSP、FPGA...\r\n" +
+                                                                "协议支持:RS - 232、RS - 422、RS - 485\r\n" +
+                                                                "传输方式: 串口、蓝牙、2.4GHz射频\r\n";
+                                    break;
+                                case 1: // 代码
+                                    TabPageHelp_Tbx_Help.Clear();
+                                    break;
+                                default:
+                                    break;
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                case 1: // 网络调试
+                    switch (nIndexSubItem)
+                    {
+                        case 0: // TCP服务端
+                            switch (nIndexSubHelp)
+                            {
+                                case 0: // 应用
+                                    TabPageHelp_Tbx_Help.Clear();
+                                    TabPageHelp_Tbx_Help.Text = "网络调试帮助:\r\n" +
+                                                                "网络调试模块主要用于调试局域网内不同设备之间的通信数据.\r\n" +
+                                                                "\r\n" + 
+                                                                "网络调试支持:TCP、UDP.";
+
+                                    break;
+                                case 1: // 代码
+                                    TabPageHelp_Tbx_Help.Clear();
+                                    break;
+                                default:
+                                    break;
+                            }
+                            break;
+                        case 1: // TCP客户端
+                            switch (nIndexSubHelp)
+                            {
+                                case 0: // 应用
+                                    TabPageHelp_Tbx_Help.Clear();
+                                    TabPageHelp_Tbx_Help.Text = "网络调试帮助:\r\n" +
+                                                                "网络调试模块主要用于调试局域网内不同设备之间的通信数据.\r\n" +
+                                                                "\r\n" +
+                                                                "网络调试支持:TCP、UDP.";
+                                    break;
+                                case 1: // 代码
+                                    TabPageHelp_Tbx_Help.Clear();
+                                    break;
+                                default:
+                                    break;
+                            }
+                            break;
+                        case 2: // UDP
+                            switch (nIndexSubHelp)
+                            {
+                                case 0: // 应用
+                                    TabPageHelp_Tbx_Help.Clear();
+                                    TabPageHelp_Tbx_Help.Text = "网络调试帮助:\r\n" +
+                                                                "网络调试模块主要用于调试局域网内不同设备之间的通信数据.\r\n" +
+                                                                "\r\n" +
+                                                                "网络调试支持:TCP、UDP.";
+                                    break;
+                                case 1: // 代码
+                                    TabPageHelp_Tbx_Help.Clear();
+                                    break;
+                                default:
+                                    break;
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                case 2: // 实时曲线
+                    switch (nIndexSubItem)
+                    {
+                        case 0: // 实时曲线
+                            switch (nIndexSubHelp)
+                            {
+                                case 0: // 应用
+                                    TabPageHelp_Tbx_Help.Clear();
+                                    TabPageHelp_Tbx_Help.Text = "实时曲线帮助:\r\n" +
+                                                                "实时曲线模块主要用于显示从控制器发送的串口数据的曲线显示.\r\n" +
+                                                                "\r\n" + 
+                                                                "串口曲线发送格式:\r\n" +
+                                                                "编码格式: 0xFF, 0x00, 0x16, 0x08, ...曲线i..., 0xAA, 0x55\r\n" +
+                                                                "(8位发送, 先高后低)\r\n";
+                                    break;
+                                case 1: // 代码
+                                    TabPageHelp_Tbx_Help.Clear();
+                                    TabPageHelp_Tbx_Help.Text = "串口曲线发送格式:\r\n" +
+                                                                "(格式: 0xFF, 0x00, 0x16, 0x08, ...曲线i..., 0xAA, 0x55)\r\n" +
+                                                                "(8位发送, 先高后低)\r\n" +
+                                                                "\r\n" +
+                                                                "signed int SendData_Temp;\r\n" +
+                                                                "unsigned char SendData_Temp_High, SendData_Temp_Low;\r\n" +
+                                                                "\r\n" +
+                                                                "UART_PutChar(UART_UART4, 0xFF);\r\n" +
+                                                                "UART_PutChar(UART_UART4, 0x00);\r\n" +
+                                                                "UART_PutChar(UART_UART4, 0x16);\r\n" +
+                                                                "UART_PutChar(UART_UART4, 0x08);\r\n" +
+                                                                "\r\n" +
+                                                                "//曲线1\r\n" +
+                                                                "SendData_Temp = (signed int)DAC_Count;\r\n" +
+                                                                "SendData_Temp_High = SendData_Temp >> 8;\r\n" +
+                                                                "SendData_Temp_Low = SendData_Temp & 0xff;\r\n" +
+                                                                "UART_PutChar(UART_UART4, SendData_Temp_High);\r\n" +
+                                                                "UART_PutChar(UART_UART4, SendData_Temp_Low);\r\n" +
+                                                                "\r\n" +
+                                                                "//曲线2\r\n" +
+                                                                "SendData_Temp = (signed int)giAcc_Z;\r\n" +
+                                                                "SendData_Temp_High = SendData_Temp >> 8;\r\n" +
+                                                                "SendData_Temp_Low = SendData_Temp & 0xff;\r\n" +
+                                                                "UART_PutChar(UART_UART4, SendData_Temp_High);\r\n" +
+                                                                "UART_PutChar(UART_UART4, SendData_Temp_Low);\r\n" +
+                                                                "\r\n" +
+                                                                "//曲线3\r\n" +
+                                                                "SendData_Temp = (signed int)giGyro_Z;\r\n" +
+                                                                "SendData_Temp_High = SendData_Temp >> 8;\r\n" +
+                                                                "SendData_Temp_Low = SendData_Temp & 0xff;\r\n" +
+                                                                "UART_PutChar(UART_UART4, SendData_Temp_High);\r\n" +
+                                                                "UART_PutChar(UART_UART4, SendData_Temp_Low);\r\n" +
+                                                                "\r\n" +
+                                                                "//曲线4\r\n" +
+                                                                "SendData_Temp = (signed int)0;\r\n" +
+                                                                "SendData_Temp_High = SendData_Temp >> 8;\r\n" +
+                                                                "SendData_Temp_Low = SendData_Temp & 0xff;\r\n" +
+                                                                "UART_PutChar(UART_UART4, SendData_Temp_High);\r\n" +
+                                                                "UART_PutChar(UART_UART4, SendData_Temp_Low);\r\n" +
+                                                                "\r\n" +
+                                                                "//曲线4\r\n" +
+                                                                "SendData_Temp = (signed int)0;\r\n" +
+                                                                "SendData_Temp_High = SendData_Temp >> 8;\r\n" +
+                                                                "SendData_Temp_Low = SendData_Temp & 0xff;\r\n" +
+                                                                "UART_PutChar(UART_UART4, SendData_Temp_High);\r\n" +
+                                                                "UART_PutChar(UART_UART4, SendData_Temp_Low);\r\n" +
+                                                                "\r\n" +
+                                                                "//曲线5\r\n" +
+                                                                "SendData_Temp = (signed int)0;\r\n" +
+                                                                "SendData_Temp_High = SendData_Temp >> 8;\r\n" +
+                                                                "SendData_Temp_Low = SendData_Temp & 0xff;\r\n" +
+                                                                "UART_PutChar(UART_UART4, SendData_Temp_High);\r\n" +
+                                                                "UART_PutChar(UART_UART4, SendData_Temp_Low);\r\n" +
+                                                                "\r\n" +
+                                                                "//曲线6\r\n" +
+                                                                "SendData_Temp = (signed int)0;\r\n" +
+                                                                "SendData_Temp_High = SendData_Temp >> 8;\r\n" +
+                                                                "SendData_Temp_Low = SendData_Temp & 0xff;\r\n" +
+                                                                "UART_PutChar(UART_UART4, SendData_Temp_High);\r\n" +
+                                                                "UART_PutChar(UART_UART4, SendData_Temp_Low);\r\n" +
+                                                                "\r\n" +
+                                                                "//曲线7\r\n" +
+                                                                "SendData_Temp = (signed int)0;\r\n" +
+                                                                "SendData_Temp_High = SendData_Temp >> 8;\r\n" +
+                                                                "SendData_Temp_Low = SendData_Temp & 0xff;\r\n" +
+                                                                "UART_PutChar(UART_UART4, SendData_Temp_High);\r\n" +
+                                                                "UART_PutChar(UART_UART4, SendData_Temp_Low);\r\n" +
+                                                                "\r\n" +
+                                                                "//曲线8\r\n" +
+                                                                "SendData_Temp = (signed int)0;\r\n" +
+                                                                "SendData_Temp_High = SendData_Temp >> 8;\r\n" +
+                                                                "SendData_Temp_Low = SendData_Temp & 0xff;\r\n" +
+                                                                "UART_PutChar(UART_UART4, SendData_Temp_High);\r\n" +
+                                                                "UART_PutChar(UART_UART4, SendData_Temp_Low);\r\n" +
+                                                                "\r\n" +
+                                                                "UART_PutChar(UART_UART4, 0xAA);\r\n" +
+                                                                "UART_PutChar(UART_UART4, 0x55);\r\n";
+
+                                    break;
+                                default:
+                                    break;
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                case 3: // 数据分析
+                    switch (nIndexSubItem)
+                    {
+                        case 0: // 进程监视
+                            switch (nIndexSubHelp)
+                            {
+                                case 0: // 应用
+                                    TabPageHelp_Tbx_Help.Clear();
+                                    break;
+                                case 1: // 代码
+                                    TabPageHelp_Tbx_Help.Clear();
+                                    break;
+                                default:
+                                    break;
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                case 4: // 控制台
+                    switch (nIndexSubItem)
+                    {
+                        case 0: // 控制台
+                            switch (nIndexSubHelp)
+                            {
+                                case 0: // 应用
+                                    TabPageHelp_Tbx_Help.Clear();
+                                    break;
+                                case 1: // 代码
+                                    TabPageHelp_Tbx_Help.Clear();
+                                    break;
+                                default:
+                                    break;
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                default:
+                    break;
+            }
+
+        }
+        #endregion
+
         #endregion
 
         #region 关于
@@ -4048,6 +4400,7 @@ namespace CSMPC
         #endregion
 
         #endregion
+
     }
 
 }
