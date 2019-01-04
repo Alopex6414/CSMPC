@@ -148,6 +148,11 @@ namespace CSMPC
             public UInt32 PeakPagefileUsage;
         };
 
+        // 控制台
+        private delegate void CONSOLELOGSETTEXTCALLBACK(string strText);
+
+        private CONSOLELOGSETTEXTCALLBACK ConsoleLogSetTextCallback;
+
         #region 导入动态链接库函数
         [DllImport("Kernel32.dll", EntryPoint = "OpenProcess", CallingConvention = CallingConvention.StdCall)]
         public static extern IntPtr OpenProcess(UInt32 dwDesiredAccess, UInt32 bInheritHandle, UInt32 dwProcessId);
@@ -4080,6 +4085,36 @@ namespace CSMPC
         #endregion
 
         #region 控制台
+
+        #region 控制台记录
+        private void TabPageConsole_ConsoleWrite(string strText)    // 控制台日志记录
+        {
+            if (!TabPageConsole_Tbx_Console.InvokeRequired)
+            {
+                string strArr = string.Empty;
+
+                strArr += "[";
+                strArr += DateTime.Now.ToString();
+                strArr += "]";
+                strArr += strText;
+
+                TabPageConsole_Tbx_Console.AppendText(strArr);
+            }
+            else
+            {
+                ConsoleLogSetTextCallback = new CONSOLELOGSETTEXTCALLBACK(TabPageConsole_ConsoleWrite);
+                TabPageConsole_Tbx_Console.Invoke(ConsoleLogSetTextCallback, strText);
+            }
+        }
+        #endregion
+
+        #region 清空控制台
+        private void TabPageConsole_Btn_Clear_Click(object sender, EventArgs e) // 清空控制台
+        {
+            TabPageConsole_Tbx_Console.Clear();
+        }
+        #endregion
+
         #endregion
 
         #region 帮助

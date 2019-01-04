@@ -2708,6 +2708,7 @@
             this.TabPageConsole_Btn_Clear.TabIndex = 7;
             this.TabPageConsole_Btn_Clear.Text = "清空";
             this.TabPageConsole_Btn_Clear.UseVisualStyleBackColor = true;
+            this.TabPageConsole_Btn_Clear.Click += new System.EventHandler(this.TabPageConsole_Btn_Clear_Click);
             // 
             // FormMain
             // 
