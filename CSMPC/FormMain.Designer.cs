@@ -253,6 +253,9 @@
             this.TabPageHelp_Lab_HelpSubText = new System.Windows.Forms.Label();
             this.TabPageHelp_Btn_Help = new System.Windows.Forms.Button();
             this.TabPageHelp_Tbx_Help = new System.Windows.Forms.TextBox();
+            this.TabPageConsole_Gbx_Console = new System.Windows.Forms.GroupBox();
+            this.TabPageConsole_Tbx_Console = new System.Windows.Forms.TextBox();
+            this.TabPageConsole_Btn_Clear = new System.Windows.Forms.Button();
             this.TabMain.SuspendLayout();
             this.TabPageSerial.SuspendLayout();
             this.TabPageSerial_Gbx_SerialSend.SuspendLayout();
@@ -303,10 +306,12 @@
             this.TabAnalysisProcessPage_Gbx_Curve.SuspendLayout();
             this.TabAnalysisProcessPage_Gbx_List.SuspendLayout();
             this.TabAnalysisProcessPage_Gbx_Config.SuspendLayout();
+            this.TabPageConsole.SuspendLayout();
             this.TabPageHelp.SuspendLayout();
             this.TabPageAbout.SuspendLayout();
             this.TabPageHelp_Gbx_Func.SuspendLayout();
             this.TabPageHelp_Gbx_Text.SuspendLayout();
+            this.TabPageConsole_Gbx_Console.SuspendLayout();
             this.SuspendLayout();
             // 
             // TabMain
@@ -2490,6 +2495,7 @@
             // 
             // TabPageConsole
             // 
+            this.TabPageConsole.Controls.Add(this.TabPageConsole_Gbx_Console);
             this.TabPageConsole.Location = new System.Drawing.Point(4, 22);
             this.TabPageConsole.Name = "TabPageConsole";
             this.TabPageConsole.Padding = new System.Windows.Forms.Padding(3);
@@ -2670,6 +2676,35 @@
             this.TabPageHelp_Tbx_Help.Size = new System.Drawing.Size(888, 487);
             this.TabPageHelp_Tbx_Help.TabIndex = 2;
             // 
+            // TabPageConsole_Gbx_Console
+            // 
+            this.TabPageConsole_Gbx_Console.Controls.Add(this.TabPageConsole_Btn_Clear);
+            this.TabPageConsole_Gbx_Console.Controls.Add(this.TabPageConsole_Tbx_Console);
+            this.TabPageConsole_Gbx_Console.Location = new System.Drawing.Point(6, 6);
+            this.TabPageConsole_Gbx_Console.Name = "TabPageConsole_Gbx_Console";
+            this.TabPageConsole_Gbx_Console.Size = new System.Drawing.Size(900, 619);
+            this.TabPageConsole_Gbx_Console.TabIndex = 0;
+            this.TabPageConsole_Gbx_Console.TabStop = false;
+            this.TabPageConsole_Gbx_Console.Text = "控制台";
+            // 
+            // TabPageConsole_Tbx_Console
+            // 
+            this.TabPageConsole_Tbx_Console.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TabPageConsole_Tbx_Console.Location = new System.Drawing.Point(6, 20);
+            this.TabPageConsole_Tbx_Console.Multiline = true;
+            this.TabPageConsole_Tbx_Console.Name = "TabPageConsole_Tbx_Console";
+            this.TabPageConsole_Tbx_Console.Size = new System.Drawing.Size(888, 487);
+            this.TabPageConsole_Tbx_Console.TabIndex = 3;
+            // 
+            // TabPageConsole_Btn_Clear
+            // 
+            this.TabPageConsole_Btn_Clear.Location = new System.Drawing.Point(819, 590);
+            this.TabPageConsole_Btn_Clear.Name = "TabPageConsole_Btn_Clear";
+            this.TabPageConsole_Btn_Clear.Size = new System.Drawing.Size(75, 23);
+            this.TabPageConsole_Btn_Clear.TabIndex = 7;
+            this.TabPageConsole_Btn_Clear.Text = "清空";
+            this.TabPageConsole_Btn_Clear.UseVisualStyleBackColor = true;
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -2760,12 +2795,15 @@
             this.TabAnalysisProcessPage_Gbx_List.ResumeLayout(false);
             this.TabAnalysisProcessPage_Gbx_Config.ResumeLayout(false);
             this.TabAnalysisProcessPage_Gbx_Config.PerformLayout();
+            this.TabPageConsole.ResumeLayout(false);
             this.TabPageHelp.ResumeLayout(false);
             this.TabPageAbout.ResumeLayout(false);
             this.TabPageHelp_Gbx_Func.ResumeLayout(false);
             this.TabPageHelp_Gbx_Func.PerformLayout();
             this.TabPageHelp_Gbx_Text.ResumeLayout(false);
             this.TabPageHelp_Gbx_Text.PerformLayout();
+            this.TabPageConsole_Gbx_Console.ResumeLayout(false);
+            this.TabPageConsole_Gbx_Console.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -2995,6 +3033,9 @@
         private System.Windows.Forms.ComboBox TabPageHelp_Cbx_HelpItem;
         private System.Windows.Forms.Label TabPageHelp_Lab_HelpItem;
         private System.Windows.Forms.TextBox TabPageHelp_Tbx_Help;
+        private System.Windows.Forms.GroupBox TabPageConsole_Gbx_Console;
+        private System.Windows.Forms.Button TabPageConsole_Btn_Clear;
+        private System.Windows.Forms.TextBox TabPageConsole_Tbx_Console;
     }
 }
 
