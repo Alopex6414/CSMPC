@@ -1033,7 +1033,7 @@ namespace CSMPC
                         if (m_strSerialRecv != null)  // 字符串不为空,AppendText方法接收
                         {
                             this.TabPageSerial_Tbx_SerialRecv.AppendText(m_strSerialRecv);   // TextBox接收字符串(在上次字符串尾部添加)
-                            this.TabPageSerial_Tbx_SerialRecv.AppendText("\n");
+                            this.TabPageSerial_Tbx_SerialRecv.AppendText("\r\n");
                         }
                     }
                     else // 接收换行CheckBox未选中
@@ -1385,7 +1385,7 @@ namespace CSMPC
                 catch (Exception)
                 {
                     this.TabPageTCPServer_Tbx_Recv.AppendText("The TCP Server is Already Occupied!");
-                    this.TabPageTCPServer_Tbx_Recv.AppendText("\n");
+                    this.TabPageTCPServer_Tbx_Recv.AppendText("\r\n");
                     return;
                 }
 
@@ -1393,7 +1393,7 @@ namespace CSMPC
                 m_SocketServer.Listen(nMaxConnect);
 
                 this.TabPageTCPServer_Tbx_Recv.AppendText("The TCP Server is Already Open And Listening...");
-                this.TabPageTCPServer_Tbx_Recv.AppendText("\n");
+                this.TabPageTCPServer_Tbx_Recv.AppendText("\r\n");
 
                 m_bListen = true;
                 this.TabPageTCPServer_Btn_NetListen.Text = "停止";
@@ -1426,7 +1426,7 @@ namespace CSMPC
                 m_dicSocket.Clear();
 
                 this.TabPageTCPServer_Tbx_Recv.AppendText("The TCP Server is Already Closed.");
-                this.TabPageTCPServer_Tbx_Recv.AppendText("\n");
+                this.TabPageTCPServer_Tbx_Recv.AppendText("\r\n");
 
                 // 服务端关闭接收线程Thread
                 foreach(KeyValuePair<string, Thread> pair in m_dicThread)
@@ -1668,7 +1668,7 @@ namespace CSMPC
         private void TCPServerRecvMsg(string strRecv)
         {
             this.TabPageTCPServer_Tbx_Recv.AppendText(strRecv);
-            this.TabPageTCPServer_Tbx_Recv.AppendText("\n");
+            this.TabPageTCPServer_Tbx_Recv.AppendText("\r\n");
         }
         #endregion
 
@@ -1676,7 +1676,7 @@ namespace CSMPC
         private void TCPServerSetText(string strText)
         {
             this.TabPageTCPServer_Tbx_Recv.AppendText(strText);
-            this.TabPageTCPServer_Tbx_Recv.AppendText("\n");
+            this.TabPageTCPServer_Tbx_Recv.AppendText("\r\n");
         }
         #endregion
 
@@ -1770,13 +1770,13 @@ namespace CSMPC
                 catch(Exception)
                 {
                     this.TabPageTCPClient_Tbx_Recv.AppendText("Unable to Connect to Remote Server!");
-                    this.TabPageTCPClient_Tbx_Recv.AppendText("\n");
+                    this.TabPageTCPClient_Tbx_Recv.AppendText("\r\n");
                     return;
                 }
 
                 // 客户端消息提示
                 this.TabPageTCPClient_Tbx_Recv.AppendText("Successfully Connected to Remote Server...");
-                this.TabPageTCPClient_Tbx_Recv.AppendText("\n");
+                this.TabPageTCPClient_Tbx_Recv.AppendText("\r\n");
 
                 m_bConnect = true;
                 this.TabPageTCPClient_Btn_NetConnect.Text = "断开";
@@ -1797,7 +1797,7 @@ namespace CSMPC
                 m_SocketClient.Close();
 
                 this.TabPageTCPClient_Tbx_Recv.AppendText("Disconnected From The Remote Server.");
-                this.TabPageTCPClient_Tbx_Recv.AppendText("\n");
+                this.TabPageTCPClient_Tbx_Recv.AppendText("\r\n");
 
                 // 客户端关闭接收线程Thread
                 m_tSocketConnect.Abort();
@@ -1814,7 +1814,7 @@ namespace CSMPC
         private void TCPClientSetText(string strText)
         {
             this.TabPageTCPClient_Tbx_Recv.AppendText(strText);
-            this.TabPageTCPClient_Tbx_Recv.AppendText("\n");
+            this.TabPageTCPClient_Tbx_Recv.AppendText("\r\n");
         }
         #endregion
 
@@ -2047,13 +2047,13 @@ namespace CSMPC
                 catch(Exception)
                 {
                     this.TabPageUDP_Tbx_Recv.AppendText("The UDP Port is Already Occupied!");
-                    this.TabPageUDP_Tbx_Recv.AppendText("\n");
+                    this.TabPageUDP_Tbx_Recv.AppendText("\r\n");
                     return;
                 }
 
                 // UDP通信消息提示
                 this.TabPageUDP_Tbx_Recv.AppendText("Successfully Open UDP Port...");
-                this.TabPageUDP_Tbx_Recv.AppendText("\n");
+                this.TabPageUDP_Tbx_Recv.AppendText("\r\n");
 
                 m_bUDP = true;
                 this.TabPageUDP_Btn_NetOpen.Text = "断开";
@@ -2073,7 +2073,7 @@ namespace CSMPC
                 m_SocketUDP.Close();
 
                 this.TabPageUDP_Tbx_Recv.AppendText("Successfully Close UDP Port...");
-                this.TabPageUDP_Tbx_Recv.AppendText("\n");
+                this.TabPageUDP_Tbx_Recv.AppendText("\r\n");
 
                 // UDP通信关闭接收线程Thread
                 m_tSocketUDP.Abort();
@@ -2090,7 +2090,7 @@ namespace CSMPC
         private void UDPSetText(string strText)
         {
             this.TabPageUDP_Tbx_Recv.AppendText(strText);
-            this.TabPageUDP_Tbx_Recv.AppendText("\n");
+            this.TabPageUDP_Tbx_Recv.AppendText("\r\n");
         }
         #endregion
 
@@ -2824,7 +2824,7 @@ namespace CSMPC
                         // 写入信息
                         FileWriter.WriteLine("CSMPC SerialCurve Export");
                         FileWriter.WriteLine(DateTime.Now.ToString("yyyy/MM/dd hh:mm:ss"));
-                        FileWriter.WriteLine("\n");
+                        FileWriter.WriteLine("\r\n");
 
                         // 写入表头
                         FileWriter.WriteLine("曲线1,曲线2,曲线3,曲线4,曲线5,曲线6,曲线7,曲线8");
@@ -2920,7 +2920,7 @@ namespace CSMPC
                             {
                                 FileWriter.Write("0");
                             }
-                            FileWriter.WriteLine("\n");
+                            FileWriter.WriteLine("\r\n");
                         }
 
                         FileWriter.Close(); // 关闭数据流
@@ -4195,12 +4195,12 @@ namespace CSMPC
                             {
                                 case 0: // 应用
                                     TabPageHelp_Tbx_Help.Clear();
-                                    TabPageHelp_Tbx_Help.Text = "串口调试帮助:\r\n" +
-                                                                "串口调试模块主要用于调试从控制器发送的串口数据, 支持多种协议, 支持多种传输方式.\r\n" +
-                                                                "\r\n" +
-                                                                "控制器支持:MCU、DSP、FPGA...\r\n" +
-                                                                "协议支持:RS - 232、RS - 422、RS - 485\r\n" +
-                                                                "传输方式: 串口、蓝牙、2.4GHz射频\r\n";
+                                    TabPageHelp_Tbx_Help.Text = "串口调试帮助:\r\r\n" +
+                                                                "串口调试模块主要用于调试从控制器发送的串口数据, 支持多种协议, 支持多种传输方式.\r\r\n" +
+                                                                "\r\r\n" +
+                                                                "控制器支持:MCU、DSP、FPGA...\r\r\n" +
+                                                                "协议支持:RS - 232、RS - 422、RS - 485\r\r\n" +
+                                                                "传输方式: 串口、蓝牙、2.4GHz射频\r\r\n";
                                     break;
                                 case 1: // 代码
                                     TabPageHelp_Tbx_Help.Clear();
@@ -4221,9 +4221,9 @@ namespace CSMPC
                             {
                                 case 0: // 应用
                                     TabPageHelp_Tbx_Help.Clear();
-                                    TabPageHelp_Tbx_Help.Text = "网络调试帮助:\r\n" +
-                                                                "网络调试模块主要用于调试局域网内不同设备之间的通信数据.\r\n" +
-                                                                "\r\n" + 
+                                    TabPageHelp_Tbx_Help.Text = "网络调试帮助:\r\r\n" +
+                                                                "网络调试模块主要用于调试局域网内不同设备之间的通信数据.\r\r\n" +
+                                                                "\r\r\n" + 
                                                                 "网络调试支持:TCP、UDP.";
 
                                     break;
@@ -4239,9 +4239,9 @@ namespace CSMPC
                             {
                                 case 0: // 应用
                                     TabPageHelp_Tbx_Help.Clear();
-                                    TabPageHelp_Tbx_Help.Text = "网络调试帮助:\r\n" +
-                                                                "网络调试模块主要用于调试局域网内不同设备之间的通信数据.\r\n" +
-                                                                "\r\n" +
+                                    TabPageHelp_Tbx_Help.Text = "网络调试帮助:\r\r\n" +
+                                                                "网络调试模块主要用于调试局域网内不同设备之间的通信数据.\r\r\n" +
+                                                                "\r\r\n" +
                                                                 "网络调试支持:TCP、UDP.";
                                     break;
                                 case 1: // 代码
@@ -4256,9 +4256,9 @@ namespace CSMPC
                             {
                                 case 0: // 应用
                                     TabPageHelp_Tbx_Help.Clear();
-                                    TabPageHelp_Tbx_Help.Text = "网络调试帮助:\r\n" +
-                                                                "网络调试模块主要用于调试局域网内不同设备之间的通信数据.\r\n" +
-                                                                "\r\n" +
+                                    TabPageHelp_Tbx_Help.Text = "网络调试帮助:\r\r\n" +
+                                                                "网络调试模块主要用于调试局域网内不同设备之间的通信数据.\r\r\n" +
+                                                                "\r\r\n" +
                                                                 "网络调试支持:TCP、UDP.";
                                     break;
                                 case 1: // 代码
@@ -4280,92 +4280,92 @@ namespace CSMPC
                             {
                                 case 0: // 应用
                                     TabPageHelp_Tbx_Help.Clear();
-                                    TabPageHelp_Tbx_Help.Text = "实时曲线帮助:\r\n" +
-                                                                "实时曲线模块主要用于显示从控制器发送的串口数据的曲线显示.\r\n" +
-                                                                "\r\n" + 
-                                                                "串口曲线发送格式:\r\n" +
-                                                                "编码格式: 0xFF, 0x00, 0x16, 0x08, ...曲线i..., 0xAA, 0x55\r\n" +
-                                                                "(8位发送, 先高后低)\r\n";
+                                    TabPageHelp_Tbx_Help.Text = "实时曲线帮助:\r\r\n" +
+                                                                "实时曲线模块主要用于显示从控制器发送的串口数据的曲线显示.\r\r\n" +
+                                                                "\r\r\n" + 
+                                                                "串口曲线发送格式:\r\r\n" +
+                                                                "编码格式: 0xFF, 0x00, 0x16, 0x08, ...曲线i..., 0xAA, 0x55\r\r\n" +
+                                                                "(8位发送, 先高后低)\r\r\n";
                                     break;
                                 case 1: // 代码
                                     TabPageHelp_Tbx_Help.Clear();
-                                    TabPageHelp_Tbx_Help.Text = "串口曲线发送格式:\r\n" +
-                                                                "(格式: 0xFF, 0x00, 0x16, 0x08, ...曲线i..., 0xAA, 0x55)\r\n" +
-                                                                "(8位发送, 先高后低)\r\n" +
-                                                                "\r\n" +
-                                                                "signed int SendData_Temp;\r\n" +
-                                                                "unsigned char SendData_Temp_High, SendData_Temp_Low;\r\n" +
-                                                                "\r\n" +
-                                                                "UART_PutChar(UART_UART4, 0xFF);\r\n" +
-                                                                "UART_PutChar(UART_UART4, 0x00);\r\n" +
-                                                                "UART_PutChar(UART_UART4, 0x16);\r\n" +
-                                                                "UART_PutChar(UART_UART4, 0x08);\r\n" +
-                                                                "\r\n" +
-                                                                "//曲线1\r\n" +
-                                                                "SendData_Temp = (signed int)DAC_Count;\r\n" +
-                                                                "SendData_Temp_High = SendData_Temp >> 8;\r\n" +
-                                                                "SendData_Temp_Low = SendData_Temp & 0xff;\r\n" +
-                                                                "UART_PutChar(UART_UART4, SendData_Temp_High);\r\n" +
-                                                                "UART_PutChar(UART_UART4, SendData_Temp_Low);\r\n" +
-                                                                "\r\n" +
-                                                                "//曲线2\r\n" +
-                                                                "SendData_Temp = (signed int)giAcc_Z;\r\n" +
-                                                                "SendData_Temp_High = SendData_Temp >> 8;\r\n" +
-                                                                "SendData_Temp_Low = SendData_Temp & 0xff;\r\n" +
-                                                                "UART_PutChar(UART_UART4, SendData_Temp_High);\r\n" +
-                                                                "UART_PutChar(UART_UART4, SendData_Temp_Low);\r\n" +
-                                                                "\r\n" +
-                                                                "//曲线3\r\n" +
-                                                                "SendData_Temp = (signed int)giGyro_Z;\r\n" +
-                                                                "SendData_Temp_High = SendData_Temp >> 8;\r\n" +
-                                                                "SendData_Temp_Low = SendData_Temp & 0xff;\r\n" +
-                                                                "UART_PutChar(UART_UART4, SendData_Temp_High);\r\n" +
-                                                                "UART_PutChar(UART_UART4, SendData_Temp_Low);\r\n" +
-                                                                "\r\n" +
-                                                                "//曲线4\r\n" +
-                                                                "SendData_Temp = (signed int)0;\r\n" +
-                                                                "SendData_Temp_High = SendData_Temp >> 8;\r\n" +
-                                                                "SendData_Temp_Low = SendData_Temp & 0xff;\r\n" +
-                                                                "UART_PutChar(UART_UART4, SendData_Temp_High);\r\n" +
-                                                                "UART_PutChar(UART_UART4, SendData_Temp_Low);\r\n" +
-                                                                "\r\n" +
-                                                                "//曲线4\r\n" +
-                                                                "SendData_Temp = (signed int)0;\r\n" +
-                                                                "SendData_Temp_High = SendData_Temp >> 8;\r\n" +
-                                                                "SendData_Temp_Low = SendData_Temp & 0xff;\r\n" +
-                                                                "UART_PutChar(UART_UART4, SendData_Temp_High);\r\n" +
-                                                                "UART_PutChar(UART_UART4, SendData_Temp_Low);\r\n" +
-                                                                "\r\n" +
-                                                                "//曲线5\r\n" +
-                                                                "SendData_Temp = (signed int)0;\r\n" +
-                                                                "SendData_Temp_High = SendData_Temp >> 8;\r\n" +
-                                                                "SendData_Temp_Low = SendData_Temp & 0xff;\r\n" +
-                                                                "UART_PutChar(UART_UART4, SendData_Temp_High);\r\n" +
-                                                                "UART_PutChar(UART_UART4, SendData_Temp_Low);\r\n" +
-                                                                "\r\n" +
-                                                                "//曲线6\r\n" +
-                                                                "SendData_Temp = (signed int)0;\r\n" +
-                                                                "SendData_Temp_High = SendData_Temp >> 8;\r\n" +
-                                                                "SendData_Temp_Low = SendData_Temp & 0xff;\r\n" +
-                                                                "UART_PutChar(UART_UART4, SendData_Temp_High);\r\n" +
-                                                                "UART_PutChar(UART_UART4, SendData_Temp_Low);\r\n" +
-                                                                "\r\n" +
-                                                                "//曲线7\r\n" +
-                                                                "SendData_Temp = (signed int)0;\r\n" +
-                                                                "SendData_Temp_High = SendData_Temp >> 8;\r\n" +
-                                                                "SendData_Temp_Low = SendData_Temp & 0xff;\r\n" +
-                                                                "UART_PutChar(UART_UART4, SendData_Temp_High);\r\n" +
-                                                                "UART_PutChar(UART_UART4, SendData_Temp_Low);\r\n" +
-                                                                "\r\n" +
-                                                                "//曲线8\r\n" +
-                                                                "SendData_Temp = (signed int)0;\r\n" +
-                                                                "SendData_Temp_High = SendData_Temp >> 8;\r\n" +
-                                                                "SendData_Temp_Low = SendData_Temp & 0xff;\r\n" +
-                                                                "UART_PutChar(UART_UART4, SendData_Temp_High);\r\n" +
-                                                                "UART_PutChar(UART_UART4, SendData_Temp_Low);\r\n" +
-                                                                "\r\n" +
-                                                                "UART_PutChar(UART_UART4, 0xAA);\r\n" +
-                                                                "UART_PutChar(UART_UART4, 0x55);\r\n";
+                                    TabPageHelp_Tbx_Help.Text = "串口曲线发送格式:\r\r\n" +
+                                                                "(格式: 0xFF, 0x00, 0x16, 0x08, ...曲线i..., 0xAA, 0x55)\r\r\n" +
+                                                                "(8位发送, 先高后低)\r\r\n" +
+                                                                "\r\r\n" +
+                                                                "signed int SendData_Temp;\r\r\n" +
+                                                                "unsigned char SendData_Temp_High, SendData_Temp_Low;\r\r\n" +
+                                                                "\r\r\n" +
+                                                                "UART_PutChar(UART_UART4, 0xFF);\r\r\n" +
+                                                                "UART_PutChar(UART_UART4, 0x00);\r\r\n" +
+                                                                "UART_PutChar(UART_UART4, 0x16);\r\r\n" +
+                                                                "UART_PutChar(UART_UART4, 0x08);\r\r\n" +
+                                                                "\r\r\n" +
+                                                                "//曲线1\r\r\n" +
+                                                                "SendData_Temp = (signed int)DAC_Count;\r\r\n" +
+                                                                "SendData_Temp_High = SendData_Temp >> 8;\r\r\n" +
+                                                                "SendData_Temp_Low = SendData_Temp & 0xff;\r\r\n" +
+                                                                "UART_PutChar(UART_UART4, SendData_Temp_High);\r\r\n" +
+                                                                "UART_PutChar(UART_UART4, SendData_Temp_Low);\r\r\n" +
+                                                                "\r\r\n" +
+                                                                "//曲线2\r\r\n" +
+                                                                "SendData_Temp = (signed int)giAcc_Z;\r\r\n" +
+                                                                "SendData_Temp_High = SendData_Temp >> 8;\r\r\n" +
+                                                                "SendData_Temp_Low = SendData_Temp & 0xff;\r\r\n" +
+                                                                "UART_PutChar(UART_UART4, SendData_Temp_High);\r\r\n" +
+                                                                "UART_PutChar(UART_UART4, SendData_Temp_Low);\r\r\n" +
+                                                                "\r\r\n" +
+                                                                "//曲线3\r\r\n" +
+                                                                "SendData_Temp = (signed int)giGyro_Z;\r\r\n" +
+                                                                "SendData_Temp_High = SendData_Temp >> 8;\r\r\n" +
+                                                                "SendData_Temp_Low = SendData_Temp & 0xff;\r\r\n" +
+                                                                "UART_PutChar(UART_UART4, SendData_Temp_High);\r\r\n" +
+                                                                "UART_PutChar(UART_UART4, SendData_Temp_Low);\r\r\n" +
+                                                                "\r\r\n" +
+                                                                "//曲线4\r\r\n" +
+                                                                "SendData_Temp = (signed int)0;\r\r\n" +
+                                                                "SendData_Temp_High = SendData_Temp >> 8;\r\r\n" +
+                                                                "SendData_Temp_Low = SendData_Temp & 0xff;\r\r\n" +
+                                                                "UART_PutChar(UART_UART4, SendData_Temp_High);\r\r\n" +
+                                                                "UART_PutChar(UART_UART4, SendData_Temp_Low);\r\r\n" +
+                                                                "\r\r\n" +
+                                                                "//曲线4\r\r\n" +
+                                                                "SendData_Temp = (signed int)0;\r\r\n" +
+                                                                "SendData_Temp_High = SendData_Temp >> 8;\r\r\n" +
+                                                                "SendData_Temp_Low = SendData_Temp & 0xff;\r\r\n" +
+                                                                "UART_PutChar(UART_UART4, SendData_Temp_High);\r\r\n" +
+                                                                "UART_PutChar(UART_UART4, SendData_Temp_Low);\r\r\n" +
+                                                                "\r\r\n" +
+                                                                "//曲线5\r\r\n" +
+                                                                "SendData_Temp = (signed int)0;\r\r\n" +
+                                                                "SendData_Temp_High = SendData_Temp >> 8;\r\r\n" +
+                                                                "SendData_Temp_Low = SendData_Temp & 0xff;\r\r\n" +
+                                                                "UART_PutChar(UART_UART4, SendData_Temp_High);\r\r\n" +
+                                                                "UART_PutChar(UART_UART4, SendData_Temp_Low);\r\r\n" +
+                                                                "\r\r\n" +
+                                                                "//曲线6\r\r\n" +
+                                                                "SendData_Temp = (signed int)0;\r\r\n" +
+                                                                "SendData_Temp_High = SendData_Temp >> 8;\r\r\n" +
+                                                                "SendData_Temp_Low = SendData_Temp & 0xff;\r\r\n" +
+                                                                "UART_PutChar(UART_UART4, SendData_Temp_High);\r\r\n" +
+                                                                "UART_PutChar(UART_UART4, SendData_Temp_Low);\r\r\n" +
+                                                                "\r\r\n" +
+                                                                "//曲线7\r\r\n" +
+                                                                "SendData_Temp = (signed int)0;\r\r\n" +
+                                                                "SendData_Temp_High = SendData_Temp >> 8;\r\r\n" +
+                                                                "SendData_Temp_Low = SendData_Temp & 0xff;\r\r\n" +
+                                                                "UART_PutChar(UART_UART4, SendData_Temp_High);\r\r\n" +
+                                                                "UART_PutChar(UART_UART4, SendData_Temp_Low);\r\r\n" +
+                                                                "\r\r\n" +
+                                                                "//曲线8\r\r\n" +
+                                                                "SendData_Temp = (signed int)0;\r\r\n" +
+                                                                "SendData_Temp_High = SendData_Temp >> 8;\r\r\n" +
+                                                                "SendData_Temp_Low = SendData_Temp & 0xff;\r\r\n" +
+                                                                "UART_PutChar(UART_UART4, SendData_Temp_High);\r\r\n" +
+                                                                "UART_PutChar(UART_UART4, SendData_Temp_Low);\r\r\n" +
+                                                                "\r\r\n" +
+                                                                "UART_PutChar(UART_UART4, 0xAA);\r\r\n" +
+                                                                "UART_PutChar(UART_UART4, 0x55);\r\r\n";
 
                                     break;
                                 default:
