@@ -114,6 +114,7 @@ namespace CSMPC
         public bool m_bPMStart = false;                                                             // 进程监视监测状态(true:开启/false:关闭)
         public bool m_bPMFinish = false;                                                            // 进程监视转换完成
         public static volatile double[] m_dProcessCurveValue = new double[8];                       // 进程监视曲线当前值
+        public const int m_nAxisMaxCount = 50000;                                                   // 进程监视曲线坐标最大值
 
         // ZedGraph
         public static LineItem ZedGraph_Process_1;    // 进程1
@@ -2709,36 +2710,36 @@ namespace CSMPC
                     this.TabPageCurve_Lab_Curve7.Text = "数值:" + m_nSerialCurveData[6].ToString();   // 曲线7数值显示
                     this.TabPageCurve_Lab_Curve8.Text = "数值:" + m_nSerialCurveData[7].ToString();   // 曲线8数值显示
 
-                    // 坐标点数多余300后保持坐标中存在300点
-                    if (ZedGraph_List_1.Count >= 300)
+                    // 坐标点数多余Count后保持坐标中存在Count点
+                    if (ZedGraph_List_1.Count >= m_nAxisMaxCount)
                     {
                         ZedGraph_List_1.RemoveAt(0);
                     }
-                    if (ZedGraph_List_2.Count >= 300)
+                    if (ZedGraph_List_2.Count >= m_nAxisMaxCount)
                     {
                         ZedGraph_List_2.RemoveAt(0);
                     }
-                    if (ZedGraph_List_3.Count >= 300)
+                    if (ZedGraph_List_3.Count >= m_nAxisMaxCount)
                     {
                         ZedGraph_List_3.RemoveAt(0);
                     }
-                    if (ZedGraph_List_4.Count >= 300)
+                    if (ZedGraph_List_4.Count >= m_nAxisMaxCount)
                     {
                         ZedGraph_List_4.RemoveAt(0);
                     }
-                    if (ZedGraph_List_5.Count >= 300)
+                    if (ZedGraph_List_5.Count >= m_nAxisMaxCount)
                     {
                         ZedGraph_List_5.RemoveAt(0);
                     }
-                    if (ZedGraph_List_6.Count >= 300)
+                    if (ZedGraph_List_6.Count >= m_nAxisMaxCount)
                     {
                         ZedGraph_List_6.RemoveAt(0);
                     }
-                    if (ZedGraph_List_7.Count >= 300)
+                    if (ZedGraph_List_7.Count >= m_nAxisMaxCount)
                     {
                         ZedGraph_List_7.RemoveAt(0);
                     }
-                    if (ZedGraph_List_8.Count >= 300)
+                    if (ZedGraph_List_8.Count >= m_nAxisMaxCount)
                     {
                         ZedGraph_List_8.RemoveAt(0);
                     }
@@ -3803,36 +3804,36 @@ namespace CSMPC
                     this.TabAnalysisProcessPage_Lab_P7.Text = "数值:" + m_dProcessCurveValue[6].ToString();   // 进程7数值显示
                     this.TabAnalysisProcessPage_Lab_P8.Text = "数值:" + m_dProcessCurveValue[7].ToString();   // 进程8数值显示
 
-                    // 坐标点数多余300后保持坐标中存在300点
-                    if (ZedGraph_ProcessList_1.Count >= 300)
+                    // 坐标点数多余Count后保持坐标中存在Count点
+                    if (ZedGraph_ProcessList_1.Count >= m_nAxisMaxCount)
                     {
                         ZedGraph_ProcessList_1.RemoveAt(0);
                     }
-                    if (ZedGraph_ProcessList_2.Count >= 300)
+                    if (ZedGraph_ProcessList_2.Count >= m_nAxisMaxCount)
                     {
                         ZedGraph_ProcessList_2.RemoveAt(0);
                     }
-                    if (ZedGraph_ProcessList_3.Count >= 300)
+                    if (ZedGraph_ProcessList_3.Count >= m_nAxisMaxCount)
                     {
                         ZedGraph_ProcessList_3.RemoveAt(0);
                     }
-                    if (ZedGraph_ProcessList_4.Count >= 300)
+                    if (ZedGraph_ProcessList_4.Count >= m_nAxisMaxCount)
                     {
                         ZedGraph_ProcessList_4.RemoveAt(0);
                     }
-                    if (ZedGraph_ProcessList_5.Count >= 300)
+                    if (ZedGraph_ProcessList_5.Count >= m_nAxisMaxCount)
                     {
                         ZedGraph_ProcessList_5.RemoveAt(0);
                     }
-                    if (ZedGraph_ProcessList_6.Count >= 300)
+                    if (ZedGraph_ProcessList_6.Count >= m_nAxisMaxCount)
                     {
                         ZedGraph_ProcessList_6.RemoveAt(0);
                     }
-                    if (ZedGraph_ProcessList_7.Count >= 300)
+                    if (ZedGraph_ProcessList_7.Count >= m_nAxisMaxCount)
                     {
                         ZedGraph_ProcessList_7.RemoveAt(0);
                     }
-                    if (ZedGraph_ProcessList_8.Count >= 300)
+                    if (ZedGraph_ProcessList_8.Count >= m_nAxisMaxCount)
                     {
                         ZedGraph_ProcessList_8.RemoveAt(0);
                     }
